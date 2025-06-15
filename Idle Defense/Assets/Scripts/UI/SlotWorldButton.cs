@@ -2,6 +2,7 @@ using Assets.Scripts.SO;
 using Assets.Scripts.Systems;
 using Assets.Scripts.Systems.Audio;
 using Assets.Scripts.Turrets;
+using Assets.Scripts.UpgradeSystem.TurretUpgrades;
 using Assets.Scripts.WaveSystem;
 using System.Linq;
 using TMPro;

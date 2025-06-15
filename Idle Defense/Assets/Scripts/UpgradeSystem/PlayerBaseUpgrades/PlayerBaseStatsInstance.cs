@@ -4,7 +4,7 @@ using Assets.Scripts.Structs;
 using System;
 using System.Collections.Generic;
 
-namespace Assets.Scripts.PlayerBase
+namespace Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades
 {
     [Serializable]
     public class PlayerBaseStatsInstance

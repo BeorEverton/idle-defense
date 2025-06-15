@@ -1,5 +1,5 @@
 using Assets.Scripts.Systems;
-using Assets.Scripts.Turrets;
+using Assets.Scripts.UpgradeSystem.TurretUpgrades;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;

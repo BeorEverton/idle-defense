@@ -1,4 +1,3 @@
-using Assets.Scripts.PlayerBase;
 using System;
 
 namespace Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades

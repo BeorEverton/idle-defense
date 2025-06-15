@@ -1,7 +1,7 @@
 using Assets.Scripts.SO;
 using Assets.Scripts.Systems.Currency;
 using Assets.Scripts.Systems.Save;
-using Assets.Scripts.Turrets;
+using Assets.Scripts.UpgradeSystem.TurretUpgrades;
 using Assets.Scripts.WaveSystem;
 using System;
 using System.Collections.Generic;

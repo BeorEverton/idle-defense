@@ -4,7 +4,7 @@ using Assets.Scripts.Structs;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.Turrets
+namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
 {
     /// <summary>
     /// This class is used to store and upgrade the stats of a turret instance.

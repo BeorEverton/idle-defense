@@ -1,8 +1,8 @@
+using Assets.Scripts.UI;
+using Assets.Scripts.UpgradeSystem.TurretUpgrades;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Assets.Scripts.Turrets;
-using Assets.Scripts.UI;
 
 public class EquipItemButton : MonoBehaviour
 {
@@ -58,7 +58,8 @@ public class EquipItemButton : MonoBehaviour
 
 
         // ----- Click ------------------------------------------------------
-        if (!btn) btn = GetComponent<Button>();
+        if (!btn)
+            btn = GetComponent<Button>();
 
         btn.onClick.RemoveAllListeners();
 

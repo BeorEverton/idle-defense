@@ -1,9 +1,9 @@
 #nullable enable
 using Assets.Scripts.Enums;
-using Assets.Scripts.PlayerBase;
 using Assets.Scripts.SO;
 using Assets.Scripts.Structs;
-using Assets.Scripts.Turrets;
+using Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades;
+using Assets.Scripts.UpgradeSystem.TurretUpgrades;
 using System;
 using System.Collections.Generic;
 

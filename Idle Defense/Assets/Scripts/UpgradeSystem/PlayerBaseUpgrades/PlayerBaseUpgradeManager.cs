@@ -1,5 +1,4 @@
 using Assets.Scripts.Enums;
-using Assets.Scripts.PlayerBase;
 using Assets.Scripts.Structs;
 using Assets.Scripts.Systems;
 using Assets.Scripts.Systems.Audio;

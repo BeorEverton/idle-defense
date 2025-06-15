@@ -1,8 +1,8 @@
 using Assets.Scripts.Enums;
-using Assets.Scripts.PlayerBase;
 using Assets.Scripts.SO;
 using Assets.Scripts.Systems.Audio;
 using Assets.Scripts.UI;
+using Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades;
 using System;
 using UnityEngine;
 

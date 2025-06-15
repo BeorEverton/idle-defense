@@ -187,16 +187,12 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 },
                 [TurretUpgradeType.SplashDamage] = new()
                 {
-                    GetCurrentValue = t => t.SplashDamage,
-                    UpgradeTurret = (t, a) =>
-                    {
-                        t.SplashDamageLevel += a;
-                        t.SplashDamage += (t.SplashDamageUpgradeAmount * a);
-                    },
-                    GetLevel = t => t.SplashDamageLevel,
-                    GetBaseStat = t => t.SplashDamage,
-                    GetBaseCost = t => t.SplashDamageUpgradeBaseCost,
-                    GetUpgradeAmount = t => t.SplashDamageUpgradeAmount,
+                    GetCurrentValue = t => t.Stats[TurretStatType.SplashDamage].Value,
+                    UpgradeTurret = (t, a) => UpgradeTurret(a, t.Stats[TurretStatType.SplashDamage].UpgradeAmount, TurretUpgradeType.SplashDamage, t),
+                    GetLevel = t => t.Stats[TurretStatType.SplashDamage].Level,
+                    GetBaseStat = t => t.Stats[TurretStatType.SplashDamage].Value,
+                    GetBaseCost = t => t.Stats[TurretStatType.SplashDamage].BaseCost,
+                    GetUpgradeAmount = t => t.Stats[TurretStatType.SplashDamage].UpgradeAmount,
                     GetCostMultiplier = t => 0f,
                     GetMaxValue = t => float.MaxValue,
                     GetMinValue = t => 0f,
@@ -204,7 +200,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                     //GetAmount = t => GetMaxAmount(t.SplashDamageUpgradeBaseCost, exponentialPower, t.SplashDamageLevel),
                     GetDisplayStrings = (t, a) =>
                     {
-                        float current = t.SplashDamage;
+                        float current = t.Stats[TurretStatType.SplashDamage].Value;
                         float bonus = GetBonusAmount(t, TurretUpgradeType.SplashDamage);
                         GetHybridCost(t, TurretUpgradeType.SplashDamage, a, out float cost, out int amount);
 

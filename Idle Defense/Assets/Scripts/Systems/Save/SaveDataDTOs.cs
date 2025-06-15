@@ -244,12 +244,16 @@ namespace Assets.Scripts.Systems.Save
                         Level = turret.ExplosionRadiusLevel,
                         ExponentialCostMultiplier = baseInfo.ExplosionRadiusCostExponentialMultiplier
                     },
+                    [TurretStatType.SplashDamage] = new TurretStat
+                    {
+                        Value = turret.SplashDamage,
+                        UpgradeAmount = turret.SplashDamageUpgradeAmount,
+                        BaseCost = turret.SplashDamageUpgradeBaseCost,
+                        Level = turret.SplashDamageLevel,
+                        ExponentialCostMultiplier = baseInfo.SplashDamageCostExponentialMultiplier
+                    },
                 },
 
-                SplashDamage = turret.SplashDamage,
-                SplashDamageLevel = turret.SplashDamageLevel,
-                SplashDamageUpgradeAmount = turret.SplashDamageUpgradeAmount,
-                SplashDamageUpgradeBaseCost = turret.SplashDamageUpgradeBaseCost,
                 PierceChance = turret.PierceChance,
                 PierceChanceLevel = turret.PierceChanceLevel,
                 PierceChanceUpgradeAmount = turret.PierceChanceUpgradeAmount,

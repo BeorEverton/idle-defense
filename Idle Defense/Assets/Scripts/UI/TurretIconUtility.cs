@@ -35,7 +35,7 @@ namespace Assets.Scripts.UI
             Mathf.FloorToInt(
                   s.Stats[TurretStatType.Damage].Level + s.Stats[TurretStatType.FireRate].Level + s.Stats[TurretStatType.CriticalChance].Level
                 + s.Stats[TurretStatType.CriticalDamage].Level + s.Stats[TurretStatType.ExplosionRadius].Level
-                + s.SplashDamageLevel + s.PierceChanceLevel
+                + s.Stats[TurretStatType.SplashDamage].Level + s.PierceChanceLevel
                 + s.PierceDamageFalloffLevel + s.PelletCountLevel
                 + s.DamageFalloffOverDistanceLevel
                 + s.PercentBonusDamagePerSecLevel + s.SlowEffectLevel);

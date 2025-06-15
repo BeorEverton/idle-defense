@@ -101,12 +101,12 @@ public class EquipItemButton : MonoBehaviour
             + s.Stats[TurretStatType.CriticalChance].Level
             + s.Stats[TurretStatType.CriticalDamage].Level
             + s.Stats[TurretStatType.ExplosionRadius].Level
-            + s.SplashDamageLevel
-            + s.PierceChanceLevel
-            + s.PierceDamageFalloffLevel
-            + s.PelletCountLevel
-            + s.DamageFalloffOverDistanceLevel
-            + s.PercentBonusDamagePerSecLevel
-            + s.SlowEffectLevel);
+            + s.Stats[TurretStatType.SplashDamage].Level
+            + s.Stats[TurretStatType.PierceChance].Level
+            + s.Stats[TurretStatType.PierceDamageFalloff].Level
+            + s.Stats[TurretStatType.PelletCount].Level
+            + s.Stats[TurretStatType.DamageFalloffOverDistance].Level
+            + s.Stats[TurretStatType.PercentBonusDamagePerSec].Level
+            + s.Stats[TurretStatType.SlowEffect].Level);
     }
 }

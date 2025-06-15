@@ -23,11 +23,6 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
         public float BaseCritChance;
         public float BaseCritDamage;
 
-        public float SplashDamage;
-        public int SplashDamageLevel;
-        public float SplashDamageUpgradeAmount;
-        public float SplashDamageUpgradeBaseCost;
-
         public float PierceChance;
         public int PierceChanceLevel;
         public float PierceChanceUpgradeAmount;

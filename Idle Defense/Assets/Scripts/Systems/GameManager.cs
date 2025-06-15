@@ -98,7 +98,6 @@ namespace Assets.Scripts.Systems
             if (isHolding)
             {
                 spdBonus += holdIncreaseRate * Time.deltaTime;
-                decreaseTimer = 0f;
             }
             else
             {

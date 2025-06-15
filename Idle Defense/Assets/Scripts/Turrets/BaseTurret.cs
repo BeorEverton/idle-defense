@@ -73,7 +73,7 @@ namespace Assets.Scripts.Turrets
             _bonusSpdMultiplier = 1f + GameManager.Instance.spdBonus / 100f;
 
             // Calculate attack speed and damage
-            _atkSpeed = (1 / _stats.FireRate) / _bonusSpdMultiplier;
+            _atkSpeed = (1 / _stats.Stats[TurretStatType.FireRate].Value) / _bonusSpdMultiplier;
 
             _timeSinceLastShot += Time.deltaTime;
             Attack();
@@ -305,26 +305,26 @@ namespace Assets.Scripts.Turrets
         {
             return Mathf.FloorToInt(
                 _stats.Stats[TurretStatType.Damage].Level +
-                _stats.FireRateLevel +
-                _stats.CriticalChanceLevel +
-                _stats.CriticalDamageMultiplierLevel +
-                _stats.ExplosionRadiusLevel +
-                _stats.SplashDamageLevel +
-                _stats.PierceChanceLevel +
-                _stats.PierceDamageFalloffLevel +
-                _stats.PelletCountLevel +
-                _stats.DamageFalloffOverDistanceLevel +
-                _stats.PercentBonusDamagePerSecLevel +
-                _stats.SlowEffectLevel +
-                _stats.KnockbackStrengthLevel
+                _stats.Stats[TurretStatType.FireRate].Level +
+                _stats.Stats[TurretStatType.CriticalChance].Level +
+                _stats.Stats[TurretStatType.CriticalDamage].Level +
+                _stats.Stats[TurretStatType.ExplosionRadius].Level +
+                _stats.Stats[TurretStatType.SplashDamage].Level +
+                _stats.Stats[TurretStatType.PierceChance].Level +
+                _stats.Stats[TurretStatType.PierceDamageFalloff].Level +
+                _stats.Stats[TurretStatType.PelletCount].Level +
+                _stats.Stats[TurretStatType.DamageFalloffOverDistance].Level +
+                _stats.Stats[TurretStatType.PercentBonusDamagePerSec].Level +
+                _stats.Stats[TurretStatType.SlowEffect].Level +
+                _stats.Stats[TurretStatType.KnockbackStrength].Level
             );
         }
 
         public virtual float GetDPS()
         {
             float baseDamage = _stats.Stats[TurretStatType.Damage].Value;
-            float fireRate = _stats.FireRate;
-            float critChance = Mathf.Clamp01(_stats.CriticalChance / 100f);
+            float fireRate = _stats.Stats[TurretStatType.FireRate].Value;
+            float critChance = Mathf.Clamp01(_stats.Stats[TurretStatType.CriticalChance].Value / 100f);
             float critMultiplier = _stats.CriticalDamageMultiplier / 100f;
             float bonusDpsPercent = _stats.PercentBonusDamagePerSec / 100f;
 

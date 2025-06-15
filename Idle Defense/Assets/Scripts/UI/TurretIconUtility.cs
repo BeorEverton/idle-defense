@@ -33,7 +33,7 @@ namespace Assets.Scripts.UI
 
         private static int TotalLevel(TurretStatsInstance s) =>
             Mathf.FloorToInt(
-                  s.Stats[TurretStatType.Damage].Level + s.FireRateLevel + s.CriticalChanceLevel
+                  s.Stats[TurretStatType.Damage].Level + s.Stats[TurretStatType.FireRate].Level + s.Stats[TurretStatType.CriticalChance].Level
                 + s.CriticalDamageMultiplierLevel + s.ExplosionRadiusLevel
                 + s.SplashDamageLevel + s.PierceChanceLevel
                 + s.PierceDamageFalloffLevel + s.PelletCountLevel

@@ -267,7 +267,7 @@ namespace Assets.Scripts.Turrets
         public override float GetDPS()
         {
             float baseDamage = _stats.Stats[TurretStatType.Damage].Value;
-            float fireRate = _stats.FireRate;
+            float fireRate = _stats.Stats[TurretStatType.FireRate].Value;
             float critChance = Mathf.Clamp01(_stats.CriticalChance / 100f);
             float critMultiplier = _stats.CriticalDamageMultiplier / 100f;
             float bonusDpsPercent = _stats.PercentBonusDamagePerSec / 100f;

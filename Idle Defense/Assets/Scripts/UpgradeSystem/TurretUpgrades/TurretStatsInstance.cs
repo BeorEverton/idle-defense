@@ -23,12 +23,6 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
         public float BaseCritChance;
         public float BaseCritDamage;
 
-        public float FireRate;
-        public int FireRateLevel;
-        public float FireRateUpgradeAmount;
-        public float FireRateUpgradeBaseCost;
-        public float FireRateCostExponentialMultiplier;
-
         public float CriticalChance;
         public int CriticalChanceLevel;
         public float CriticalChanceUpgradeAmount;

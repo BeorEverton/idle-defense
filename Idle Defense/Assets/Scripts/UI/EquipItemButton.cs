@@ -88,7 +88,7 @@ public class EquipItemButton : MonoBehaviour
         int pellets = Mathf.Max(1, s.PelletCount);
 
         // For lasers FireRate is 0, treat as 1 shot/sec (damage already per sec)
-        double shotsPerSec = s.FireRate > 0.01f ? s.FireRate : 1.0;
+        double shotsPerSec = s.Stats[TurretStatType.FireRate].Value > 0.01f ? s.Stats[TurretStatType.FireRate].Value : 1.0;
 
         return dmgPerProj * pellets * shotsPerSec;
     }
@@ -97,7 +97,7 @@ public class EquipItemButton : MonoBehaviour
     {
         return Mathf.FloorToInt(
               s.Stats[TurretStatType.Damage].Level
-            + s.FireRateLevel
+            + s.Stats[TurretStatType.FireRate].Level
             + s.CriticalChanceLevel
             + s.CriticalDamageMultiplierLevel
             + s.ExplosionRadiusLevel

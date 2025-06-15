@@ -73,24 +73,26 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 },
                 [TurretUpgradeType.FireRate] = new()
                 {
-                    GetCurrentValue = t => t.FireRate,
+                    GetCurrentValue = t => t.Stats[TurretStatType.FireRate].Value,
                     UpgradeTurret = (t, a) =>
                     {
-                        t.FireRateLevel += a;
-                        t.FireRate += (t.FireRateUpgradeAmount * a);
+                        TurretStat stat = t.Stats[TurretStatType.FireRate];
+                        stat.Level += a;
+                        stat.Value += (t.Stats[TurretStatType.FireRate].UpgradeAmount * a);
+                        t.Stats[TurretStatType.FireRate] = stat; // Update the stat in the dictionary
                     },
-                    GetLevel = t => t.FireRateLevel,
+                    GetLevel = t => t.Stats[TurretStatType.FireRate].Level,
                     GetBaseStat = t => t.BaseFireRate,
-                    GetBaseCost = t => t.FireRateUpgradeBaseCost,
-                    GetUpgradeAmount = t => t.FireRateUpgradeAmount,
-                    GetCostMultiplier = t => t.FireRateCostExponentialMultiplier,
+                    GetBaseCost = t => t.Stats[TurretStatType.FireRate].BaseCost,
+                    GetUpgradeAmount = t => t.Stats[TurretStatType.FireRate].UpgradeAmount,
+                    GetCostMultiplier = t => t.Stats[TurretStatType.FireRate].ExponentialCostMultiplier,
                     GetMaxValue = t => float.MaxValue,
                     GetMinValue = t => 0f,
                     GetCost = (t, a) => GetExponentialCost(t, TurretUpgradeType.FireRate, a),
                     //GetAmount = t => GetMaxAmount(t.FireRateUpgradeBaseCost, t.FireRateCostExponentialMultiplier, t.FireRateLevel),
                     GetDisplayStrings = (t, a) =>
                     {
-                        float currentFireRate = t.FireRate;
+                        float currentFireRate = t.Stats[TurretStatType.FireRate].Value;
                         float bonusFireRate = GetBonusAmount(t, TurretUpgradeType.FireRate);
                         GetExponentialCost(t, TurretUpgradeType.FireRate, a, out float cost, out int amount);
 

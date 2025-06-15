@@ -43,7 +43,7 @@ namespace Assets.Scripts.Turrets
 
         private bool IsCriticalHit()
         {
-            return Random.Range(0, 100) < _stats.CriticalChance;
+            return Random.Range(0, 100) < _stats.Stats[TurretStatType.CriticalChance].Value;
         }
     }
 }

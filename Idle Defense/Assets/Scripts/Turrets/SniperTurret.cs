@@ -114,7 +114,7 @@ namespace Assets.Scripts.Turrets
         {
             float baseDamage = _stats.Stats[TurretStatType.Damage].Value;
             float fireRate = _stats.Stats[TurretStatType.FireRate].Value;
-            float critChance = Mathf.Clamp01(_stats.CriticalChance / 100f);
+            float critChance = Mathf.Clamp01(_stats.Stats[TurretStatType.CriticalChance].Value / 100f);
             float critMultiplier = _stats.CriticalDamageMultiplier / 100f;
             float pierceChance = Mathf.Clamp01(_stats.PierceChance / 100f);
             float pierceFalloff = _stats.PierceDamageFalloff / 100f;

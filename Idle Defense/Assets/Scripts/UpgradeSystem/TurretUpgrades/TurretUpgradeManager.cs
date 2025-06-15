@@ -106,24 +106,26 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 },
                 [TurretUpgradeType.CriticalChance] = new()
                 {
-                    GetCurrentValue = t => t.CriticalChance,
+                    GetCurrentValue = t => t.Stats[TurretStatType.CriticalChance].Value,
                     UpgradeTurret = (t, a) =>
                     {
-                        t.CriticalChanceLevel += a;
-                        t.CriticalChance += (t.CriticalChanceUpgradeAmount * a);
+                        TurretStat stat = t.Stats[TurretStatType.CriticalChance];
+                        stat.Level += a;
+                        stat.Value += (t.Stats[TurretStatType.CriticalChance].UpgradeAmount * a);
+                        t.Stats[TurretStatType.CriticalChance] = stat; // Update the stat in the dictionary
                     },
-                    GetLevel = t => t.CriticalChanceLevel,
+                    GetLevel = t => t.Stats[TurretStatType.CriticalChance].Level,
                     GetBaseStat = t => t.BaseCritChance,
-                    GetBaseCost = t => t.CriticalChanceUpgradeBaseCost,
-                    GetUpgradeAmount = t => t.CriticalChanceUpgradeAmount,
-                    GetCostMultiplier = t => t.CriticalChanceCostExponentialMultiplier,
+                    GetBaseCost = t => t.Stats[TurretStatType.CriticalChance].BaseCost,
+                    GetUpgradeAmount = t => t.Stats[TurretStatType.CriticalChance].UpgradeAmount,
+                    GetCostMultiplier = t => t.Stats[TurretStatType.CriticalChance].ExponentialCostMultiplier,
                     GetMaxValue = t => 50f,
                     GetMinValue = t => 0f,
                     GetCost = (t, a) => GetExponentialCost(t, TurretUpgradeType.CriticalChance, a),
                     //GetAmount = t => GetMaxAmount(t.CriticalChanceUpgradeBaseCost, t.CriticalChanceCostExponentialMultiplier, t.CriticalChanceLevel),
                     GetDisplayStrings = (t, a) =>
                     {
-                        float current = t.CriticalChance;
+                        float current = t.Stats[TurretStatType.CriticalChance].Value;
                         float bonus = GetBonusAmount(t, TurretUpgradeType.CriticalChance);
                         GetExponentialCost(t, TurretUpgradeType.CriticalChance, a, out float cost, out int amount);
 

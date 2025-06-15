@@ -81,7 +81,7 @@ public class EquipItemButton : MonoBehaviour
     {
         // Expected crit bonus
         double critBonus = (s.Stats[TurretStatType.CriticalChance].Value / 100.0) *
-                           (s.CriticalDamageMultiplier / 100.0 - 1.0);
+                           (s.Stats[TurretStatType.CriticalDamage].Value / 100.0 - 1.0);
 
         double dmgPerProj = s.Stats[TurretStatType.Damage].Value * (1.0 + critBonus);
 

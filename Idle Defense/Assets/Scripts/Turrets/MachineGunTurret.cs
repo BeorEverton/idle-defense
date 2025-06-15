@@ -32,7 +32,7 @@ namespace Assets.Scripts.Turrets
 
             if (isCritical)
             {
-                finalDamage *= 1f + (_stats.CriticalDamageMultiplier / 100f);
+                finalDamage *= 1f + (_stats.Stats[TurretStatType.CriticalDamage].Value / 100f);
             }
 
             _targetEnemy.GetComponent<Enemy>().TakeDamage(finalDamage, isCritical);

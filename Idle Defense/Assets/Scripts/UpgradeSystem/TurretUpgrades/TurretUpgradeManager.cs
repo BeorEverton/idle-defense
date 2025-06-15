@@ -74,13 +74,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 [TurretUpgradeType.FireRate] = new()
                 {
                     GetCurrentValue = t => t.Stats[TurretStatType.FireRate].Value,
-                    UpgradeTurret = (t, a) =>
-                    {
-                        TurretStat stat = t.Stats[TurretStatType.FireRate];
-                        stat.Level += a;
-                        stat.Value += (t.Stats[TurretStatType.FireRate].UpgradeAmount * a);
-                        t.Stats[TurretStatType.FireRate] = stat; // Update the stat in the dictionary
-                    },
+                    UpgradeTurret = (t, a) => UpgradeTurret(a, t.Stats[TurretStatType.FireRate].UpgradeAmount, TurretUpgradeType.FireRate, t),
                     GetLevel = t => t.Stats[TurretStatType.FireRate].Level,
                     GetBaseStat = t => t.BaseFireRate,
                     GetBaseCost = t => t.Stats[TurretStatType.FireRate].BaseCost,
@@ -107,13 +101,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 [TurretUpgradeType.CriticalChance] = new()
                 {
                     GetCurrentValue = t => t.Stats[TurretStatType.CriticalChance].Value,
-                    UpgradeTurret = (t, a) =>
-                    {
-                        TurretStat stat = t.Stats[TurretStatType.CriticalChance];
-                        stat.Level += a;
-                        stat.Value += (t.Stats[TurretStatType.CriticalChance].UpgradeAmount * a);
-                        t.Stats[TurretStatType.CriticalChance] = stat; // Update the stat in the dictionary
-                    },
+                    UpgradeTurret = (t, a) => UpgradeTurret(a, t.Stats[TurretStatType.CriticalChance].UpgradeAmount, TurretUpgradeType.CriticalChance, t),
                     GetLevel = t => t.Stats[TurretStatType.CriticalChance].Level,
                     GetBaseStat = t => t.BaseCritChance,
                     GetBaseCost = t => t.Stats[TurretStatType.CriticalChance].BaseCost,
@@ -142,12 +130,8 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 },
                 [TurretUpgradeType.CriticalDamageMultiplier] = new()
                 {
-                    GetCurrentValue = t => t.CriticalDamageMultiplier,
-                    UpgradeTurret = (t, a) =>
-                    {
-                        t.CriticalDamageMultiplierLevel += a;
-                        t.CriticalDamageMultiplier += (t.CriticalDamageMultiplierUpgradeAmount * a);
-                    },
+                    GetCurrentValue = t => t.Stats[TurretStatType.CriticalDamage].Value,
+                    UpgradeTurret = (t, a) => UpgradeTurret(a, t.Stats[TurretStatType.CriticalDamage].UpgradeAmount, TurretUpgradeType.CriticalDamageMultiplier, t),
                     GetLevel = t => t.CriticalDamageMultiplierLevel,
                     GetBaseStat = t => t.BaseCritDamage,
                     GetBaseCost = t => t.CriticalDamageMultiplierUpgradeBaseCost,
@@ -159,7 +143,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                     //GetAmount = t => GetMaxAmount(t.CriticalDamageMultiplierUpgradeBaseCost, t.CriticalDamageMultiplier, t.CriticalDamageMultiplierLevel),
                     GetDisplayStrings = (t, a) =>
                 {
-                    float current = t.CriticalDamageMultiplier;
+                    float current = t.Stats[TurretStatType.CriticalDamage].Value;
                     float bonus = GetBonusAmount(t, TurretUpgradeType.CriticalDamageMultiplier);
                     GetExponentialCost(t, TurretUpgradeType.CriticalDamageMultiplier, a, out float cost, out int amount);
 
@@ -463,6 +447,14 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                     }
                 }
             };
+        }
+
+        private void UpgradeTurret(int levelAmount, float upgradeAmount, TurretUpgradeType type, TurretStatsInstance turret)
+        {
+            TurretStat stat = turret.Stats[TurretStatType.CriticalDamage];
+            stat.Level += levelAmount;
+            stat.Value += (upgradeAmount * levelAmount);
+            turret.Stats[TurretStatType.CriticalDamage] = stat; // Update the stat in the dictionary
         }
         #endregion
 

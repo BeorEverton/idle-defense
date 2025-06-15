@@ -78,7 +78,7 @@ namespace Assets.Scripts.Systems.Save
                 CriticalChanceLevel = turret.Stats[TurretStatType.CriticalChance].Level,
                 CriticalChanceUpgradeAmount = turret.Stats[TurretStatType.CriticalChance].UpgradeAmount,
                 CriticalChanceUpgradeBaseCost = turret.Stats[TurretStatType.CriticalChance].BaseCost,
-                CriticalDamageMultiplier = turret.CriticalDamageMultiplier,
+                CriticalDamageMultiplier = turret.Stats[TurretStatType.CriticalDamage].Value,
                 CriticalDamageMultiplierLevel = turret.CriticalDamageMultiplierLevel,
                 CriticalDamageMultiplierUpgradeAmount = turret.CriticalDamageMultiplierUpgradeAmount,
                 CriticalDamageMultiplierUpgradeBaseCost = turret.CriticalDamageMultiplierUpgradeBaseCost,
@@ -216,12 +216,16 @@ namespace Assets.Scripts.Systems.Save
                         Level = turret.CriticalChanceLevel,
                         ExponentialCostMultiplier = baseInfo.CriticalChanceCostExponentialMultiplier
                     },
+                    [TurretStatType.CriticalDamage] = new TurretStat
+                    {
+                        Value = turret.CriticalDamageMultiplier,
+                        UpgradeAmount = turret.CriticalDamageMultiplierUpgradeAmount,
+                        BaseCost = turret.CriticalDamageMultiplierUpgradeBaseCost,
+                        Level = turret.CriticalDamageMultiplierLevel,
+                        ExponentialCostMultiplier = baseInfo.CriticalDamageCostExponentialMultiplier
+                    }
                 },
 
-                CriticalDamageMultiplier = turret.CriticalDamageMultiplier,
-                CriticalDamageMultiplierLevel = turret.CriticalDamageMultiplierLevel,
-                CriticalDamageMultiplierUpgradeAmount = turret.CriticalDamageMultiplierUpgradeAmount,
-                CriticalDamageMultiplierUpgradeBaseCost = turret.CriticalDamageMultiplierUpgradeBaseCost,
                 ExplosionRadius = turret.ExplosionRadius,
                 ExplosionRadiusLevel = turret.ExplosionRadiusLevel,
                 ExplosionRadiusUpgradeAmount = turret.ExplosionRadiusUpgradeAmount,

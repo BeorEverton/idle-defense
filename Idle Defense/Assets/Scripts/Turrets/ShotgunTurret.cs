@@ -269,7 +269,7 @@ namespace Assets.Scripts.Turrets
             float baseDamage = _stats.Stats[TurretStatType.Damage].Value;
             float fireRate = _stats.Stats[TurretStatType.FireRate].Value;
             float critChance = Mathf.Clamp01(_stats.Stats[TurretStatType.CriticalChance].Value / 100f);
-            float critMultiplier = _stats.CriticalDamageMultiplier / 100f;
+            float critMultiplier = _stats.Stats[TurretStatType.CriticalDamage].Value / 100f;
             float bonusDpsPercent = _stats.PercentBonusDamagePerSec / 100f;
             int pelletCount = _stats.PelletCount;
 

@@ -45,7 +45,7 @@ namespace Assets.Scripts.Turrets
 
             Vector2 baseDir = ((_targetEnemy.transform.position - transform.position)).normalized;
 
-            if (_stats.PelletCount % 2 == 1)
+            if ((int)_stats.Stats[TurretStatType.PelletCount].Value % 2 == 1)
             {
                 FireWithUnevenPelletCount(baseDir);
             }
@@ -119,7 +119,7 @@ namespace Assets.Scripts.Turrets
             }
 
             // Distribute pellets
-            int pelletsRemaining = _stats.PelletCount;
+            int pelletsRemaining = (int)_stats.Stats[TurretStatType.PelletCount].Value;
             int index = 0;
 
             while (pelletsRemaining > 0 && sortedCount > 0)
@@ -146,10 +146,10 @@ namespace Assets.Scripts.Turrets
 
         private void FireWithUnevenPelletCount(Vector2 baseDir)
         {
-            for (int i = 0; i < _stats.PelletCount; i++)
+            for (int i = 0; i < (int)_stats.Stats[TurretStatType.PelletCount].Value; i++)
             {
-                float angleOffset = _stats.PelletCount > 1
-                    ? Mathf.Lerp(-spreadAngle / 2f, spreadAngle / 2f, (float)i / (_stats.PelletCount - 1))
+                float angleOffset = (int)_stats.Stats[TurretStatType.PelletCount].Value > 1
+                    ? Mathf.Lerp(-spreadAngle / 2f, spreadAngle / 2f, (float)i / ((int)_stats.Stats[TurretStatType.PelletCount].Value - 1))
                     : 0f;
 
                 FirePellet(baseDir, angleOffset);
@@ -158,7 +158,7 @@ namespace Assets.Scripts.Turrets
 
         private void FireWithEvenPelletCount(Vector2 baseDir)
         {
-            int pelletsRemaining = _stats.PelletCount - 1;
+            int pelletsRemaining = (int)_stats.Stats[TurretStatType.PelletCount].Value - 1;
             int leftPellets = pelletsRemaining / 2;
             int rightPellets = pelletsRemaining - leftPellets;
 
@@ -271,7 +271,7 @@ namespace Assets.Scripts.Turrets
             float critChance = Mathf.Clamp01(_stats.Stats[TurretStatType.CriticalChance].Value / 100f);
             float critMultiplier = _stats.Stats[TurretStatType.CriticalDamage].Value / 100f;
             float bonusDpsPercent = _stats.PercentBonusDamagePerSec / 100f;
-            int pelletCount = _stats.PelletCount;
+            int pelletCount = (int)_stats.Stats[TurretStatType.PelletCount].Value;
 
             float pelletDamage = baseDamage * (1f + critChance * (critMultiplier - 1f));
             pelletDamage *= (1f + bonusDpsPercent);

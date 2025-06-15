@@ -23,11 +23,6 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
         public float BaseCritChance;
         public float BaseCritDamage;
 
-        public int PelletCount;
-        public int PelletCountLevel;
-        public int PelletCountUpgradeAmount;
-        public float PelletCountUpgradeBaseCost;
-
         public float DamageFalloffOverDistance;
         public int DamageFalloffOverDistanceLevel;
         public float DamageFalloffOverDistanceUpgradeAmount;

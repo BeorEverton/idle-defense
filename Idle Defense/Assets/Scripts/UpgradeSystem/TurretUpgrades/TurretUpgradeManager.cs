@@ -270,16 +270,12 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 },
                 [TurretStatType.PelletCount] = new()
                 {
-                    GetCurrentValue = t => t.PelletCount,
-                    UpgradeTurret = (t, a) =>
-                    {
-                        t.PelletCountLevel += a;
-                        t.PelletCount += (t.PelletCountUpgradeAmount * a);
-                    },
-                    GetLevel = t => t.PelletCountLevel,
-                    GetBaseStat = t => t.PelletCount,
-                    GetBaseCost = t => t.PelletCountUpgradeBaseCost,
-                    GetUpgradeAmount = t => t.PelletCountUpgradeAmount,
+                    GetCurrentValue = t => t.Stats[TurretStatType.PelletCount].Value,
+                    UpgradeTurret = (t, a) => UpgradeTurret(a, TurretStatType.PelletCount, t),
+                    GetLevel = t => t.Stats[TurretStatType.PelletCount].Level,
+                    GetBaseStat = t => t.Stats[TurretStatType.PelletCount].Value,
+                    GetBaseCost = t => t.Stats[TurretStatType.PelletCount].BaseCost,
+                    GetUpgradeAmount = t => t.Stats[TurretStatType.PelletCount].UpgradeAmount,
                     GetCostMultiplier = t => 0f,
                     GetMaxValue = t => float.MaxValue,
                     GetMinValue = t => 0f,
@@ -287,7 +283,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                     //GetAmount = t => GetMaxAmount(t.PelletCountUpgradeBaseCost, exponentialPower, t.PelletCountLevel),
                     GetDisplayStrings = (t, a) =>
                     {
-                        float current = t.PelletCount;
+                        float current = t.Stats[TurretStatType.PelletCount].Value;
                         float bonus = GetBonusAmount(t, TurretStatType.PelletCount);
                         GetHybridCost(t, TurretStatType.PelletCount, a, out float cost, out int amount);
 

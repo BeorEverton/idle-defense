@@ -354,16 +354,12 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 },
                 [TurretStatType.PercentBonusDamagePerSec] = new()
                 {
-                    GetCurrentValue = t => t.PercentBonusDamagePerSec,
-                    UpgradeTurret = (t, a) =>
-                    {
-                        t.PercentBonusDamagePerSecLevel += a;
-                        t.PercentBonusDamagePerSec += (t.PercentBonusDamagePerSecUpgradeAmount * a);
-                    },
-                    GetLevel = t => t.PercentBonusDamagePerSecLevel,
-                    GetBaseStat = t => t.PercentBonusDamagePerSec,
-                    GetBaseCost = t => t.PercentBonusDamagePerSecUpgradeBaseCost,
-                    GetUpgradeAmount = t => t.PercentBonusDamagePerSecUpgradeAmount,
+                    GetCurrentValue = t => t.Stats[TurretStatType.PercentBonusDamagePerSec].Value,
+                    UpgradeTurret = (t, a) => UpgradeTurret(a, TurretStatType.PercentBonusDamagePerSec, t),
+                    GetLevel = t => t.Stats[TurretStatType.PercentBonusDamagePerSec].Level,
+                    GetBaseStat = t => t.Stats[TurretStatType.PercentBonusDamagePerSec].Value,
+                    GetBaseCost = t => t.Stats[TurretStatType.PercentBonusDamagePerSec].BaseCost,
+                    GetUpgradeAmount = t => t.Stats[TurretStatType.PercentBonusDamagePerSec].UpgradeAmount,
                     GetCostMultiplier = t => 0f,
                     GetMaxValue = t => float.MaxValue,
                     GetMinValue = t => 0f,
@@ -371,7 +367,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                     //GetAmount = t => GetMaxAmount(t.PercentBonusDamagePerSecUpgradeBaseCost, exponentialPower, t.PercentBonusDamagePerSecLevel),
                     GetDisplayStrings = (t, a) =>
                     {
-                        float current = t.PercentBonusDamagePerSec;
+                        float current = t.Stats[TurretStatType.PercentBonusDamagePerSec].Value;
                         float bonus = GetBonusAmount(t, TurretStatType.PercentBonusDamagePerSec);
                         GetHybridCost(t, TurretStatType.PercentBonusDamagePerSec, a, out float cost, out int amount);
 

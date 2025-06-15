@@ -21,7 +21,7 @@ namespace Assets.Scripts.Turrets
         {
             base.Start();
 
-            _bonusDmgPerSec = 1f + _stats.PercentBonusDamagePerSec / 100f;
+            _bonusDmgPerSec = 1f + _stats.Stats[TurretStatType.PercentBonusDamagePerSec].Value / 100f;
         }
 
         protected override void Update()

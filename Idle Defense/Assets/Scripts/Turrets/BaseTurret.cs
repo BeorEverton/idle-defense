@@ -327,7 +327,7 @@ namespace Assets.Scripts.Turrets
             float fireRate = _stats.Stats[TurretStatType.FireRate].Value;
             float critChance = Mathf.Clamp01(_stats.Stats[TurretStatType.CriticalChance].Value / 100f);
             float critMultiplier = _stats.Stats[TurretStatType.CriticalDamage].Value / 100f;
-            float bonusDpsPercent = _stats.PercentBonusDamagePerSec / 100f;
+            float bonusDpsPercent = _stats.Stats[TurretStatType.PercentBonusDamagePerSec].Value / 100f;
 
             // Effective damage per shot with crit chance
             float effectiveDamage = baseDamage * (1f + critChance * (critMultiplier - 1f));

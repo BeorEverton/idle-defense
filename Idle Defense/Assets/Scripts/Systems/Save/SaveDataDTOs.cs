@@ -261,28 +261,47 @@ namespace Assets.Scripts.Systems.Save
                         Level = turret.PierceChanceLevel,
                         ExponentialCostMultiplier = baseInfo.PierceChanceCostExponentialMultiplier
                     },
+                    [TurretStatType.PierceDamageFalloff] = new TurretStat
+                    {
+                        Value = turret.PierceDamageFalloff,
+                        UpgradeAmount = turret.PierceDamageFalloffUpgradeAmount,
+                        BaseCost = turret.PierceDamageFalloffUpgradeBaseCost,
+                        Level = turret.PierceDamageFalloffLevel,
+                        ExponentialCostMultiplier = baseInfo.PierceDamageFalloffCostExponentialMultiplier
+                    },
+                    [TurretStatType.PelletCount] = new TurretStat
+                    {
+                        Value = turret.PelletCount,
+                        UpgradeAmount = turret.PelletCountUpgradeAmount,
+                        BaseCost = turret.PelletCountUpgradeBaseCost,
+                        Level = turret.PelletCountLevel,
+                        ExponentialCostMultiplier = baseInfo.PelletCountCostExponentialMultiplier
+                    },
+                    [TurretStatType.DamageFalloffOverDistance] = new TurretStat
+                    {
+                        Value = turret.DamageFalloffOverDistance,
+                        UpgradeAmount = turret.DamageFalloffOverDistanceUpgradeAmount,
+                        BaseCost = turret.DamageFalloffOverDistanceUpgradeBaseCost,
+                        Level = turret.DamageFalloffOverDistanceLevel,
+                        ExponentialCostMultiplier = baseInfo.DamageFalloffOverDistanceCostExponentialMultiplier
+                    },
+                    [TurretStatType.PercentBonusDamagePerSec] = new TurretStat
+                    {
+                        Value = turret.PercentBonusDamagePerSec,
+                        UpgradeAmount = turret.PercentBonusDamagePerSecUpgradeAmount,
+                        BaseCost = turret.PercentBonusDamagePerSecUpgradeBaseCost,
+                        Level = turret.PercentBonusDamagePerSecLevel,
+                        ExponentialCostMultiplier = baseInfo.PercentBonusDamagePerSecCostExponentialMultiplier
+                    },
+                    [TurretStatType.SlowEffect] = new TurretStat
+                    {
+                        Value = turret.SlowEffect,
+                        UpgradeAmount = turret.SlowEffectUpgradeAmount,
+                        BaseCost = turret.SlowEffectUpgradeBaseCost,
+                        Level = turret.SlowEffectLevel,
+                        ExponentialCostMultiplier = baseInfo.SlowEffectCostExponentialMultiplier
+                    }
                 },
-
-                PierceDamageFalloff = turret.PierceDamageFalloff,
-                PierceDamageFalloffLevel = turret.PierceDamageFalloffLevel,
-                PierceDamageFalloffUpgradeAmount = turret.PierceDamageFalloffUpgradeAmount,
-                PierceDamageFalloffUpgradeBaseCost = turret.PierceDamageFalloffUpgradeBaseCost,
-                PelletCount = turret.PelletCount,
-                PelletCountLevel = turret.PelletCountLevel,
-                PelletCountUpgradeAmount = turret.PelletCountUpgradeAmount,
-                PelletCountUpgradeBaseCost = turret.PelletCountUpgradeBaseCost,
-                DamageFalloffOverDistance = turret.DamageFalloffOverDistance,
-                DamageFalloffOverDistanceLevel = turret.DamageFalloffOverDistanceLevel,
-                DamageFalloffOverDistanceUpgradeAmount = turret.DamageFalloffOverDistanceUpgradeAmount,
-                DamageFalloffOverDistanceUpgradeBaseCost = turret.DamageFalloffOverDistanceUpgradeBaseCost,
-                PercentBonusDamagePerSec = turret.PercentBonusDamagePerSec,
-                PercentBonusDamagePerSecLevel = turret.PercentBonusDamagePerSecLevel,
-                PercentBonusDamagePerSecUpgradeAmount = turret.PercentBonusDamagePerSecUpgradeAmount,
-                PercentBonusDamagePerSecUpgradeBaseCost = turret.PercentBonusDamagePerSecUpgradeBaseCost,
-                SlowEffect = turret.SlowEffect,
-                SlowEffectLevel = turret.SlowEffectLevel,
-                SlowEffectUpgradeAmount = turret.SlowEffectUpgradeAmount,
-                SlowEffectUpgradeBaseCost = turret.SlowEffectUpgradeBaseCost,
                 RotationSpeed = turret.RotationSpeed,
                 AngleThreshold = turret.AngleThreshold
             };

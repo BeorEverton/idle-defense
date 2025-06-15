@@ -37,8 +37,8 @@ namespace Assets.Scripts.UI
                   s.Stats[TurretStatType.Damage].Level + s.Stats[TurretStatType.FireRate].Level + s.Stats[TurretStatType.CriticalChance].Level
                 + s.Stats[TurretStatType.CriticalDamage].Level + s.Stats[TurretStatType.ExplosionRadius].Level
                 + s.Stats[TurretStatType.SplashDamage].Level + s.Stats[TurretStatType.PierceChance].Level
-                + s.PierceDamageFalloffLevel + s.PelletCountLevel
-                + s.DamageFalloffOverDistanceLevel
-                + s.PercentBonusDamagePerSecLevel + s.SlowEffectLevel);
+                + s.Stats[TurretStatType.PierceDamageFalloff].Level + s.Stats[TurretStatType.PelletCount].Level
+                + s.Stats[TurretStatType.DamageFalloffOverDistance].Level
+                + s.Stats[TurretStatType.PercentBonusDamagePerSec].Level + s.Stats[TurretStatType.SlowEffect].Level);
     }
 }

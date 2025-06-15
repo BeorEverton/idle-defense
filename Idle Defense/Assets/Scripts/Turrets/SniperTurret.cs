@@ -34,7 +34,7 @@ namespace Assets.Scripts.Turrets
 
             _recoil.AddRecoil();
 
-            float pierceDamageMultiplier = _stats.PierceDamageFalloff / 100f;
+            float pierceDamageMultiplier = _stats.Stats[TurretStatType.PierceDamageFalloff].Value / 100f;
             float currentDamage = _stats.Stats[TurretStatType.Damage].Value;
             bool firstHit = true;
 

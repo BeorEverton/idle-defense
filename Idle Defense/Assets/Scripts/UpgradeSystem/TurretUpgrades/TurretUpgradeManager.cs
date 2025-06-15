@@ -72,7 +72,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 [TurretStatType.FireRate] = new()
                 {
                     GetCurrentValue = t => t.Stats[TurretStatType.FireRate].Value,
-                    UpgradeTurret = (t, a) => UpgradeTurret(a, t.Stats[TurretStatType.FireRate].UpgradeAmount, TurretStatType.FireRate, t),
+                    UpgradeTurret = (t, a) => UpgradeTurret(a, TurretStatType.FireRate, t),
                     GetLevel = t => t.Stats[TurretStatType.FireRate].Level,
                     GetBaseStat = t => t.BaseFireRate,
                     GetBaseCost = t => t.Stats[TurretStatType.FireRate].BaseCost,
@@ -99,7 +99,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 [TurretStatType.CriticalChance] = new()
                 {
                     GetCurrentValue = t => t.Stats[TurretStatType.CriticalChance].Value,
-                    UpgradeTurret = (t, a) => UpgradeTurret(a, t.Stats[TurretStatType.CriticalChance].UpgradeAmount, TurretStatType.CriticalChance, t),
+                    UpgradeTurret = (t, a) => UpgradeTurret(a, TurretStatType.CriticalChance, t),
                     GetLevel = t => t.Stats[TurretStatType.CriticalChance].Level,
                     GetBaseStat = t => t.BaseCritChance,
                     GetBaseCost = t => t.Stats[TurretStatType.CriticalChance].BaseCost,
@@ -129,7 +129,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 [TurretStatType.CriticalDamage] = new()
                 {
                     GetCurrentValue = t => t.Stats[TurretStatType.CriticalDamage].Value,
-                    UpgradeTurret = (t, a) => UpgradeTurret(a, t.Stats[TurretStatType.CriticalDamage].UpgradeAmount, TurretStatType.CriticalDamage, t),
+                    UpgradeTurret = (t, a) => UpgradeTurret(a, TurretStatType.CriticalDamage, t),
                     GetLevel = t => t.Stats[TurretStatType.CriticalDamage].Level,
                     GetBaseStat = t => t.BaseCritDamage,
                     GetBaseCost = t => t.Stats[TurretStatType.CriticalDamage].BaseCost,
@@ -156,7 +156,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 [TurretStatType.ExplosionRadius] = new()
                 {
                     GetCurrentValue = t => t.Stats[TurretStatType.ExplosionRadius].Value,
-                    UpgradeTurret = (t, a) => UpgradeTurret(a, t.Stats[TurretStatType.ExplosionRadius].UpgradeAmount, TurretStatType.ExplosionRadius, t),
+                    UpgradeTurret = (t, a) => UpgradeTurret(a, TurretStatType.ExplosionRadius, t),
                     GetLevel = t => t.Stats[TurretStatType.ExplosionRadius].Level,
                     GetBaseStat = t => t.Stats[TurretStatType.ExplosionRadius].Value,
                     GetBaseCost = t => t.Stats[TurretStatType.ExplosionRadius].BaseCost,
@@ -186,7 +186,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 [TurretStatType.SplashDamage] = new()
                 {
                     GetCurrentValue = t => t.Stats[TurretStatType.SplashDamage].Value,
-                    UpgradeTurret = (t, a) => UpgradeTurret(a, t.Stats[TurretStatType.SplashDamage].UpgradeAmount, TurretStatType.SplashDamage, t),
+                    UpgradeTurret = (t, a) => UpgradeTurret(a, TurretStatType.SplashDamage, t),
                     GetLevel = t => t.Stats[TurretStatType.SplashDamage].Level,
                     GetBaseStat = t => t.Stats[TurretStatType.SplashDamage].Value,
                     GetBaseCost = t => t.Stats[TurretStatType.SplashDamage].BaseCost,
@@ -213,7 +213,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 [TurretStatType.PierceChance] = new()
                 {
                     GetCurrentValue = t => t.Stats[TurretStatType.PierceChance].Value,
-                    UpgradeTurret = (t, a) => UpgradeTurret(a, t.Stats[TurretStatType.PierceChance].UpgradeAmount, TurretStatType.PierceChance, t),
+                    UpgradeTurret = (t, a) => UpgradeTurret(a, TurretStatType.PierceChance, t),
 
                     GetLevel = t => t.Stats[TurretStatType.PierceChance].Level,
                     GetBaseStat = t => t.Stats[TurretStatType.PierceChance].Value,
@@ -243,16 +243,12 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 },
                 [TurretStatType.PierceDamageFalloff] = new()
                 {
-                    GetCurrentValue = t => t.PierceDamageFalloff,
-                    UpgradeTurret = (t, a) =>
-                    {
-                        t.PierceDamageFalloffLevel += a;
-                        t.PierceDamageFalloff -= (t.PierceDamageFalloffUpgradeAmount * a);
-                    },
-                    GetLevel = t => t.PierceDamageFalloffLevel,
-                    GetBaseStat = t => t.PierceDamageFalloff,
-                    GetBaseCost = t => t.PierceDamageFalloffUpgradeBaseCost,
-                    GetUpgradeAmount = t => t.PierceDamageFalloffUpgradeAmount,
+                    GetCurrentValue = t => t.Stats[TurretStatType.PierceDamageFalloff].Value,
+                    UpgradeTurret = (t, a) => UpgradeTurret(a, TurretStatType.PierceDamageFalloff, t),
+                    GetLevel = t => t.Stats[TurretStatType.PierceDamageFalloff].Level,
+                    GetBaseStat = t => t.Stats[TurretStatType.PierceDamageFalloff].Value,
+                    GetBaseCost = t => t.Stats[TurretStatType.PierceDamageFalloff].BaseCost,
+                    GetUpgradeAmount = t => t.Stats[TurretStatType.PierceDamageFalloff].UpgradeAmount,
                     GetCostMultiplier = t => 0f,
                     GetMaxValue = t => float.MaxValue,
                     GetMinValue = t => 0f,
@@ -260,7 +256,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                     //GetAmount = t => GetMaxAmount(t.PierceDamageFalloffUpgradeBaseCost, exponentialPower, t.PierceDamageFalloffLevel),
                     GetDisplayStrings = (t, a) =>
                     {
-                        float currentFalloff = t.PierceDamageFalloff;
+                        float currentFalloff = t.Stats[TurretStatType.PierceDamageFalloff].Value;
                         float bonus = GetBonusAmount(t, TurretStatType.PierceDamageFalloff);
                         GetHybridCost(t, TurretStatType.PierceDamageFalloff, a, out float cost, out int amount);
 
@@ -436,11 +432,11 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
             };
         }
 
-        private void UpgradeTurret(int levelAmount, float upgradeAmount, TurretStatType type, TurretStatsInstance turret)
+        private void UpgradeTurret(int levelAmount, TurretStatType type, TurretStatsInstance turret)
         {
             TurretStat stat = turret.Stats[TurretStatType.CriticalDamage];
             stat.Level += levelAmount;
-            stat.Value += (upgradeAmount * levelAmount);
+            stat.Value += (turret.Stats[type].UpgradeAmount * levelAmount);
             turret.Stats[TurretStatType.CriticalDamage] = stat; // Update the stat in the dictionary
         }
         #endregion

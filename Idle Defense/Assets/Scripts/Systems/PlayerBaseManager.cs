@@ -1,3 +1,4 @@
+using Assets.Scripts.Enums;
 using Assets.Scripts.PlayerBase;
 using Assets.Scripts.SO;
 using Assets.Scripts.Systems.Audio;
@@ -147,7 +148,7 @@ namespace Assets.Scripts.Systems
             if (upgradeVisuals == null || upgradeVisuals.Length == 0)
                 return;
 
-            float totalLevel = Stats.MaxHealthStat.Level + Stats.RegenAmountStat.Level + Stats.RegenIntervalStat.Level;
+            float totalLevel = Stats.Stats[PlayerBaseStatType.MaxHealth].Level + Stats.Stats[PlayerBaseStatType.RegenAmount].Level + Stats.Stats[PlayerBaseStatType.RegenInterval].Level;
 
             for (int i = 0; i < upgradeVisuals.Length; i++)
             {

@@ -1,6 +1,8 @@
+using Assets.Scripts.Enums;
 using Assets.Scripts.SO;
 using Assets.Scripts.Structs;
 using System;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.PlayerBase
 {
@@ -11,9 +13,7 @@ namespace Assets.Scripts.PlayerBase
         public float RegenAmount;
         public float RegenInterval;
 
-        public PlayerBaseStat MaxHealthStat;
-        public PlayerBaseStat RegenAmountStat;
-        public PlayerBaseStat RegenIntervalStat;
+        public Dictionary<PlayerBaseStatType, PlayerBaseStat> Stats = new();
 
         public PlayerBaseStatsInstance(PlayerBaseSO source)
         {
@@ -21,21 +21,21 @@ namespace Assets.Scripts.PlayerBase
             RegenAmount = source.RegenAmount;
             RegenInterval = source.RegenInterval;
 
-            MaxHealthStat = new PlayerBaseStat
+            Stats[PlayerBaseStatType.MaxHealth] = new PlayerBaseStat
             {
-                Amount = source.MaxHealthStat.Amount,
+                UpgradeAmount = source.MaxHealthStat.UpgradeAmount,
                 BaseCost = source.MaxHealthStat.BaseCost,
                 Level = source.MaxHealthStat.Level
             };
-            RegenAmountStat = new PlayerBaseStat
+            Stats[PlayerBaseStatType.RegenAmount] = new PlayerBaseStat
             {
-                Amount = source.RegenAmountStat.Amount,
+                UpgradeAmount = source.RegenAmountStat.UpgradeAmount,
                 BaseCost = source.RegenAmountStat.BaseCost,
                 Level = source.RegenAmountStat.Level
             };
-            RegenIntervalStat = new PlayerBaseStat
+            Stats[PlayerBaseStatType.RegenInterval] = new PlayerBaseStat
             {
-                Amount = source.RegenIntervalStat.Amount,
+                UpgradeAmount = source.RegenIntervalStat.UpgradeAmount,
                 BaseCost = source.RegenIntervalStat.BaseCost,
                 Level = source.RegenIntervalStat.Level
             };

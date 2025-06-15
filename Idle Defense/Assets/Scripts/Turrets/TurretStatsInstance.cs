@@ -1,4 +1,7 @@
+using Assets.Scripts.Enums;
 using Assets.Scripts.SO;
+using Assets.Scripts.Structs;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Turrets
@@ -11,6 +14,7 @@ namespace Assets.Scripts.Turrets
     {
         public bool IsUnlocked;
         public TurretType TurretType;   // add at top – nothing else changes
+        public Dictionary<TurretStatType, TurretStat> Stats = new();
 
         [Header("Base Stats")]
         //DO NOT TOUCH AT RUNTIME
@@ -100,75 +104,110 @@ namespace Assets.Scripts.Turrets
             BaseCritChance = source.CriticalChance;
             BaseCritDamage = source.CriticalDamageMultiplier;
 
-            Damage = source.Damage;
-            DamageLevel = source.DamageLevel;
-            DamageUpgradeAmount = source.DamageUpgradeAmount;
-            DamageUpgradeBaseCost = source.DamageUpgradeBaseCost;
-            DamageCostExponentialMultiplier = source.DamageCostExponentialMultiplier;
-
-            FireRate = source.FireRate;
-            FireRateLevel = source.FireRateLevel;
-            FireRateUpgradeAmount = source.FireRateUpgradeAmount;
-            FireRateUpgradeBaseCost = source.FireRateUpgradeBaseCost;
-            FireRateCostExponentialMultiplier = source.FireRateCostExponentialMultiplier;
-
-            CriticalChance = source.CriticalChance;
-            CriticalChanceLevel = source.CriticalChanceLevel;
-            CriticalChanceUpgradeAmount = source.CriticalChanceUpgradeAmount;
-            CriticalChanceUpgradeBaseCost = source.CriticalChanceUpgradeBaseCost;
-            CriticalChanceCostExponentialMultiplier = source.CriticalChanceCostExponentialMultiplier;
-
-            CriticalDamageMultiplier = source.CriticalDamageMultiplier;
-            CriticalDamageMultiplierLevel = source.CriticalDamageMultiplierLevel;
-            CriticalDamageMultiplierUpgradeAmount = source.CriticalDamageMultiplierUpgradeAmount;
-            CriticalDamageMultiplierUpgradeBaseCost = source.CriticalDamageMultiplierUpgradeBaseCost;
-            CriticalDamageCostExponentialMultiplier = source.CriticalDamageCostExponentialMultiplier;
-
-            ExplosionRadius = source.ExplosionRadius;
-            ExplosionRadiusLevel = source.ExplosionRadiusLevel;
-            ExplosionRadiusUpgradeAmount = source.ExplosionRadiusUpgradeAmount;
-            ExplosionRadiusUpgradeBaseCost = source.ExplosionRadiusUpgradeBaseCost;
-
-            SplashDamage = source.SplashDamage;
-            SplashDamageLevel = source.SplashDamageLevel;
-            SplashDamageUpgradeAmount = source.SplashDamageUpgradeAmount;
-            SplashDamageUpgradeBaseCost = source.SplashDamageUpgradeBaseCost;
-
-            PierceChance = source.PierceChance;
-            PierceChanceLevel = source.PierceChanceLevel;
-            PierceChanceUpgradeAmount = source.PierceChanceUpgradeAmount;
-            PierceChanceUpgradeBaseCost = source.PierceChanceUpgradeBaseCost;
-
-            PierceDamageFalloff = source.PierceDamageFalloff;
-            PierceDamageFalloffLevel = source.PierceDamageFalloffLevel;
-            PierceDamageFalloffUpgradeAmount = source.PierceDamageFalloffUpgradeAmount;
-            PierceDamageFalloffUpgradeBaseCost = source.PierceDamageFalloffUpgradeBaseCost;
-
-            PelletCount = source.PelletCount;
-            PelletCountLevel = source.PelletCountLevel;
-            PelletCountUpgradeAmount = source.PelletCountUpgradeAmount;
-            PelletCountUpgradeBaseCost = source.PelletCountUpgradeBaseCost;
-
-            DamageFalloffOverDistance = source.DamageFalloffOverDistance;
-            DamageFalloffOverDistanceLevel = source.DamageFalloffOverDistanceLevel;
-            DamageFalloffOverDistanceUpgradeAmount = source.DamageFalloffOverDistanceUpgradeAmount;
-            DamageFalloffOverDistanceUpgradeBaseCost = source.DamageFalloffOverDistanceUpgradeBaseCost;
-
-            KnockbackStrength = source.KnockbackStrength;
-            KnockbackStrengthLevel = source.KnockbackStrengthLevel;
-            KnockbackStrengthUpgradeAmount = source.KnockbackStrengthUpgradeAmount;
-            KnockbackStrengthUpgradeBaseCost = source.KnockbackStrengthUpgradeBaseCost;
-            KnockbackStrengthCostExponentialMultiplier = source.KnockbackStrengthCostExponentialMultiplier;
-
-            PercentBonusDamagePerSec = source.PercentBonusDamagePerSec;
-            PercentBonusDamagePerSecLevel = source.PercentBonusDamagePerSecLevel;
-            PercentBonusDamagePerSecUpgradeAmount = source.PercentBonusDamagePerSecUpgradeAmount;
-            PercentBonusDamagePerSecUpgradeBaseCost = source.PercentBonusDamagePerSecUpgradeBaseCost;
-
-            SlowEffect = source.SlowEffect;
-            SlowEffectLevel = source.SlowEffectLevel;
-            SlowEffectUpgradeAmount = source.SlowEffectUpgradeAmount;
-            SlowEffectUpgradeBaseCost = source.SlowEffectUpgradeBaseCost;
+            Stats[TurretStatType.Damage] = new TurretStat
+            {
+                Value = source.Damage,
+                Level = source.DamageLevel,
+                UpgradeAmount = source.DamageUpgradeAmount,
+                BaseCost = source.DamageUpgradeBaseCost,
+                ExponentialCostMultiplier = source.DamageCostExponentialMultiplier
+            };
+            Stats[TurretStatType.FireRate] = new TurretStat
+            {
+                Value = source.FireRate,
+                Level = source.FireRateLevel,
+                UpgradeAmount = source.FireRateUpgradeAmount,
+                BaseCost = source.FireRateUpgradeBaseCost,
+                ExponentialCostMultiplier = source.FireRateCostExponentialMultiplier
+            };
+            Stats[TurretStatType.CriticalChance] = new TurretStat
+            {
+                Value = source.CriticalChance,
+                Level = source.CriticalChanceLevel,
+                UpgradeAmount = source.CriticalChanceUpgradeAmount,
+                BaseCost = source.CriticalChanceUpgradeBaseCost,
+                ExponentialCostMultiplier = source.CriticalChanceCostExponentialMultiplier
+            };
+            Stats[TurretStatType.CriticalDamage] = new TurretStat
+            {
+                Value = source.CriticalDamageMultiplier,
+                Level = source.CriticalDamageMultiplierLevel,
+                UpgradeAmount = source.CriticalDamageMultiplierUpgradeAmount,
+                BaseCost = source.CriticalDamageMultiplierUpgradeBaseCost,
+                ExponentialCostMultiplier = source.CriticalDamageCostExponentialMultiplier
+            };
+            Stats[TurretStatType.ExplosionRadius] = new TurretStat
+            {
+                Value = source.ExplosionRadius,
+                Level = source.ExplosionRadiusLevel,
+                UpgradeAmount = source.ExplosionRadiusUpgradeAmount,
+                BaseCost = source.ExplosionRadiusUpgradeBaseCost,
+                ExponentialCostMultiplier = 1f
+            };
+            Stats[TurretStatType.SplashDamage] = new TurretStat
+            {
+                Value = source.SplashDamage,
+                Level = source.SplashDamageLevel,
+                UpgradeAmount = source.SplashDamageUpgradeAmount,
+                BaseCost = source.SplashDamageUpgradeBaseCost,
+                ExponentialCostMultiplier = 1f
+            };
+            Stats[TurretStatType.PierceChance] = new TurretStat
+            {
+                Value = source.PierceChance,
+                Level = source.PierceChanceLevel,
+                UpgradeAmount = source.PierceChanceUpgradeAmount,
+                BaseCost = source.PierceChanceUpgradeBaseCost,
+                ExponentialCostMultiplier = 1f
+            };
+            Stats[TurretStatType.PierceDamageFalloff] = new TurretStat
+            {
+                Value = source.PierceDamageFalloff,
+                Level = source.PierceDamageFalloffLevel,
+                UpgradeAmount = source.PierceDamageFalloffUpgradeAmount,
+                BaseCost = source.PierceDamageFalloffUpgradeBaseCost,
+                ExponentialCostMultiplier = 1f
+            };
+            Stats[TurretStatType.PelletCount] = new TurretStat
+            {
+                Value = source.PelletCount,
+                Level = source.PelletCountLevel,
+                UpgradeAmount = source.PelletCountUpgradeAmount,
+                BaseCost = source.PelletCountUpgradeBaseCost,
+                ExponentialCostMultiplier = 1f
+            };
+            Stats[TurretStatType.DamageFalloffOverDistance] = new TurretStat
+            {
+                Value = source.DamageFalloffOverDistance,
+                Level = source.DamageFalloffOverDistanceLevel,
+                UpgradeAmount = source.DamageFalloffOverDistanceUpgradeAmount,
+                BaseCost = source.DamageFalloffOverDistanceUpgradeBaseCost,
+                ExponentialCostMultiplier = 1f
+            };
+            Stats[TurretStatType.KnockbackStrength] = new TurretStat
+            {
+                Value = source.KnockbackStrength,
+                Level = source.KnockbackStrengthLevel,
+                UpgradeAmount = source.KnockbackStrengthUpgradeAmount,
+                BaseCost = source.KnockbackStrengthUpgradeBaseCost,
+                ExponentialCostMultiplier = source.KnockbackStrengthCostExponentialMultiplier
+            };
+            Stats[TurretStatType.PercentBonusDamagePerSec] = new TurretStat
+            {
+                Value = source.PercentBonusDamagePerSec,
+                Level = source.PercentBonusDamagePerSecLevel,
+                UpgradeAmount = source.PercentBonusDamagePerSecUpgradeAmount,
+                BaseCost = source.PercentBonusDamagePerSecUpgradeBaseCost,
+                ExponentialCostMultiplier = 1f
+            };
+            Stats[TurretStatType.SlowEffect] = new TurretStat
+            {
+                Value = source.SlowEffect,
+                Level = source.SlowEffectLevel,
+                UpgradeAmount = source.SlowEffectUpgradeAmount,
+                BaseCost = source.SlowEffectUpgradeBaseCost,
+                ExponentialCostMultiplier = 1f
+            };
 
             RotationSpeed = source.RotationSpeed;
             AngleThreshold = source.AngleThreshold;

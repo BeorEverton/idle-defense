@@ -28,7 +28,7 @@ namespace Assets.Scripts.WaveSystem
         [SerializeField] private EnemySpawner _enemySpawner;
 
         private Dictionary<int, Wave> _waves = new(); //Dictionary of all waves, with wave number as key
-        private int _maxWaves = 0; //Amount of waves in dictionary
+        private int _maxWaves = 0; //UpgradeAmount of waves in dictionary
         private int _currentWave = 1; //Overall wave index
         private bool _waveCompleted = false;
         private bool _waveLost = false;
@@ -55,8 +55,8 @@ namespace Assets.Scripts.WaveSystem
         public Wave GetCurrentWave() => _waves[_currentWave];
 
         public void LoadWave(int waveNumber)
-        {            
-            
+        {
+
             _currentWave = Mathf.Clamp(waveNumber, 1, int.MaxValue);
         }
 
@@ -107,7 +107,7 @@ namespace Assets.Scripts.WaveSystem
                 if (_waveCompleted)
                 {
                     _currentWave++;
-                    
+
                     StatsManager.Instance.TotalZonesSecured++;
                     StatsManager.Instance.MaxZone = _currentWave;
                 }
@@ -220,7 +220,7 @@ namespace Assets.Scripts.WaveSystem
             StopAllCoroutines();
             _waveCompleted = false;
             _waveLost = false;
-            
+
             GameRunning = true;
             StartCoroutine(StartWaveRoutine());
         }

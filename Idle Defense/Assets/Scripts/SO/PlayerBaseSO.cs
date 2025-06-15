@@ -10,7 +10,7 @@ namespace Assets.Scripts.SO
         [Tooltip("Max health of player base")]
         public int MaxHealth;
 
-        [Tooltip("Amount of health regenerated per tick")]
+        [Tooltip("UpgradeAmount of health regenerated per tick")]
         public float RegenAmount;
 
         [Tooltip("Time interval between regen ticks")]

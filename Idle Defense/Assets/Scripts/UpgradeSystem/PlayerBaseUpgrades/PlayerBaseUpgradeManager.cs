@@ -1,4 +1,6 @@
+using Assets.Scripts.Enums;
 using Assets.Scripts.PlayerBase;
+using Assets.Scripts.Structs;
 using Assets.Scripts.Systems;
 using Assets.Scripts.Systems.Audio;
 using Assets.Scripts.Systems.Currency;
@@ -29,15 +31,18 @@ namespace Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades
                         float newMax = p.MaxHealth;
                         for (int i = 0; i < a; i++)
                         {
-                            newMax *= 1f + p.MaxHealthStat.Amount;
+                            newMax *= 1f + p.Stats[PlayerBaseStatType.MaxHealth].UpgradeAmount;
                         }
 
-                        p.MaxHealthStat.Amount += a;
+                        PlayerBaseStat stat = p.Stats[PlayerBaseStatType.MaxHealth];
+                        stat.UpgradeAmount += a;
+                        p.Stats[PlayerBaseStatType.MaxHealth] = stat;
+
                         p.MaxHealth = Mathf.CeilToInt(newMax);
                     },
-                    GetLevel = p => p.MaxHealthStat.Level,
-                    GetUpgradeAmount = p => p.MaxHealthStat.Amount,
-                    GetBaseCost = p => p.MaxHealthStat.BaseCost,
+                    GetLevel = p => p.Stats[PlayerBaseStatType.MaxHealth].Level,
+                    GetUpgradeAmount = p => p.Stats[PlayerBaseStatType.MaxHealth].UpgradeAmount,
+                    GetBaseCost = p => p.Stats[PlayerBaseStatType.MaxHealth].BaseCost,
                     GetMaxValue = p => float.MaxValue,
                     GetMinValue = p => 0f,
                     GetCost = (p, a) => GetCost(p, PlayerUpgradeType.MaxHealth, a),
@@ -45,7 +50,7 @@ namespace Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades
                     GetDisplayStrings = (p, a) =>
                     {
                         float current = p.MaxHealth;
-                        float pct = p.MaxHealthStat.Amount;
+                        float pct = p.Stats[PlayerBaseStatType.MaxHealth].UpgradeAmount;
 
                         float projected = current;
                         for (int i = 0; i < a; i++)
@@ -72,12 +77,15 @@ namespace Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades
                     GetCurrentValue = p => p.RegenAmount,
                     Upgrade = (p, a) =>
                     {
-                        p.RegenAmountStat.Level += a;
-                        p.RegenAmount += (p.RegenAmountStat.Amount * a);
+                        PlayerBaseStat stat = p.Stats[PlayerBaseStatType.RegenAmount];
+                        stat.UpgradeAmount += a;
+                        p.Stats[PlayerBaseStatType.RegenAmount] = stat;
+
+                        p.RegenAmount += (p.Stats[PlayerBaseStatType.RegenAmount].UpgradeAmount * a);
                     },
-                    GetLevel = p => p.RegenAmountStat.Level,
-                    GetUpgradeAmount = p => p.RegenAmountStat.Amount,
-                    GetBaseCost = p => p.RegenAmountStat.BaseCost,
+                    GetLevel = p => p.Stats[PlayerBaseStatType.RegenAmount].Level,
+                    GetUpgradeAmount = p => p.Stats[PlayerBaseStatType.RegenAmount].UpgradeAmount,
+                    GetBaseCost = p => p.Stats[PlayerBaseStatType.RegenAmount].BaseCost,
                     GetMaxValue = p => float.MaxValue,
                     GetMinValue = p => 0f,
                     GetCost = (p, a) => GetCost(p, PlayerUpgradeType.RegenAmount, a),
@@ -100,15 +108,18 @@ namespace Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades
                     GetCurrentValue = p => p.RegenInterval,
                     Upgrade = (p, a) =>
                     {
-                        p.RegenIntervalStat.Level += a;
+                        PlayerBaseStat stat = p.Stats[PlayerBaseStatType.RegenInterval];
+                        stat.UpgradeAmount += a;
+                        p.Stats[PlayerBaseStatType.RegenInterval] = stat;
+
                         _playerUpgrades.TryGetValue(PlayerUpgradeType.RegenInterval, out PlayerBaseUpgrade upgrade);
 
-                        p.RegenInterval = Mathf.Max(p.RegenInterval - p.RegenIntervalStat.Amount * a,
+                        p.RegenInterval = Mathf.Max(p.RegenInterval - p.Stats[PlayerBaseStatType.RegenInterval].UpgradeAmount * a,
                             upgrade == null ? 0.5f : upgrade.GetMinValue(p));
                     },
-                    GetLevel = p => p.RegenIntervalStat.Level,
-                    GetUpgradeAmount = p => p.RegenIntervalStat.Amount,
-                    GetBaseCost = p => p.RegenIntervalStat.BaseCost,
+                    GetLevel = p => p.Stats[PlayerBaseStatType.RegenInterval].Level,
+                    GetUpgradeAmount = p => p.Stats[PlayerBaseStatType.RegenInterval].UpgradeAmount,
+                    GetBaseCost = p => p.Stats[PlayerBaseStatType.RegenInterval].BaseCost,
                     GetMaxValue = p => float.MaxValue,
                     GetMinValue = p => 0.5f,
                     GetCost = (p, a) => GetCost(p, PlayerUpgradeType.RegenInterval, a),

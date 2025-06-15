@@ -498,7 +498,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
         public float GetTurretUpgradeCost(TurretStatsInstance turret, TurretUpgradeType type, int amount) =>
             !_turretUpgrades.TryGetValue(type, out TurretUpgrade upgrade) ? 0f : upgrade.GetCost(turret, amount);
 
-        // Used to show Max Amount of upgrades available
+        // Used to show Max UpgradeAmount of upgrades available
         //public int GetTurretAvailableUpgradeAmount(TurretStatsInstance turret, TurretUpgradeType type) =>
         //    !_turretUpgrades.TryGetValue(type, out TurretUpgrade upgrade) ? 0 : upgrade.GetAmount(turret);
 

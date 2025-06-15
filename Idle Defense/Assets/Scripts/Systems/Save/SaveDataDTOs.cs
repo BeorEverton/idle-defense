@@ -1,4 +1,5 @@
 #nullable enable
+using Assets.Scripts.Enums;
 using Assets.Scripts.PlayerBase;
 using Assets.Scripts.SO;
 using Assets.Scripts.Structs;
@@ -27,15 +28,15 @@ namespace Assets.Scripts.Systems.Save
                 MaxHealth = player.MaxHealth,
                 RegenAmount = player.RegenAmount,
                 RegenInterval = player.RegenInterval,
-                MaxHealthUpgradeAmount = player.MaxHealthStat.Amount,
-                MaxHealthUpgradeBaseCost = player.MaxHealthStat.BaseCost,
-                MaxHealthLevel = player.MaxHealthStat.Level,
-                RegenAmountUpgradeAmount = player.RegenAmountStat.Amount,
-                RegenAmountUpgradeBaseCost = player.RegenAmountStat.BaseCost,
-                RegenAmountLevel = player.RegenAmountStat.Level,
-                RegenIntervalUpgradeAmount = player.RegenIntervalStat.Amount,
-                RegenIntervalUpgradeBaseCost = player.RegenIntervalStat.BaseCost,
-                RegenIntervalLevel = player.RegenIntervalStat.Level
+                MaxHealthUpgradeAmount = player.Stats[PlayerBaseStatType.MaxHealth].UpgradeAmount,
+                MaxHealthUpgradeBaseCost = player.Stats[PlayerBaseStatType.MaxHealth].BaseCost,
+                MaxHealthLevel = player.Stats[PlayerBaseStatType.MaxHealth].Level,
+                RegenAmountUpgradeAmount = player.Stats[PlayerBaseStatType.RegenAmount].UpgradeAmount,
+                RegenAmountUpgradeBaseCost = player.Stats[PlayerBaseStatType.RegenAmount].BaseCost,
+                RegenAmountLevel = player.Stats[PlayerBaseStatType.RegenAmount].Level,
+                RegenIntervalUpgradeAmount = player.Stats[PlayerBaseStatType.RegenInterval].UpgradeAmount,
+                RegenIntervalUpgradeBaseCost = player.Stats[PlayerBaseStatType.RegenInterval].BaseCost,
+                RegenIntervalLevel = player.Stats[PlayerBaseStatType.RegenInterval].Level
             };
         }
 
@@ -151,24 +152,29 @@ namespace Assets.Scripts.Systems.Save
                 MaxHealth = playerInfo.MaxHealth,
                 RegenAmount = playerInfo.RegenAmount,
                 RegenInterval = playerInfo.RegenInterval,
-                MaxHealthStat = new PlayerBaseStat
+
+                Stats =
                 {
-                    Amount = playerInfo.MaxHealth,
-                    BaseCost = playerInfo.MaxHealthUpgradeBaseCost,
-                    Level = playerInfo.MaxHealthLevel
-                },
-                RegenAmountStat = new PlayerBaseStat
-                {
-                    Amount = playerInfo.RegenAmount,
-                    BaseCost = playerInfo.RegenAmountUpgradeBaseCost,
-                    Level = playerInfo.RegenAmountLevel
-                },
-                RegenIntervalStat = new PlayerBaseStat
-                {
-                    Amount = playerInfo.RegenInterval,
-                    BaseCost = playerInfo.RegenIntervalUpgradeBaseCost,
-                    Level = playerInfo.RegenIntervalLevel
-                },
+                    [PlayerBaseStatType.MaxHealth] = new PlayerBaseStat
+                    {
+                        UpgradeAmount = playerInfo.MaxHealth,
+                        BaseCost = playerInfo.MaxHealthUpgradeBaseCost,
+                        Level = playerInfo.MaxHealthLevel
+                    },
+                    [PlayerBaseStatType.RegenAmount] = new PlayerBaseStat
+                    {
+                        UpgradeAmount = playerInfo.RegenAmount,
+                        BaseCost = playerInfo.RegenAmountUpgradeBaseCost,
+                        Level = playerInfo.RegenAmountLevel
+                    },
+                    [PlayerBaseStatType.RegenInterval] = new PlayerBaseStat
+                    {
+                        UpgradeAmount = playerInfo.RegenInterval,
+                        BaseCost = playerInfo.RegenIntervalUpgradeBaseCost,
+                        Level = playerInfo.RegenIntervalLevel
+                    }
+                }
+
             };
 
             return playerStats;

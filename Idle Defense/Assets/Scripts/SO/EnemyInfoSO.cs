@@ -18,7 +18,7 @@ namespace Assets.Scripts.SO
         public float MovementSpeed;
         [Tooltip("The amount the movementspeed can differ from MovementSpeed")]
         public float MovementSpeedDifference;
-        [Tooltip("Amount of coins to drop on death. Will be randomized with +- 5%")]
+        [Tooltip("UpgradeAmount of coins to drop on death. Will be randomized with +- 5%")]
         public ulong CoinDropAmount;
 
         [Header("Wave Multipliers")]

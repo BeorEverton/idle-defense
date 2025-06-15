@@ -105,7 +105,7 @@ namespace Assets.Editor.Simulator
                 {
                     // ensure the interval does not go below the minimum
                     cost = baseSO.RegenIntervalStat.BaseCost * Mathf.Pow(1.1f, level);
-                    if (baseSO.RegenInterval - baseSO.RegenIntervalStat.Amount * level < MinBaseRegenInterval)
+                    if (baseSO.RegenInterval - baseSO.RegenIntervalStat.UpgradeAmount * level < MinBaseRegenInterval)
                         return float.MaxValue; // too expensive to upgrade below the min interval
                 }
 
@@ -727,8 +727,8 @@ namespace Assets.Editor.Simulator
                     {
                         coins -= healthCost;
                         maxHpLvl++;
-                        baseMaxHealth += baseSO.MaxHealthStat.Amount;
-                        baseHealth = Mathf.Min(baseHealth + baseSO.MaxHealthStat.Amount, baseMaxHealth);
+                        baseMaxHealth += baseSO.MaxHealthStat.UpgradeAmount;
+                        baseHealth = Mathf.Min(baseHealth + baseSO.MaxHealthStat.UpgradeAmount, baseMaxHealth);
                         wStat.BaseUpgrades++;
                         wStat.MaxHealthLevel = maxHpLvl;
                         wStat.CurrentMaxHealth = baseMaxHealth;
@@ -741,14 +741,14 @@ namespace Assets.Editor.Simulator
                         // 2) If the base was merely damaged (not lost), invest in regeneration
                         if (wStat.DamageTaken > 0f)
                         {
-                            // a) Try upgrading Regen Amount first
+                            // a) Try upgrading Regen UpgradeAmount first
                             float rawRegenAmtCost = CostForBase(PlayerUpgradeType.RegenAmount, regenAmtLvl);
                             ulong regenAmtCost = (ulong)Mathf.Ceil(rawRegenAmtCost);
                             if (regenAmtCost > 0 && coins >= regenAmtCost)
                             {
                                 coins -= regenAmtCost;
                                 regenAmtLvl++;
-                                regenAmount += baseSO.RegenAmountStat.Amount;
+                                regenAmount += baseSO.RegenAmountStat.UpgradeAmount;
                                 wStat.BaseUpgrades++;
                                 wStat.RegenAmountLevel = regenAmtLvl;
                                 wStat.CurrentRegenAmount = regenAmount;
@@ -767,7 +767,7 @@ namespace Assets.Editor.Simulator
                                 {
                                     coins -= regenIntCost;
                                     regenIntLvl++;
-                                    regenInterval = Mathf.Max(MinBaseRegenInterval, regenInterval - baseSO.RegenIntervalStat.Amount);
+                                    regenInterval = Mathf.Max(MinBaseRegenInterval, regenInterval - baseSO.RegenIntervalStat.UpgradeAmount);
                                     wStat.BaseUpgrades++;
                                     wStat.RegenIntervalLevel = regenIntLvl;
                                     wStat.CurrentRegenInterval = regenInterval;
@@ -1041,22 +1041,22 @@ namespace Assets.Editor.Simulator
                             {
                                 case PlayerUpgradeType.MaxHealth:
                                     maxHpLvl++;
-                                    baseMaxHealth += baseSO.MaxHealthStat.Amount;
-                                    baseHealth = Mathf.Min(baseHealth + baseSO.MaxHealthStat.Amount, baseMaxHealth);
+                                    baseMaxHealth += baseSO.MaxHealthStat.UpgradeAmount;
+                                    baseHealth = Mathf.Min(baseHealth + baseSO.MaxHealthStat.UpgradeAmount, baseMaxHealth);
                                     wStat.BaseUpgrades++;
                                     wStat.MaxHealthLevel = maxHpLvl;
                                     wStat.CurrentMaxHealth = baseMaxHealth;
                                     break;
                                 case PlayerUpgradeType.RegenAmount:
                                     regenAmtLvl++;
-                                    regenAmount += baseSO.RegenAmountStat.Amount;
+                                    regenAmount += baseSO.RegenAmountStat.UpgradeAmount;
                                     wStat.BaseUpgrades++;
                                     wStat.RegenAmountLevel = regenAmtLvl;
                                     wStat.CurrentRegenAmount = regenAmount;
                                     break;
                                 case PlayerUpgradeType.RegenInterval:
                                     regenIntLvl++;
-                                    regenInterval = Mathf.Max(MinBaseRegenInterval, regenInterval - baseSO.RegenAmountStat.Amount);
+                                    regenInterval = Mathf.Max(MinBaseRegenInterval, regenInterval - baseSO.RegenAmountStat.UpgradeAmount);
                                     wStat.BaseUpgrades++;
                                     wStat.RegenIntervalLevel = regenIntLvl;
                                     wStat.CurrentRegenInterval = regenInterval;

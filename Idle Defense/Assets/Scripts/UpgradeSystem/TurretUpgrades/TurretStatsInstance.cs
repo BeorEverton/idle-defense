@@ -23,11 +23,6 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
         public float BaseCritChance;
         public float BaseCritDamage;
 
-        public float SlowEffect;
-        public int SlowEffectLevel;
-        public float SlowEffectUpgradeAmount;
-        public float SlowEffectUpgradeBaseCost;
-
         public float RotationSpeed;
         public float AngleThreshold;
 

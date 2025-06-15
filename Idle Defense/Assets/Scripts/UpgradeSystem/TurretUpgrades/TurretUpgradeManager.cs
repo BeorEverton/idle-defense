@@ -381,16 +381,12 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 },
                 [TurretStatType.SlowEffect] = new()
                 {
-                    GetCurrentValue = t => t.SlowEffect,
-                    UpgradeTurret = (t, a) =>
-                    {
-                        t.SlowEffectLevel += a;
-                        t.SlowEffect += (t.SlowEffectUpgradeAmount * a);
-                    },
-                    GetLevel = t => t.SlowEffectLevel,
-                    GetBaseStat = t => t.SlowEffect,
-                    GetBaseCost = t => t.SlowEffectUpgradeBaseCost,
-                    GetUpgradeAmount = t => t.SlowEffectUpgradeAmount,
+                    GetCurrentValue = t => t.Stats[TurretStatType.SlowEffect].Value,
+                    UpgradeTurret = (t, a) => UpgradeTurret(a, TurretStatType.SlowEffect, t),
+                    GetLevel = t => t.Stats[TurretStatType.SlowEffect].Level,
+                    GetBaseStat = t => t.Stats[TurretStatType.SlowEffect].Value,
+                    GetBaseCost = t => t.Stats[TurretStatType.SlowEffect].BaseCost,
+                    GetUpgradeAmount = t => t.Stats[TurretStatType.SlowEffect].UpgradeAmount,
                     GetCostMultiplier = t => 0f,
                     GetMaxValue = t => 100f,
                     GetMinValue = t => 0f,
@@ -398,7 +394,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                     //GetAmount = t => GetMaxAmount(t.SlowEffectUpgradeBaseCost, exponentialPower, t.SlowEffectLevel),
                     GetDisplayStrings = (t, a) =>
                     {
-                        float current = t.SlowEffect;
+                        float current = t.Stats[TurretStatType.SlowEffect].Value;
                         float bonus = GetBonusAmount(t, TurretStatType.SlowEffect);
                         GetHybridCost(t, TurretStatType.SlowEffect, a, out float cost, out int amount);
 

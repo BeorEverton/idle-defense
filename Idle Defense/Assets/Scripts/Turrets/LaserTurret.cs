@@ -53,7 +53,7 @@ namespace Assets.Scripts.Turrets
             StatsManager.Instance.AddTurretDamage(_turretInfo.TurretType, damage);
 
             if (!enemy.IsSlowed)
-                enemy.ReduceMovementSpeed(_stats.SlowEffect);
+                enemy.ReduceMovementSpeed(_stats.Stats[TurretStatType.SlowEffect].Value);
 
             _timeSinceLastShot = 0f;
         }

@@ -1,9 +1,9 @@
 using System;
 
-namespace Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades
+namespace Assets.Scripts.UpgradeSystem.PermanentUpgrades
 {
     [Serializable]
-    public class PlayerBaseUpgradeMeta : IUpgradeMeta
+    public class PermanentUpgradeMeta : IUpgradeMeta
     {
         public string Type;
         public string DisplayName;

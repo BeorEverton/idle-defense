@@ -1,19 +1,10 @@
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.UpgradeSystem.PermanentUpgrades
 {
-    public class PermanentUpgrade : MonoBehaviour
+    public class PermanentUpgrade
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        public Action<PermanentStatsInstance, int> Upgrade;
     }
 }

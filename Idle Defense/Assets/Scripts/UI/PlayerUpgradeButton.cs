@@ -1,5 +1,6 @@
 using Assets.Scripts.Systems;
 using Assets.Scripts.Systems.Currency;
+using Assets.Scripts.UpgradeSystem;
 using Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades;
 using System;
 using TMPro;
@@ -102,13 +103,13 @@ namespace Assets.Scripts.UI
 
         private string GetDisplayNameForUpgrade(PlayerUpgradeType type)
         {
-            PlayerBaseUpgradeMeta meta = PlayerBaseUpgradeMetaManager.GetMeta(type);
+            PlayerBaseUpgradeMeta meta = GenericMetaManager.GetMeta<PlayerBaseUpgradeMeta, PlayerUpgradeType>(type, "PlayerBaseUpgradeMeta");
             return meta != null ? meta.DisplayName : type.ToString();
         }
 
         private string GetUpgradeDescription(PlayerUpgradeType type)
         {
-            PlayerBaseUpgradeMeta meta = PlayerBaseUpgradeMetaManager.GetMeta(type);
+            PlayerBaseUpgradeMeta meta = GenericMetaManager.GetMeta<PlayerBaseUpgradeMeta, PlayerUpgradeType>(type, "PlayerBaseUpgradeMeta");
             return meta != null ? meta.Description : "Upgrade effect not documented.";
         }
 

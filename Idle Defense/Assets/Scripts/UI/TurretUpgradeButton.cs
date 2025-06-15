@@ -2,6 +2,7 @@ using Assets.Scripts.Systems;
 using Assets.Scripts.Systems.Currency;
 using Assets.Scripts.Turrets;
 using Assets.Scripts.UpgradeSystem;
+using Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades;
 using Assets.Scripts.UpgradeSystem.TurretUpgrades;
 using System;
 using TMPro;
@@ -121,13 +122,13 @@ namespace Assets.Scripts.UI
 
         private string GetDisplayNameForUpgrade(TurretUpgradeType type)
         {
-            TurretUpgradeMeta meta = TurretUpgradeMetaManager.GetMeta(type);
+            TurretUpgradeMeta meta = GenericMetaManager.GetMeta<TurretUpgradeMeta, TurretUpgradeType>(type, "TurretUpgradeMeta");
             return meta != null ? meta.DisplayName : type.ToString();
         }
 
         private string GetUpgradeDescription(TurretUpgradeType type)
         {
-            TurretUpgradeMeta meta = TurretUpgradeMetaManager.GetMeta(type);
+            TurretUpgradeMeta meta = GenericMetaManager.GetMeta<TurretUpgradeMeta, TurretUpgradeType>(type, "TurretUpgradeMeta");
             return meta != null ? meta.Description : "Upgrade effect not documented.";
         }
 

@@ -214,7 +214,7 @@ namespace Assets.Scripts.Turrets
                 return 0f;
 
             float effectiveDistance = distance - minFalloffDistance;
-            float damageFalloff = _stats.Stats[TurretStatType.Damage].Value * effectiveDistance * _stats.DamageFalloffOverDistance / 100f;
+            float damageFalloff = _stats.Stats[TurretStatType.Damage].Value * effectiveDistance * _stats.Stats[TurretStatType.DamageFalloffOverDistance].Value / 100f;
 
             return Mathf.Min(damageFalloff, maxDamageFalloff);
         }

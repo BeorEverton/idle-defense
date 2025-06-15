@@ -297,16 +297,12 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 },
                 [TurretStatType.DamageFalloffOverDistance] = new()
                 {
-                    GetCurrentValue = t => t.DamageFalloffOverDistance,
-                    UpgradeTurret = (t, a) =>
-                    {
-                        t.DamageFalloffOverDistanceLevel += a;
-                        t.DamageFalloffOverDistance -= (t.DamageFalloffOverDistanceUpgradeAmount * a);
-                    },
-                    GetLevel = t => t.DamageFalloffOverDistanceLevel,
-                    GetBaseStat = t => t.DamageFalloffOverDistance,
-                    GetBaseCost = t => t.DamageFalloffOverDistanceUpgradeBaseCost,
-                    GetUpgradeAmount = t => t.DamageFalloffOverDistanceUpgradeAmount,
+                    GetCurrentValue = t => t.Stats[TurretStatType.DamageFalloffOverDistance].Value,
+                    UpgradeTurret = (t, a) => UpgradeTurret(a, TurretStatType.DamageFalloffOverDistance, t),
+                    GetLevel = t => t.Stats[TurretStatType.DamageFalloffOverDistance].Level,
+                    GetBaseStat = t => t.Stats[TurretStatType.DamageFalloffOverDistance].Value,
+                    GetBaseCost = t => t.Stats[TurretStatType.DamageFalloffOverDistance].BaseCost,
+                    GetUpgradeAmount = t => t.Stats[TurretStatType.DamageFalloffOverDistance].UpgradeAmount,
                     GetCostMultiplier = t => 0f,
                     GetMaxValue = t => float.MaxValue,
                     GetMinValue = t => 0f,
@@ -314,7 +310,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                     //GetAmount = t => GetMaxAmount(t.DamageFalloffOverDistanceUpgradeBaseCost, exponentialPower, t.DamageFalloffOverDistanceLevel),
                     GetDisplayStrings = (t, a) =>
                     {
-                        float current = t.DamageFalloffOverDistance;
+                        float current = t.Stats[TurretStatType.DamageFalloffOverDistance].Value;
                         float bonus = GetBonusAmount(t, TurretStatType.DamageFalloffOverDistance);
                         GetHybridCost(t, TurretStatType.DamageFalloffOverDistance, a, out float cost, out int amount);
 

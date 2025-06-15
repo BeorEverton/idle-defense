@@ -1,8 +1,8 @@
+using Assets.Scripts.Enums;
 using Assets.Scripts.Systems;
 using Assets.Scripts.Systems.Currency;
 using Assets.Scripts.Turrets;
 using Assets.Scripts.UpgradeSystem;
-using Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades;
 using Assets.Scripts.UpgradeSystem.TurretUpgrades;
 using System;
 using TMPro;
@@ -24,7 +24,7 @@ namespace Assets.Scripts.UI
         [SerializeField] private TextMeshProUGUI _statName, _statValue, _statUpgradeAmount, _statUpgradeCost, _statUpgradeCount;
 
         [Header("Upgrade Type")]
-        [SerializeField] private TurretUpgradeType _upgradeType;
+        [SerializeField] private TurretStatType _statType;
 
         private Button _button;
         private int _upgradeAmount;
@@ -54,7 +54,7 @@ namespace Assets.Scripts.UI
             _turret = _baseTurret.GetStats();
 
             // Update the initial data
-            _statName.SetText(GetDisplayNameForUpgrade(_upgradeType));
+            _statName.SetText(GetDisplayNameForUpgrade(_statType));
             UpdateDisplay();
         }
 
@@ -88,7 +88,7 @@ namespace Assets.Scripts.UI
 
         public void UpdateDisplayFromType()
         {
-            _upgradeManager.UpdateUpgradeDisplay(_turret, _upgradeType, this);
+            _upgradeManager.UpdateUpgradeDisplay(_turret, _statType, this);
         }
 
         public void OnClick()
@@ -98,12 +98,12 @@ namespace Assets.Scripts.UI
 
             int amount = MultipleBuyOption.Instance.GetBuyAmount();
 
-            _upgradeManager.UpgradeTurretStat(_turret, _upgradeType, this, amount);
+            _upgradeManager.UpgradeTurretStat(_turret, _statType, this, amount);
         }
 
         public void EnableTooltip()
         {
-            string description = GetUpgradeDescription(_upgradeType);
+            string description = GetUpgradeDescription(_statType);
             TooltipManager.Instance.ShowTooltip(description);
         }
 
@@ -120,21 +120,21 @@ namespace Assets.Scripts.UI
             _statUpgradeCount.SetText(count);
         }
 
-        private string GetDisplayNameForUpgrade(TurretUpgradeType type)
+        private string GetDisplayNameForUpgrade(TurretStatType type)
         {
-            TurretUpgradeMeta meta = GenericMetaManager.GetMeta<TurretUpgradeMeta, TurretUpgradeType>(type, "TurretUpgradeMeta");
+            TurretUpgradeMeta meta = GenericMetaManager.GetMeta<TurretUpgradeMeta, TurretStatType>(type, "TurretUpgradeMeta");
             return meta != null ? meta.DisplayName : type.ToString();
         }
 
-        private string GetUpgradeDescription(TurretUpgradeType type)
+        private string GetUpgradeDescription(TurretStatType type)
         {
-            TurretUpgradeMeta meta = GenericMetaManager.GetMeta<TurretUpgradeMeta, TurretUpgradeType>(type, "TurretUpgradeMeta");
+            TurretUpgradeMeta meta = GenericMetaManager.GetMeta<TurretUpgradeMeta, TurretStatType>(type, "TurretUpgradeMeta");
             return meta != null ? meta.Description : "Upgrade effect not documented.";
         }
 
         public void UpdateDisplay()
         {
-            _upgradeManager.UpdateUpgradeDisplay(_turret, _upgradeType, this);
+            _upgradeManager.UpdateUpgradeDisplay(_turret, _statType, this);
         }
 
         public void UpdateInteractableState()
@@ -143,7 +143,7 @@ namespace Assets.Scripts.UI
                 return;
 
             int amount = MultipleBuyOption.Instance.GetBuyAmount();
-            float cost = _upgradeManager.GetTurretUpgradeCost(_turret, _upgradeType, amount);
+            float cost = _upgradeManager.GetTurretUpgradeCost(_turret, _statType, amount);
 
             _button.interactable = SessionCurrencyManager.Instance.CanSpend((ulong)cost);
         }

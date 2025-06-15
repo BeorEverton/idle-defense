@@ -4,6 +4,7 @@ using Assets.Scripts.UpgradeSystem.TurretUpgrades;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TurretStatType = Assets.Scripts.Enums.TurretStatType;
 
 public class EquipItemButton : MonoBehaviour
 {

@@ -6,6 +6,7 @@ using Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades;
 using Assets.Scripts.UpgradeSystem.TurretUpgrades;
 using System;
 using System.Collections.Generic;
+using TurretStatType = Assets.Scripts.Enums.TurretStatType;
 
 namespace Assets.Scripts.Systems.Save
 {
@@ -252,12 +253,16 @@ namespace Assets.Scripts.Systems.Save
                         Level = turret.SplashDamageLevel,
                         ExponentialCostMultiplier = baseInfo.SplashDamageCostExponentialMultiplier
                     },
+                    [TurretStatType.PierceChance] = new TurretStat
+                    {
+                        Value = turret.PierceChance,
+                        UpgradeAmount = turret.PierceChanceUpgradeAmount,
+                        BaseCost = turret.PierceChanceUpgradeBaseCost,
+                        Level = turret.PierceChanceLevel,
+                        ExponentialCostMultiplier = baseInfo.PierceChanceCostExponentialMultiplier
+                    },
                 },
 
-                PierceChance = turret.PierceChance,
-                PierceChanceLevel = turret.PierceChanceLevel,
-                PierceChanceUpgradeAmount = turret.PierceChanceUpgradeAmount,
-                PierceChanceUpgradeBaseCost = turret.PierceChanceUpgradeBaseCost,
                 PierceDamageFalloff = turret.PierceDamageFalloff,
                 PierceDamageFalloffLevel = turret.PierceDamageFalloffLevel,
                 PierceDamageFalloffUpgradeAmount = turret.PierceDamageFalloffUpgradeAmount,

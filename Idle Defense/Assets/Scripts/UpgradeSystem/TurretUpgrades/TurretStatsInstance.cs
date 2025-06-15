@@ -14,7 +14,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
     {
         public bool IsUnlocked;
         public TurretType TurretType;   // add at top – nothing else changes
-        public Dictionary<TurretStatType, TurretStat> Stats = new();
+        public Dictionary<Enums.TurretStatType, TurretStat> Stats = new();
 
         [Header("Base Stats")]
         //DO NOT TOUCH AT RUNTIME
@@ -22,11 +22,6 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
         public float BaseFireRate;
         public float BaseCritChance;
         public float BaseCritDamage;
-
-        public float PierceChance;
-        public int PierceChanceLevel;
-        public float PierceChanceUpgradeAmount;
-        public float PierceChanceUpgradeBaseCost;
 
         public float PierceDamageFalloff;
         public int PierceDamageFalloffLevel;
@@ -70,7 +65,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
             BaseCritChance = source.CriticalChance;
             BaseCritDamage = source.CriticalDamageMultiplier;
 
-            Stats[TurretStatType.Damage] = new TurretStat
+            Stats[Enums.TurretStatType.Damage] = new TurretStat
             {
                 Value = source.Damage,
                 Level = source.DamageLevel,
@@ -78,7 +73,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 BaseCost = source.DamageUpgradeBaseCost,
                 ExponentialCostMultiplier = source.DamageCostExponentialMultiplier
             };
-            Stats[TurretStatType.FireRate] = new TurretStat
+            Stats[Enums.TurretStatType.FireRate] = new TurretStat
             {
                 Value = source.FireRate,
                 Level = source.FireRateLevel,
@@ -86,7 +81,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 BaseCost = source.FireRateUpgradeBaseCost,
                 ExponentialCostMultiplier = source.FireRateCostExponentialMultiplier
             };
-            Stats[TurretStatType.CriticalChance] = new TurretStat
+            Stats[Enums.TurretStatType.CriticalChance] = new TurretStat
             {
                 Value = source.CriticalChance,
                 Level = source.CriticalChanceLevel,
@@ -94,7 +89,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 BaseCost = source.CriticalChanceUpgradeBaseCost,
                 ExponentialCostMultiplier = source.CriticalChanceCostExponentialMultiplier
             };
-            Stats[TurretStatType.CriticalDamage] = new TurretStat
+            Stats[Enums.TurretStatType.CriticalDamage] = new TurretStat
             {
                 Value = source.CriticalDamageMultiplier,
                 Level = source.CriticalDamageMultiplierLevel,
@@ -102,7 +97,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 BaseCost = source.CriticalDamageMultiplierUpgradeBaseCost,
                 ExponentialCostMultiplier = source.CriticalDamageCostExponentialMultiplier
             };
-            Stats[TurretStatType.ExplosionRadius] = new TurretStat
+            Stats[Enums.TurretStatType.ExplosionRadius] = new TurretStat
             {
                 Value = source.ExplosionRadius,
                 Level = source.ExplosionRadiusLevel,
@@ -110,7 +105,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 BaseCost = source.ExplosionRadiusUpgradeBaseCost,
                 ExponentialCostMultiplier = 1f
             };
-            Stats[TurretStatType.SplashDamage] = new TurretStat
+            Stats[Enums.TurretStatType.SplashDamage] = new TurretStat
             {
                 Value = source.SplashDamage,
                 Level = source.SplashDamageLevel,
@@ -118,7 +113,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 BaseCost = source.SplashDamageUpgradeBaseCost,
                 ExponentialCostMultiplier = 1f
             };
-            Stats[TurretStatType.PierceChance] = new TurretStat
+            Stats[Enums.TurretStatType.PierceChance] = new TurretStat
             {
                 Value = source.PierceChance,
                 Level = source.PierceChanceLevel,
@@ -126,7 +121,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 BaseCost = source.PierceChanceUpgradeBaseCost,
                 ExponentialCostMultiplier = 1f
             };
-            Stats[TurretStatType.PierceDamageFalloff] = new TurretStat
+            Stats[Enums.TurretStatType.PierceDamageFalloff] = new TurretStat
             {
                 Value = source.PierceDamageFalloff,
                 Level = source.PierceDamageFalloffLevel,
@@ -134,7 +129,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 BaseCost = source.PierceDamageFalloffUpgradeBaseCost,
                 ExponentialCostMultiplier = 1f
             };
-            Stats[TurretStatType.PelletCount] = new TurretStat
+            Stats[Enums.TurretStatType.PelletCount] = new TurretStat
             {
                 Value = source.PelletCount,
                 Level = source.PelletCountLevel,
@@ -142,7 +137,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 BaseCost = source.PelletCountUpgradeBaseCost,
                 ExponentialCostMultiplier = 1f
             };
-            Stats[TurretStatType.DamageFalloffOverDistance] = new TurretStat
+            Stats[Enums.TurretStatType.DamageFalloffOverDistance] = new TurretStat
             {
                 Value = source.DamageFalloffOverDistance,
                 Level = source.DamageFalloffOverDistanceLevel,
@@ -150,7 +145,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 BaseCost = source.DamageFalloffOverDistanceUpgradeBaseCost,
                 ExponentialCostMultiplier = 1f
             };
-            Stats[TurretStatType.KnockbackStrength] = new TurretStat
+            Stats[Enums.TurretStatType.KnockbackStrength] = new TurretStat
             {
                 Value = source.KnockbackStrength,
                 Level = source.KnockbackStrengthLevel,
@@ -158,7 +153,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 BaseCost = source.KnockbackStrengthUpgradeBaseCost,
                 ExponentialCostMultiplier = source.KnockbackStrengthCostExponentialMultiplier
             };
-            Stats[TurretStatType.PercentBonusDamagePerSec] = new TurretStat
+            Stats[Enums.TurretStatType.PercentBonusDamagePerSec] = new TurretStat
             {
                 Value = source.PercentBonusDamagePerSec,
                 Level = source.PercentBonusDamagePerSecLevel,
@@ -166,7 +161,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 BaseCost = source.PercentBonusDamagePerSecUpgradeBaseCost,
                 ExponentialCostMultiplier = 1f
             };
-            Stats[TurretStatType.SlowEffect] = new TurretStat
+            Stats[Enums.TurretStatType.SlowEffect] = new TurretStat
             {
                 Value = source.SlowEffect,
                 Level = source.SlowEffectLevel,

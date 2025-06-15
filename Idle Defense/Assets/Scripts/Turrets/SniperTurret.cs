@@ -75,7 +75,7 @@ namespace Assets.Scripts.Turrets
                 else
                 {
                     float roll = Random.Range(0f, 100f);
-                    if (roll > _stats.PierceChance)
+                    if (roll > _stats.Stats[TurretStatType.PierceChance].Value)
                         break;
                 }
 
@@ -116,9 +116,9 @@ namespace Assets.Scripts.Turrets
             float fireRate = _stats.Stats[TurretStatType.FireRate].Value;
             float critChance = Mathf.Clamp01(_stats.Stats[TurretStatType.CriticalChance].Value / 100f);
             float critMultiplier = _stats.Stats[TurretStatType.CriticalDamage].Value / 100f;
-            float pierceChance = Mathf.Clamp01(_stats.PierceChance / 100f);
-            float pierceFalloff = _stats.PierceDamageFalloff / 100f;
-            float bonusDpsPercent = _stats.PercentBonusDamagePerSec / 100f;
+            float pierceChance = Mathf.Clamp01(_stats.Stats[TurretStatType.PierceChance].Value / 100f);
+            float pierceFalloff = _stats.Stats[TurretStatType.PierceDamageFalloff].Value / 100f;
+            float bonusDpsPercent = _stats.Stats[TurretStatType.PercentBonusDamagePerSec].Value / 100f;
 
             float damage = baseDamage * (1f + critChance * (critMultiplier - 1f));
             damage *= (1f + bonusDpsPercent);

@@ -15,11 +15,11 @@ namespace Assets.Editor.Simulator
         // Called by SimulationEngine after coins have been deducted.
         void Tick(ref ulong coins, ref List<TurretBlueprint> slots, int currentWave);
 
-        // Set by the engine to tell the strategy *which* turret slot to upgrade.
+        // Set by the engine to tell the strategy *which* turret slot to stat.
         void SetNextTurretIndex(int index);
 
-        // Set by the engine to tell the strategy *which* stat to upgrade.
-        void SetNextUpgradeType(TurretUpgradeType upgrade);
+        // Set by the engine to tell the strategy *which* stat to stat.
+        void SetNextUpgradeType(TurretStatType stat);
     }
 
     public static class SpendingStrategyFactory
@@ -37,18 +37,18 @@ namespace Assets.Editor.Simulator
     }
 
     // ---------------------------------------------------------
-    // Base class to share the apply upgrade code
+    // Base class to share the apply stat code
     // ---------------------------------------------------------
     abstract class BaseStrategy : ISpendingStrategy
     {
         protected int nextTurretIndex = -1;
-        protected TurretUpgradeType nextUpgradeType;
+        protected TurretStatType NextStatType;
 
         public void SetNextTurretIndex(int index)
             => nextTurretIndex = index;
 
-        public void SetNextUpgradeType(TurretUpgradeType upgrade)
-            => nextUpgradeType = upgrade;
+        public void SetNextUpgradeType(TurretStatType stat)
+            => NextStatType = stat;
 
         public virtual void Tick(ref ulong coins, ref List<TurretBlueprint> slots, int currentWave)
         {
@@ -56,45 +56,45 @@ namespace Assets.Editor.Simulator
                 return;
 
             var bp = slots[nextTurretIndex];
-            switch (nextUpgradeType)
+            switch (NextStatType)
             {
-                case TurretUpgradeType.Damage:
+                case TurretStatType.Damage:
                     slots[nextTurretIndex] = bp.WithDamageUpgraded();
                     break;
-                case TurretUpgradeType.FireRate:
+                case TurretStatType.FireRate:
                     slots[nextTurretIndex] = bp.WithFireRateUpgraded();
                     break;
-                case TurretUpgradeType.CriticalChance:
+                case TurretStatType.CriticalChance:
                     slots[nextTurretIndex] = bp.WithCritChanceUpgraded();
                     break;
-                case TurretUpgradeType.CriticalDamageMultiplier:
+                case TurretStatType.CriticalDamageMultiplier:
                     slots[nextTurretIndex] = bp.WithCritDamageUpgraded();
                     break;
-                case TurretUpgradeType.ExplosionRadius:
+                case TurretStatType.ExplosionRadius:
                     slots[nextTurretIndex] = bp.WithExplosionRadiusUpgraded();
                     break;
-                case TurretUpgradeType.SplashDamage:
+                case TurretStatType.SplashDamage:
                     slots[nextTurretIndex] = bp.WithSplashDamageUpgraded();
                     break;
-                case TurretUpgradeType.PierceChance:
+                case TurretStatType.PierceChance:
                     slots[nextTurretIndex] = bp.WithPierceChanceUpgraded();
                     break;
-                case TurretUpgradeType.PierceDamageFalloff:
+                case TurretStatType.PierceDamageFalloff:
                     slots[nextTurretIndex] = bp.WithPierceDamageFalloffUpgraded();
                     break;
-                case TurretUpgradeType.PelletCount:
+                case TurretStatType.PelletCount:
                     slots[nextTurretIndex] = bp.WithPelletCountUpgraded();
                     break;
-                case TurretUpgradeType.DamageFalloffOverDistance:
+                case TurretStatType.DamageFalloffOverDistance:
                     slots[nextTurretIndex] = bp.WithDamageFalloffOverDistanceUpgraded();
                     break;
-                case TurretUpgradeType.PercentBonusDamagePerSec:
+                case TurretStatType.PercentBonusDamagePerSec:
                     slots[nextTurretIndex] = bp.WithPercentBonusDamagePerSecUpgraded();
                     break;
-                case TurretUpgradeType.SlowEffect:
+                case TurretStatType.SlowEffect:
                     slots[nextTurretIndex] = bp.WithSlowEffectUpgraded();
                     break;
-                case TurretUpgradeType.KnockbackStrength:
+                case TurretStatType.KnockbackStrength:
                     slots[nextTurretIndex] = bp.WithKnockbackStrengthUpgraded();
                     break;
             }
@@ -105,7 +105,7 @@ namespace Assets.Editor.Simulator
     }
 
     // ---------------------------------------------------------
-    // Cheapest: finds the single cheapest next upgrade across all slots and stats
+    // Cheapest: finds the single cheapest next stat across all slots and stats
     // ---------------------------------------------------------
     class CheapestStrategy : BaseStrategy
     {
@@ -113,9 +113,9 @@ namespace Assets.Editor.Simulator
         {
             ulong bestCost = ulong.MaxValue;
             int bestSlot = -1;
-            int bestUpgrade = -1; // index into our list of upgrade types
+            int bestUpgrade = -1; // index into our list of stat types
 
-            // for each slot, check every upgrade cost
+            // for each slot, check every stat cost
             for (int i = 0; i < slots.Count; i++)
             {
                 var t = slots[i];
@@ -152,7 +152,7 @@ namespace Assets.Editor.Simulator
             {
                 coins -= bestCost;
                 var bp = slots[bestSlot];
-                // apply the chosen upgrade
+                // apply the chosen stat
                 switch (bestUpgrade)
                 {
                     case 0:
@@ -200,7 +200,7 @@ namespace Assets.Editor.Simulator
     }
 
     // ---------------------------------------------------------
-    // Random: picks a random upgrade among all affordable options
+    // Random: picks a random stat among all affordable options
     // ---------------------------------------------------------
     class RandomStrategy : BaseStrategy
     {
@@ -287,7 +287,7 @@ namespace Assets.Editor.Simulator
     }
 
     // ---------------------------------------------------------
-    // MostEffective: picks the upgrade with highest DPS gain per coin
+    // MostEffective: picks the stat with highest DPS gain per coin
     // ---------------------------------------------------------
     class MostEffectiveStrategy : BaseStrategy
     {

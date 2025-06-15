@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using TurretStatType = Assets.Scripts.Enums.TurretStatType;
 
 namespace Assets.Scripts.Turrets
 {

@@ -50,7 +50,7 @@ namespace IdleDefense.Editor.Simulation
         public int PercentBonusDamagePerSecUpgrades;
         public int SlowEffectUpgrades;
 
-        // total turret-upgrade spend this wave
+        // total turret-stat spend this wave
         public ulong TurretMoneySpent;
 
         public string Slot1;

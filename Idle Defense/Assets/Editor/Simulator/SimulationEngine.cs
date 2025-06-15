@@ -106,7 +106,7 @@ namespace Assets.Editor.Simulator
                     // ensure the interval does not go below the minimum
                     cost = baseSO.RegenIntervalStat.BaseCost * Mathf.Pow(1.1f, level);
                     if (baseSO.RegenInterval - baseSO.RegenIntervalStat.UpgradeAmount * level < MinBaseRegenInterval)
-                        return float.MaxValue; // too expensive to upgrade below the min interval
+                        return float.MaxValue; // too expensive to stat below the min interval
                 }
 
                 return cost;
@@ -873,8 +873,8 @@ namespace Assets.Editor.Simulator
                 }
                 else // Cheapest or Random
                 {
-                    // build all affordable upgrade candidates (turret and base)
-                    var candidates = new List<(bool isBase, PlayerUpgradeType baseType, TurretUpgradeType turretType, int slot, ulong cost)>();
+                    // build all affordable stat candidates (turret and base)
+                    var candidates = new List<(bool isBase, PlayerUpgradeType baseType, TurretStatType turretType, int slot, ulong cost)>();
 
                     // 1) turret stat candidates
                     for (int t = 0; t < slots.Count; t++)
@@ -888,7 +888,7 @@ namespace Assets.Editor.Simulator
                                 bp.DamageCostExponentialMultiplier);
                             ulong c = (ulong)Mathf.Ceil(raw);
                             if (c <= coins)
-                                candidates.Add((false, default, TurretUpgradeType.Damage, t, c));
+                                candidates.Add((false, default, TurretStatType.Damage, t, c));
                         }
                         // FIRE RATE
                         {
@@ -898,7 +898,7 @@ namespace Assets.Editor.Simulator
                                 bp.FireRateCostExponentialMultiplier);
                             ulong c = (ulong)Mathf.Ceil(raw);
                             if (c <= coins)
-                                candidates.Add((false, default, TurretUpgradeType.FireRate, t, c));
+                                candidates.Add((false, default, TurretStatType.FireRate, t, c));
                         }
                         // CRIT CHANCE
                         {
@@ -908,7 +908,7 @@ namespace Assets.Editor.Simulator
                                 bp.CriticalChanceCostExponentialMultiplier);
                             ulong c = (ulong)Mathf.Ceil(raw);
                             if (c <= coins)
-                                candidates.Add((false, default, TurretUpgradeType.CriticalChance, t, c));
+                                candidates.Add((false, default, TurretStatType.CriticalChance, t, c));
                         }
                         // CRIT DAMAGE
                         {
@@ -918,7 +918,7 @@ namespace Assets.Editor.Simulator
                                 bp.CriticalDamageCostExponentialMultiplier);
                             ulong c = (ulong)Mathf.Ceil(raw);
                             if (c <= coins)
-                                candidates.Add((false, default, TurretUpgradeType.CriticalDamageMultiplier, t, c));
+                                candidates.Add((false, default, TurretStatType.CriticalDamageMultiplier, t, c));
                         }
                         // EXPLOSION RADIUS
                         {
@@ -927,7 +927,7 @@ namespace Assets.Editor.Simulator
                                 bp.ExplosionRadiusLevel);
                             ulong c = (ulong)Mathf.Ceil(raw);
                             if (c <= coins)
-                                candidates.Add((false, default, TurretUpgradeType.ExplosionRadius, t, c));
+                                candidates.Add((false, default, TurretStatType.ExplosionRadius, t, c));
                         }
                         // SPLASH DAMAGE
                         {
@@ -936,7 +936,7 @@ namespace Assets.Editor.Simulator
                                 bp.SplashDamageLevel);
                             ulong c = (ulong)Mathf.Ceil(raw);
                             if (c <= coins)
-                                candidates.Add((false, default, TurretUpgradeType.SplashDamage, t, c));
+                                candidates.Add((false, default, TurretStatType.SplashDamage, t, c));
                         }
                         // PIERCE CHANCE
                         {
@@ -945,7 +945,7 @@ namespace Assets.Editor.Simulator
                                 bp.PierceChanceLevel);
                             ulong c = (ulong)Mathf.Ceil(raw);
                             if (c <= coins)
-                                candidates.Add((false, default, TurretUpgradeType.PierceChance, t, c));
+                                candidates.Add((false, default, TurretStatType.PierceChance, t, c));
                         }
                         // PIERCE FALLOFF
                         {
@@ -954,7 +954,7 @@ namespace Assets.Editor.Simulator
                                 bp.PierceDamageFalloffLevel);
                             ulong c = (ulong)Mathf.Ceil(raw);
                             if (c <= coins)
-                                candidates.Add((false, default, TurretUpgradeType.PierceDamageFalloff, t, c));
+                                candidates.Add((false, default, TurretStatType.PierceDamageFalloff, t, c));
                         }
                         // PELLET COUNT
                         {
@@ -963,7 +963,7 @@ namespace Assets.Editor.Simulator
                                 bp.PelletCountLevel);
                             ulong c = (ulong)Mathf.Ceil(raw);
                             if (c <= coins)
-                                candidates.Add((false, default, TurretUpgradeType.PelletCount, t, c));
+                                candidates.Add((false, default, TurretStatType.PelletCount, t, c));
                         }
                         // KNOCKBACK
                         {
@@ -973,7 +973,7 @@ namespace Assets.Editor.Simulator
                                 bp.KnockbackStrengthCostExponentialMultiplier);
                             ulong c = (ulong)Mathf.Ceil(raw);
                             if (c <= coins)
-                                candidates.Add((false, default, TurretUpgradeType.KnockbackStrength, t, c));
+                                candidates.Add((false, default, TurretStatType.KnockbackStrength, t, c));
                         }
                         // DAMAGE FALLOFF
                         {
@@ -982,7 +982,7 @@ namespace Assets.Editor.Simulator
                                 bp.DamageFalloffOverDistanceLevel);
                             ulong c = (ulong)Mathf.Ceil(raw);
                             if (c <= coins)
-                                candidates.Add((false, default, TurretUpgradeType.DamageFalloffOverDistance, t, c));
+                                candidates.Add((false, default, TurretStatType.DamageFalloffOverDistance, t, c));
                         }
                         // % BONUS DPS
                         {
@@ -991,7 +991,7 @@ namespace Assets.Editor.Simulator
                                 bp.PercentBonusDamagePerSecLevel);
                             ulong c = (ulong)Mathf.Ceil(raw);
                             if (c <= coins)
-                                candidates.Add((false, default, TurretUpgradeType.PercentBonusDamagePerSec, t, c));
+                                candidates.Add((false, default, TurretStatType.PercentBonusDamagePerSec, t, c));
                         }
                         // SLOW EFFECT
                         {
@@ -1000,11 +1000,11 @@ namespace Assets.Editor.Simulator
                                 bp.SlowEffectLevel);
                             ulong c = (ulong)Mathf.Ceil(raw);
                             if (c <= coins)
-                                candidates.Add((false, default, TurretUpgradeType.SlowEffect, t, c));
+                                candidates.Add((false, default, TurretStatType.SlowEffect, t, c));
                         }
                     }
 
-                    // 2) base upgrade candidates
+                    // 2) base stat candidates
                     foreach (PlayerUpgradeType pu in Enum.GetValues(typeof(PlayerUpgradeType)))
                     {
                         int lvl = pu switch
@@ -1036,7 +1036,7 @@ namespace Assets.Editor.Simulator
 
                         if (pick.isBase)
                         {
-                            // apply base upgrade
+                            // apply base stat
                             switch (pick.baseType)
                             {
                                 case PlayerUpgradeType.MaxHealth:
@@ -1065,59 +1065,59 @@ namespace Assets.Editor.Simulator
                         }
                         else
                         {
-                            // apply turret upgrade
+                            // apply turret stat
                             var bp = slots[pick.slot];
                             switch (pick.turretType)
                             {
-                                case TurretUpgradeType.Damage:
+                                case TurretStatType.Damage:
                                     slots[pick.slot] = bp.WithDamageUpgraded();
                                     wStat.DamageUpgrades++;
                                     break;
-                                case TurretUpgradeType.FireRate:
+                                case TurretStatType.FireRate:
                                     slots[pick.slot] = bp.WithFireRateUpgraded();
                                     wStat.FireRateUpgrades++;
                                     break;
-                                case TurretUpgradeType.CriticalChance:
+                                case TurretStatType.CriticalChance:
                                     slots[pick.slot] = bp.WithCritChanceUpgraded();
                                     wStat.CriticalChanceUpgrades++;
                                     break;
-                                case TurretUpgradeType.CriticalDamageMultiplier:
+                                case TurretStatType.CriticalDamageMultiplier:
                                     slots[pick.slot] = bp.WithCritDamageUpgraded();
                                     wStat.CriticalDamageMultiplierUpgrades++;
                                     break;
-                                case TurretUpgradeType.ExplosionRadius:
+                                case TurretStatType.ExplosionRadius:
                                     slots[pick.slot] = bp.WithExplosionRadiusUpgraded();
                                     wStat.ExplosionRadiusUpgrades++;
                                     break;
-                                case TurretUpgradeType.SplashDamage:
+                                case TurretStatType.SplashDamage:
                                     slots[pick.slot] = bp.WithSplashDamageUpgraded();
                                     wStat.SplashDamageUpgrades++;
                                     break;
-                                case TurretUpgradeType.PierceChance:
+                                case TurretStatType.PierceChance:
                                     slots[pick.slot] = bp.WithPierceChanceUpgraded();
                                     wStat.PierceChanceUpgrades++;
                                     break;
-                                case TurretUpgradeType.PierceDamageFalloff:
+                                case TurretStatType.PierceDamageFalloff:
                                     slots[pick.slot] = bp.WithPierceDamageFalloffUpgraded();
                                     wStat.PierceDamageFalloffUpgrades++;
                                     break;
-                                case TurretUpgradeType.PelletCount:
+                                case TurretStatType.PelletCount:
                                     slots[pick.slot] = bp.WithPelletCountUpgraded();
                                     wStat.PelletCountUpgrades++;
                                     break;
-                                case TurretUpgradeType.KnockbackStrength:
+                                case TurretStatType.KnockbackStrength:
                                     slots[pick.slot] = bp.WithKnockbackStrengthUpgraded();
                                     wStat.KnockbackStrengthUpgrades++;
                                     break;
-                                case TurretUpgradeType.DamageFalloffOverDistance:
+                                case TurretStatType.DamageFalloffOverDistance:
                                     slots[pick.slot] = bp.WithDamageFalloffOverDistanceUpgraded();
                                     wStat.DamageFalloffOverDistanceUpgrades++;
                                     break;
-                                case TurretUpgradeType.PercentBonusDamagePerSec:
+                                case TurretStatType.PercentBonusDamagePerSec:
                                     slots[pick.slot] = bp.WithPercentBonusDamagePerSecUpgraded();
                                     wStat.PercentBonusDamagePerSecUpgrades++;
                                     break;
-                                case TurretUpgradeType.SlowEffect:
+                                case TurretStatType.SlowEffect:
                                     slots[pick.slot] = bp.WithSlowEffectUpgraded();
                                     wStat.SlowEffectUpgrades++;
                                     break;

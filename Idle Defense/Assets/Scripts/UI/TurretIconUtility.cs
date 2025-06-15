@@ -3,6 +3,7 @@ using Assets.Scripts.Systems;
 using Assets.Scripts.Turrets;
 using Assets.Scripts.UpgradeSystem.TurretUpgrades;
 using UnityEngine;
+using TurretStatType = Assets.Scripts.Enums.TurretStatType;
 
 namespace Assets.Scripts.UI
 {
@@ -35,7 +36,7 @@ namespace Assets.Scripts.UI
             Mathf.FloorToInt(
                   s.Stats[TurretStatType.Damage].Level + s.Stats[TurretStatType.FireRate].Level + s.Stats[TurretStatType.CriticalChance].Level
                 + s.Stats[TurretStatType.CriticalDamage].Level + s.Stats[TurretStatType.ExplosionRadius].Level
-                + s.Stats[TurretStatType.SplashDamage].Level + s.PierceChanceLevel
+                + s.Stats[TurretStatType.SplashDamage].Level + s.Stats[TurretStatType.PierceChance].Level
                 + s.PierceDamageFalloffLevel + s.PelletCountLevel
                 + s.DamageFalloffOverDistanceLevel
                 + s.PercentBonusDamagePerSecLevel + s.SlowEffectLevel);

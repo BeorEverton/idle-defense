@@ -1,5 +1,6 @@
 // Assets/Editor/Simulation/SpendingStrategies.cs
 
+using Assets.Scripts.Enums;
 using Assets.Scripts.UpgradeSystem.TurretUpgrades;
 using IdleDefense.Editor.Simulation;
 using System;
@@ -67,7 +68,7 @@ namespace Assets.Editor.Simulator
                 case TurretStatType.CriticalChance:
                     slots[nextTurretIndex] = bp.WithCritChanceUpgraded();
                     break;
-                case TurretStatType.CriticalDamageMultiplier:
+                case TurretStatType.CriticalDamage:
                     slots[nextTurretIndex] = bp.WithCritDamageUpgraded();
                     break;
                 case TurretStatType.ExplosionRadius:

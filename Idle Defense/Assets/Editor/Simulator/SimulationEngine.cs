@@ -4,6 +4,7 @@
 // ------------------------------------------------
 
 using Assets.Scripts.Enemies;
+using Assets.Scripts.Enums;
 using Assets.Scripts.SO;          // EnemyInfoSO, TurretInfoSO, PlayerBaseSO
 using Assets.Scripts.Systems;  // WaveConfigSO, TurretUnlockTableSO
 using Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades;
@@ -918,7 +919,7 @@ namespace Assets.Editor.Simulator
                                 bp.CriticalDamageCostExponentialMultiplier);
                             ulong c = (ulong)Mathf.Ceil(raw);
                             if (c <= coins)
-                                candidates.Add((false, default, TurretStatType.CriticalDamageMultiplier, t, c));
+                                candidates.Add((false, default, TurretStatType.CriticalDamage, t, c));
                         }
                         // EXPLOSION RADIUS
                         {
@@ -1081,7 +1082,7 @@ namespace Assets.Editor.Simulator
                                     slots[pick.slot] = bp.WithCritChanceUpgraded();
                                     wStat.CriticalChanceUpgrades++;
                                     break;
-                                case TurretStatType.CriticalDamageMultiplier:
+                                case TurretStatType.CriticalDamage:
                                     slots[pick.slot] = bp.WithCritDamageUpgraded();
                                     wStat.CriticalDamageMultiplierUpgrades++;
                                     break;

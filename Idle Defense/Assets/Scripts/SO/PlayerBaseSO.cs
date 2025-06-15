@@ -1,3 +1,4 @@
+using Assets.Scripts.PlayerBase;
 using UnityEngine;
 
 namespace Assets.Scripts.SO
@@ -7,7 +8,7 @@ namespace Assets.Scripts.SO
     {
         [Header("Health")]
         [Tooltip("Max health of player base")]
-        public float MaxHealth;
+        public int MaxHealth;
 
         [Tooltip("Amount of health regenerated per tick")]
         public float RegenAmount;
@@ -16,18 +17,12 @@ namespace Assets.Scripts.SO
         public float RegenInterval = 0.5f;
 
         [Tooltip("Upgrade amount per level for MaxHealth")]
-        public float MaxHealthUpgradeAmount;
-        public float MaxHealthUpgradeBaseCost;
-        public int MaxHealthLevel;
+        public PlayerBaseStat MaxHealthStat;
 
         [Tooltip("Upgrade amount per level for RegenAmount")]
-        public float RegenAmountUpgradeAmount;
-        public float RegenAmountUpgradeBaseCost;
-        public int RegenAmountLevel;
+        public PlayerBaseStat RegenAmountStat;
 
         [Tooltip("Upgrade amount per level for RegenInterval (lower is faster)")]
-        public float RegenIntervalUpgradeAmount;
-        public float RegenIntervalUpgradeBaseCost;
-        public int RegenIntervalLevel;
+        public PlayerBaseStat RegenIntervalStat;
     }
 }

@@ -27,15 +27,15 @@ namespace Assets.Scripts.Systems.Save
                 MaxHealth = player.MaxHealth,
                 RegenAmount = player.RegenAmount,
                 RegenInterval = player.RegenInterval,
-                MaxHealthUpgradeAmount = player.MaxHealthUpgradeAmount,
-                MaxHealthUpgradeBaseCost = player.MaxHealthUpgradeBaseCost,
-                MaxHealthLevel = player.MaxHealthLevel,
-                RegenAmountUpgradeAmount = player.RegenAmountUpgradeAmount,
-                RegenAmountUpgradeBaseCost = player.RegenAmountUpgradeBaseCost,
-                RegenAmountLevel = player.RegenAmountLevel,
-                RegenIntervalUpgradeAmount = player.RegenIntervalUpgradeAmount,
-                RegenIntervalUpgradeBaseCost = player.RegenIntervalUpgradeBaseCost,
-                RegenIntervalLevel = player.RegenIntervalLevel
+                MaxHealthUpgradeAmount = player.MaxHealthStat.Amount,
+                MaxHealthUpgradeBaseCost = player.MaxHealthStat.BaseCost,
+                MaxHealthLevel = player.MaxHealthStat.Level,
+                RegenAmountUpgradeAmount = player.RegenAmountStat.Amount,
+                RegenAmountUpgradeBaseCost = player.RegenAmountStat.BaseCost,
+                RegenAmountLevel = player.RegenAmountStat.Level,
+                RegenIntervalUpgradeAmount = player.RegenIntervalStat.Amount,
+                RegenIntervalUpgradeBaseCost = player.RegenIntervalStat.BaseCost,
+                RegenIntervalLevel = player.RegenIntervalStat.Level
             };
         }
 
@@ -150,17 +150,25 @@ namespace Assets.Scripts.Systems.Save
             {
                 MaxHealth = playerInfo.MaxHealth,
                 RegenAmount = playerInfo.RegenAmount,
-                RegenDelay = playerInfo.RegenDelay,
                 RegenInterval = playerInfo.RegenInterval,
-                MaxHealthUpgradeAmount = playerInfo.MaxHealthUpgradeAmount,
-                MaxHealthUpgradeBaseCost = playerInfo.MaxHealthUpgradeBaseCost,
-                MaxHealthLevel = playerInfo.MaxHealthLevel,
-                RegenAmountUpgradeAmount = playerInfo.RegenAmountUpgradeAmount,
-                RegenAmountUpgradeBaseCost = playerInfo.RegenAmountUpgradeBaseCost,
-                RegenAmountLevel = playerInfo.RegenAmountLevel,
-                RegenIntervalUpgradeAmount = playerInfo.RegenIntervalUpgradeAmount,
-                RegenIntervalUpgradeBaseCost = playerInfo.RegenIntervalUpgradeBaseCost,
-                RegenIntervalLevel = playerInfo.RegenIntervalLevel
+                MaxHealthStat = new PlayerBaseStat
+                {
+                    Amount = playerInfo.MaxHealth,
+                    BaseCost = playerInfo.MaxHealthUpgradeBaseCost,
+                    Level = playerInfo.MaxHealthLevel
+                },
+                RegenAmountStat = new PlayerBaseStat
+                {
+                    Amount = playerInfo.RegenAmount,
+                    BaseCost = playerInfo.RegenAmountUpgradeBaseCost,
+                    Level = playerInfo.RegenAmountLevel
+                },
+                RegenIntervalStat = new PlayerBaseStat
+                {
+                    Amount = playerInfo.RegenInterval,
+                    BaseCost = playerInfo.RegenIntervalUpgradeBaseCost,
+                    Level = playerInfo.RegenIntervalLevel
+                },
             };
 
             return playerStats;
@@ -246,21 +254,20 @@ public class GameDataDTO
 [Serializable]
 public class PlayerInfoDTO
 {
-    public float MaxHealth;
+    public int MaxHealth;
     public float RegenAmount;
-    public float RegenDelay;
     public float RegenInterval;
 
     public float MaxHealthUpgradeAmount;
-    public float MaxHealthUpgradeBaseCost;
+    public ulong MaxHealthUpgradeBaseCost;
     public int MaxHealthLevel;
 
     public float RegenAmountUpgradeAmount;
-    public float RegenAmountUpgradeBaseCost;
+    public ulong RegenAmountUpgradeBaseCost;
     public int RegenAmountLevel;
 
     public float RegenIntervalUpgradeAmount;
-    public float RegenIntervalUpgradeBaseCost;
+    public ulong RegenIntervalUpgradeBaseCost;
     public int RegenIntervalLevel;
 }
 

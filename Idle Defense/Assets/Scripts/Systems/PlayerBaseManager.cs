@@ -147,7 +147,7 @@ namespace Assets.Scripts.Systems
             if (upgradeVisuals == null || upgradeVisuals.Length == 0)
                 return;
 
-            float totalLevel = Stats.MaxHealthLevel + Stats.RegenAmountLevel + Stats.RegenIntervalLevel;
+            float totalLevel = Stats.MaxHealthStat.Level + Stats.RegenAmountStat.Level + Stats.RegenIntervalStat.Level;
 
             for (int i = 0; i < upgradeVisuals.Length; i++)
             {

@@ -6,22 +6,13 @@ namespace Assets.Scripts.PlayerBase
     [Serializable]
     public class PlayerBaseStatsInstance
     {
-        public float MaxHealth;
+        public int MaxHealth;
         public float RegenAmount;
-        public float RegenDelay;
         public float RegenInterval;
 
-        public float MaxHealthUpgradeAmount;
-        public float MaxHealthUpgradeBaseCost;
-        public int MaxHealthLevel;
-
-        public float RegenAmountUpgradeAmount;
-        public float RegenAmountUpgradeBaseCost;
-        public int RegenAmountLevel;
-
-        public float RegenIntervalUpgradeAmount;
-        public float RegenIntervalUpgradeBaseCost;
-        public int RegenIntervalLevel;
+        public PlayerBaseStat MaxHealthStat;
+        public PlayerBaseStat RegenAmountStat;
+        public PlayerBaseStat RegenIntervalStat;
 
         public PlayerBaseStatsInstance(PlayerBaseSO source)
         {
@@ -29,19 +20,33 @@ namespace Assets.Scripts.PlayerBase
             RegenAmount = source.RegenAmount;
             RegenInterval = source.RegenInterval;
 
-            MaxHealthUpgradeAmount = source.MaxHealthUpgradeAmount;
-            MaxHealthUpgradeBaseCost = source.MaxHealthUpgradeBaseCost;
-            MaxHealthLevel = source.MaxHealthLevel;
-
-            RegenAmountUpgradeAmount = source.RegenAmountUpgradeAmount;
-            RegenAmountUpgradeBaseCost = source.RegenAmountUpgradeBaseCost;
-            RegenAmountLevel = source.RegenAmountLevel;
-
-            RegenIntervalUpgradeAmount = source.RegenIntervalUpgradeAmount;
-            RegenIntervalUpgradeBaseCost = source.RegenIntervalUpgradeBaseCost;
-            RegenIntervalLevel = source.RegenIntervalLevel;
+            MaxHealthStat = new PlayerBaseStat
+            {
+                Amount = source.MaxHealthStat.Amount,
+                BaseCost = source.MaxHealthStat.BaseCost,
+                Level = source.MaxHealthStat.Level
+            };
+            RegenAmountStat = new PlayerBaseStat
+            {
+                Amount = source.RegenAmountStat.Amount,
+                BaseCost = source.RegenAmountStat.BaseCost,
+                Level = source.RegenAmountStat.Level
+            };
+            RegenIntervalStat = new PlayerBaseStat
+            {
+                Amount = source.RegenIntervalStat.Amount,
+                BaseCost = source.RegenIntervalStat.BaseCost,
+                Level = source.RegenIntervalStat.Level
+            };
         }
 
         public PlayerBaseStatsInstance() { } //Used to load from DTO
+    }
+
+    public struct PlayerBaseStat
+    {
+        public float Amount;
+        public ulong BaseCost;
+        public int Level;
     }
 }

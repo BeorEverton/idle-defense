@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace IdleDefense.Editor.Simulation
+namespace Assets.Editor.Simulator
 {
     public class SimulationRunnerWindow : EditorWindow
     {

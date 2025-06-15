@@ -1,9 +1,9 @@
 using System;
 
-namespace Assets.Scripts.UpgradeSystem
+namespace Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades
 {
     [Serializable]
-    public class TurretUpgradeMeta
+    public class PlayerBaseUpgradeMeta
     {
         public string Type;
         public string DisplayName;

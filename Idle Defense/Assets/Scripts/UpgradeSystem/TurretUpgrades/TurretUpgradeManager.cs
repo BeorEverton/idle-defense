@@ -1,12 +1,12 @@
+using Assets.Scripts.Systems;
 using Assets.Scripts.Systems.Audio;
 using Assets.Scripts.Turrets;
 using Assets.Scripts.UI;
-using Assets.Scripts.UpgradeSystem;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.Systems
+namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
 {
     public class TurretUpgradeManager : MonoBehaviour
     {

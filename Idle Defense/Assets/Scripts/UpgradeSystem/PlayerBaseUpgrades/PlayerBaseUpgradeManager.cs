@@ -1,12 +1,11 @@
+using Assets.Scripts.PlayerBase;
 using Assets.Scripts.Systems;
 using Assets.Scripts.Systems.Audio;
 using Assets.Scripts.UI;
-using Assets.Scripts.UpgradeSystem;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-namespace Assets.Scripts.PlayerBase
+namespace Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades
 {
     public class PlayerBaseUpgradeManager : MonoBehaviour
     {

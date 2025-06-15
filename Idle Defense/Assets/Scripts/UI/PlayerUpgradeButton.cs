@@ -1,6 +1,5 @@
-using Assets.Scripts.PlayerBase;
 using Assets.Scripts.Systems;
-using Assets.Scripts.UpgradeSystem;
+using Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades;
 using System;
 using TMPro;
 using UnityEngine;

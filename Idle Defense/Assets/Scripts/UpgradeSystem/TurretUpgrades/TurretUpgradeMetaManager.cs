@@ -1,9 +1,8 @@
 using Assets.Scripts.Helpers;
-using Assets.Scripts.Systems;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.UpgradeSystem
+namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
 {
     public static class TurretUpgradeMetaManager
     {

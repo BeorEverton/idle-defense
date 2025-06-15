@@ -1,7 +1,7 @@
 using Assets.Scripts.PlayerBase;
 using System;
 
-namespace Assets.Scripts.UpgradeSystem
+namespace Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades
 {
     public class PlayerBaseUpgrade
     {

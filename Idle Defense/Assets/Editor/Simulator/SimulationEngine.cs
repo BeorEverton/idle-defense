@@ -2,12 +2,13 @@
 // ------------------------------------------------
 // Main head-less simulator – per-wave stats export
 // ------------------------------------------------
+
 using Assets.Scripts.Enemies;
-using Assets.Scripts.PlayerBase; // EnemyClass
 using Assets.Scripts.SO;          // EnemyInfoSO, TurretInfoSO, PlayerBaseSO
 using Assets.Scripts.Systems;  // WaveConfigSO, TurretUnlockTableSO
-using Assets.Scripts.Turrets;     // TurretType
-using Assets.Scripts.WaveSystem;
+using Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades;
+using Assets.Scripts.UpgradeSystem.TurretUpgrades;
+using IdleDefense.Editor.Simulation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ using Random = UnityEngine.Random;
 // for reference: [^\x00-\x7F]+
 
 
-namespace IdleDefense.Editor.Simulation
+namespace Assets.Editor.Simulator
 {
     // ---------------------------------------------
     // Minimal per-enemy runtime struct

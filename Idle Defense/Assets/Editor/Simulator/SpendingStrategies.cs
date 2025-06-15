@@ -1,11 +1,12 @@
 // Assets/Editor/Simulation/SpendingStrategies.cs
+
+using Assets.Scripts.UpgradeSystem.TurretUpgrades;
+using IdleDefense.Editor.Simulation;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Scripts.Turrets;
-using Assets.Scripts.Systems;  // for TurretType
 
-namespace IdleDefense.Editor.Simulation
+namespace Assets.Editor.Simulator
 {
     public enum SpendingMode { Cheapest, Random, MostEffective }
 
@@ -58,31 +59,44 @@ namespace IdleDefense.Editor.Simulation
             switch (nextUpgradeType)
             {
                 case TurretUpgradeType.Damage:
-                    slots[nextTurretIndex] = bp.WithDamageUpgraded(); break;
+                    slots[nextTurretIndex] = bp.WithDamageUpgraded();
+                    break;
                 case TurretUpgradeType.FireRate:
-                    slots[nextTurretIndex] = bp.WithFireRateUpgraded(); break;
+                    slots[nextTurretIndex] = bp.WithFireRateUpgraded();
+                    break;
                 case TurretUpgradeType.CriticalChance:
-                    slots[nextTurretIndex] = bp.WithCritChanceUpgraded(); break;
+                    slots[nextTurretIndex] = bp.WithCritChanceUpgraded();
+                    break;
                 case TurretUpgradeType.CriticalDamageMultiplier:
-                    slots[nextTurretIndex] = bp.WithCritDamageUpgraded(); break;
+                    slots[nextTurretIndex] = bp.WithCritDamageUpgraded();
+                    break;
                 case TurretUpgradeType.ExplosionRadius:
-                    slots[nextTurretIndex] = bp.WithExplosionRadiusUpgraded(); break;
+                    slots[nextTurretIndex] = bp.WithExplosionRadiusUpgraded();
+                    break;
                 case TurretUpgradeType.SplashDamage:
-                    slots[nextTurretIndex] = bp.WithSplashDamageUpgraded(); break;
+                    slots[nextTurretIndex] = bp.WithSplashDamageUpgraded();
+                    break;
                 case TurretUpgradeType.PierceChance:
-                    slots[nextTurretIndex] = bp.WithPierceChanceUpgraded(); break;
+                    slots[nextTurretIndex] = bp.WithPierceChanceUpgraded();
+                    break;
                 case TurretUpgradeType.PierceDamageFalloff:
-                    slots[nextTurretIndex] = bp.WithPierceDamageFalloffUpgraded(); break;
+                    slots[nextTurretIndex] = bp.WithPierceDamageFalloffUpgraded();
+                    break;
                 case TurretUpgradeType.PelletCount:
-                    slots[nextTurretIndex] = bp.WithPelletCountUpgraded(); break;
+                    slots[nextTurretIndex] = bp.WithPelletCountUpgraded();
+                    break;
                 case TurretUpgradeType.DamageFalloffOverDistance:
-                    slots[nextTurretIndex] = bp.WithDamageFalloffOverDistanceUpgraded(); break;
+                    slots[nextTurretIndex] = bp.WithDamageFalloffOverDistanceUpgraded();
+                    break;
                 case TurretUpgradeType.PercentBonusDamagePerSec:
-                    slots[nextTurretIndex] = bp.WithPercentBonusDamagePerSecUpgraded(); break;
+                    slots[nextTurretIndex] = bp.WithPercentBonusDamagePerSecUpgraded();
+                    break;
                 case TurretUpgradeType.SlowEffect:
-                    slots[nextTurretIndex] = bp.WithSlowEffectUpgraded(); break;
+                    slots[nextTurretIndex] = bp.WithSlowEffectUpgraded();
+                    break;
                 case TurretUpgradeType.KnockbackStrength:
-                    slots[nextTurretIndex] = bp.WithKnockbackStrengthUpgraded(); break;
+                    slots[nextTurretIndex] = bp.WithKnockbackStrengthUpgraded();
+                    break;
             }
 
             // reset for next decision
@@ -141,19 +155,45 @@ namespace IdleDefense.Editor.Simulation
                 // apply the chosen upgrade
                 switch (bestUpgrade)
                 {
-                    case 0: slots[bestSlot] = bp.WithDamageUpgraded(); break;
-                    case 1: slots[bestSlot] = bp.WithFireRateUpgraded(); break;
-                    case 2: slots[bestSlot] = bp.WithCritChanceUpgraded(); break;
-                    case 3: slots[bestSlot] = bp.WithCritDamageUpgraded(); break;
-                    case 4: slots[bestSlot] = bp.WithExplosionRadiusUpgraded(); break;
-                    case 5: slots[bestSlot] = bp.WithSplashDamageUpgraded(); break;
-                    case 6: slots[bestSlot] = bp.WithPierceChanceUpgraded(); break;
-                    case 7: slots[bestSlot] = bp.WithPierceDamageFalloffUpgraded(); break;
-                    case 8: slots[bestSlot] = bp.WithPelletCountUpgraded(); break;
-                    case 9: slots[bestSlot] = bp.WithKnockbackStrengthUpgraded(); break;
-                    case 10: slots[bestSlot] = bp.WithDamageFalloffOverDistanceUpgraded(); break;
-                    case 11: slots[bestSlot] = bp.WithPercentBonusDamagePerSecUpgraded(); break;
-                    case 12: slots[bestSlot] = bp.WithSlowEffectUpgraded(); break;
+                    case 0:
+                        slots[bestSlot] = bp.WithDamageUpgraded();
+                        break;
+                    case 1:
+                        slots[bestSlot] = bp.WithFireRateUpgraded();
+                        break;
+                    case 2:
+                        slots[bestSlot] = bp.WithCritChanceUpgraded();
+                        break;
+                    case 3:
+                        slots[bestSlot] = bp.WithCritDamageUpgraded();
+                        break;
+                    case 4:
+                        slots[bestSlot] = bp.WithExplosionRadiusUpgraded();
+                        break;
+                    case 5:
+                        slots[bestSlot] = bp.WithSplashDamageUpgraded();
+                        break;
+                    case 6:
+                        slots[bestSlot] = bp.WithPierceChanceUpgraded();
+                        break;
+                    case 7:
+                        slots[bestSlot] = bp.WithPierceDamageFalloffUpgraded();
+                        break;
+                    case 8:
+                        slots[bestSlot] = bp.WithPelletCountUpgraded();
+                        break;
+                    case 9:
+                        slots[bestSlot] = bp.WithKnockbackStrengthUpgraded();
+                        break;
+                    case 10:
+                        slots[bestSlot] = bp.WithDamageFalloffOverDistanceUpgraded();
+                        break;
+                    case 11:
+                        slots[bestSlot] = bp.WithPercentBonusDamagePerSecUpgraded();
+                        break;
+                    case 12:
+                        slots[bestSlot] = bp.WithSlowEffectUpgraded();
+                        break;
                 }
             }
         }
@@ -195,26 +235,53 @@ namespace IdleDefense.Editor.Simulation
                         candidates.Add((i, u, costs[u]));
             }
 
-            if (candidates.Count == 0) return;
+            if (candidates.Count == 0)
+                return;
 
             var pick = candidates[rng.Next(candidates.Count)];
             coins -= pick.cost;
             var bp = slots[pick.slot];
             switch (pick.upgrade)
             {
-                case 0: slots[pick.slot] = bp.WithDamageUpgraded(); break;
-                case 1: slots[pick.slot] = bp.WithFireRateUpgraded(); break;
-                case 2: slots[pick.slot] = bp.WithCritChanceUpgraded(); break;
-                case 3: slots[pick.slot] = bp.WithCritDamageUpgraded(); break;
-                case 4: slots[pick.slot] = bp.WithExplosionRadiusUpgraded(); break;
-                case 5: slots[pick.slot] = bp.WithSplashDamageUpgraded(); break;
-                case 6: slots[pick.slot] = bp.WithPierceChanceUpgraded(); break;
-                case 7: slots[pick.slot] = bp.WithPierceDamageFalloffUpgraded(); break;
-                case 8: slots[pick.slot] = bp.WithPelletCountUpgraded(); break;
-                case 9: slots[pick.slot] = bp.WithKnockbackStrengthUpgraded(); break;
-                case 10: slots[pick.slot] = bp.WithDamageFalloffOverDistanceUpgraded(); break;
-                case 11: slots[pick.slot] = bp.WithPercentBonusDamagePerSecUpgraded(); break;
-                case 12: slots[pick.slot] = bp.WithSlowEffectUpgraded(); break;
+                case 0:
+                    slots[pick.slot] = bp.WithDamageUpgraded();
+                    break;
+                case 1:
+                    slots[pick.slot] = bp.WithFireRateUpgraded();
+                    break;
+                case 2:
+                    slots[pick.slot] = bp.WithCritChanceUpgraded();
+                    break;
+                case 3:
+                    slots[pick.slot] = bp.WithCritDamageUpgraded();
+                    break;
+                case 4:
+                    slots[pick.slot] = bp.WithExplosionRadiusUpgraded();
+                    break;
+                case 5:
+                    slots[pick.slot] = bp.WithSplashDamageUpgraded();
+                    break;
+                case 6:
+                    slots[pick.slot] = bp.WithPierceChanceUpgraded();
+                    break;
+                case 7:
+                    slots[pick.slot] = bp.WithPierceDamageFalloffUpgraded();
+                    break;
+                case 8:
+                    slots[pick.slot] = bp.WithPelletCountUpgraded();
+                    break;
+                case 9:
+                    slots[pick.slot] = bp.WithKnockbackStrengthUpgraded();
+                    break;
+                case 10:
+                    slots[pick.slot] = bp.WithDamageFalloffOverDistanceUpgraded();
+                    break;
+                case 11:
+                    slots[pick.slot] = bp.WithPercentBonusDamagePerSecUpgraded();
+                    break;
+                case 12:
+                    slots[pick.slot] = bp.WithSlowEffectUpgraded();
+                    break;
             }
         }
     }
@@ -257,49 +324,63 @@ namespace IdleDefense.Editor.Simulation
                     {
                         case 0:
                             rawCost = CostPlusLevel(t.DamageUpgradeBaseCost, t.DamageLevel, t.DamageCostExponentialMultiplier);
-                            up = t.WithDamageUpgraded(); break;
+                            up = t.WithDamageUpgraded();
+                            break;
                         case 1:
                             rawCost = CostPlusLevel(t.FireRateUpgradeBaseCost, t.FireRateLevel, t.FireRateCostExponentialMultiplier);
-                            up = t.WithFireRateUpgraded(); break;
+                            up = t.WithFireRateUpgraded();
+                            break;
                         case 2:
                             rawCost = CostPlusLevel(t.CritChanceUpgradeBaseCost, t.CriticalChanceLevel, t.CriticalChanceCostExponentialMultiplier);
-                            up = t.WithCritChanceUpgraded(); break;
+                            up = t.WithCritChanceUpgraded();
+                            break;
                         case 3:
                             rawCost = CostPlusLevel(t.CritDamageUpgradeBaseCost, t.CriticalDamageMultiplierLevel, t.CriticalDamageCostExponentialMultiplier);
-                            up = t.WithCritDamageUpgraded(); break;
+                            up = t.WithCritDamageUpgraded();
+                            break;
                         case 4:
                             rawCost = CostPlusLevel(t.ExplosionRadiusUpgradeBaseCost, t.ExplosionRadiusLevel, t.ExplosionRadiusCostExponentialMultiplier);
-                            up = t.WithExplosionRadiusUpgraded(); break;
+                            up = t.WithExplosionRadiusUpgraded();
+                            break;
                         case 5:
                             rawCost = CostPlusLevel(t.SplashDamageUpgradeBaseCost, t.SplashDamageLevel, t.SplashDamageCostExponentialMultiplier);
-                            up = t.WithSplashDamageUpgraded(); break;
+                            up = t.WithSplashDamageUpgraded();
+                            break;
                         case 6:
                             rawCost = CostPlusLevel(t.PierceChanceUpgradeBaseCost, t.PierceChanceLevel, t.PierceChanceCostExponentialMultiplier);
-                            up = t.WithPierceChanceUpgraded(); break;
+                            up = t.WithPierceChanceUpgraded();
+                            break;
                         case 7:
                             rawCost = CostPlusLevel(t.PierceDamageFalloffUpgradeBaseCost, t.PierceDamageFalloffLevel, t.PierceDamageFalloffCostExponentialMultiplier);
-                            up = t.WithPierceDamageFalloffUpgraded(); break;
+                            up = t.WithPierceDamageFalloffUpgraded();
+                            break;
                         case 8:
                             rawCost = CostPlusLevel(t.PelletCountUpgradeBaseCost, t.PelletCountLevel, t.PelletCountCostExponentialMultiplier);
-                            up = t.WithPelletCountUpgraded(); break;
+                            up = t.WithPelletCountUpgraded();
+                            break;
                         case 9:
                             rawCost = CostPlusLevel(t.KnockbackStrengthUpgradeBaseCost, t.KnockbackStrengthLevel, t.KnockbackStrengthCostExponentialMultiplier);
-                            up = t.WithKnockbackStrengthUpgraded(); break;
+                            up = t.WithKnockbackStrengthUpgraded();
+                            break;
                         case 10:
                             rawCost = CostPlusLevel(t.DamageFalloffOverDistanceUpgradeBaseCost, t.DamageFalloffOverDistanceLevel, t.DamageFalloffOverDistanceCostExponentialMultiplier);
-                            up = t.WithDamageFalloffOverDistanceUpgraded(); break;
+                            up = t.WithDamageFalloffOverDistanceUpgraded();
+                            break;
                         case 11:
                             rawCost = CostPlusLevel(t.PercentBonusDamagePerSecUpgradeBaseCost, t.PercentBonusDamagePerSecLevel, t.PercentBonusDamagePerSecCostExponentialMultiplier);
-                            up = t.WithPercentBonusDamagePerSecUpgraded(); break;
+                            up = t.WithPercentBonusDamagePerSecUpgraded();
+                            break;
                         case 12:
                             rawCost = CostPlusLevel(t.SlowEffectUpgradeBaseCost, t.SlowEffectLevel, t.SlowEffectCostExponentialMultiplier);
-                            up = t.WithSlowEffectUpgraded(); break;
+                            up = t.WithSlowEffectUpgraded();
+                            break;
                         default:
                             continue;
                     }
 
                     ulong cost = (ulong)Mathf.Ceil(rawCost);
-                    if (cost > coins) continue;
+                    if (cost > coins)
+                        continue;
 
                     float delta = up.DamagePerSecond() - baseDps;
                     float score = delta / cost;
@@ -319,19 +400,45 @@ namespace IdleDefense.Editor.Simulation
                 var bp = slots[bestSlot];
                 switch (bestUpgrade)
                 {
-                    case 0: slots[bestSlot] = bp.WithDamageUpgraded(); break;
-                    case 1: slots[bestSlot] = bp.WithFireRateUpgraded(); break;
-                    case 2: slots[bestSlot] = bp.WithCritChanceUpgraded(); break;
-                    case 3: slots[bestSlot] = bp.WithCritDamageUpgraded(); break;
-                    case 4: slots[bestSlot] = bp.WithExplosionRadiusUpgraded(); break;
-                    case 5: slots[bestSlot] = bp.WithSplashDamageUpgraded(); break;
-                    case 6: slots[bestSlot] = bp.WithPierceChanceUpgraded(); break;
-                    case 7: slots[bestSlot] = bp.WithPierceDamageFalloffUpgraded(); break;
-                    case 8: slots[bestSlot] = bp.WithPelletCountUpgraded(); break;
-                    case 9: slots[bestSlot] = bp.WithKnockbackStrengthUpgraded(); break;
-                    case 10: slots[bestSlot] = bp.WithDamageFalloffOverDistanceUpgraded(); break;
-                    case 11: slots[bestSlot] = bp.WithPercentBonusDamagePerSecUpgraded(); break;
-                    case 12: slots[bestSlot] = bp.WithSlowEffectUpgraded(); break;
+                    case 0:
+                        slots[bestSlot] = bp.WithDamageUpgraded();
+                        break;
+                    case 1:
+                        slots[bestSlot] = bp.WithFireRateUpgraded();
+                        break;
+                    case 2:
+                        slots[bestSlot] = bp.WithCritChanceUpgraded();
+                        break;
+                    case 3:
+                        slots[bestSlot] = bp.WithCritDamageUpgraded();
+                        break;
+                    case 4:
+                        slots[bestSlot] = bp.WithExplosionRadiusUpgraded();
+                        break;
+                    case 5:
+                        slots[bestSlot] = bp.WithSplashDamageUpgraded();
+                        break;
+                    case 6:
+                        slots[bestSlot] = bp.WithPierceChanceUpgraded();
+                        break;
+                    case 7:
+                        slots[bestSlot] = bp.WithPierceDamageFalloffUpgraded();
+                        break;
+                    case 8:
+                        slots[bestSlot] = bp.WithPelletCountUpgraded();
+                        break;
+                    case 9:
+                        slots[bestSlot] = bp.WithKnockbackStrengthUpgraded();
+                        break;
+                    case 10:
+                        slots[bestSlot] = bp.WithDamageFalloffOverDistanceUpgraded();
+                        break;
+                    case 11:
+                        slots[bestSlot] = bp.WithPercentBonusDamagePerSecUpgraded();
+                        break;
+                    case 12:
+                        slots[bestSlot] = bp.WithSlowEffectUpgraded();
+                        break;
                 }
             }
         }

@@ -1,9 +1,8 @@
 using Assets.Scripts.Helpers;
-using Assets.Scripts.PlayerBase;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.UpgradeSystem
+namespace Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades
 {
     public static class PlayerBaseUpgradeMetaManager
     {

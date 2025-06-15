@@ -1,7 +1,7 @@
 using Assets.Scripts.Turrets;
 using System;
 
-namespace Assets.Scripts.UpgradeSystem
+namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
 {
     public class TurretUpgrade
     {

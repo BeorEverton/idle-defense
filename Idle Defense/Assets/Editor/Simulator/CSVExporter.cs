@@ -1,8 +1,10 @@
 // Assets/Editor/Simulation/CsvExporter.cs
+
+using IdleDefense.Editor.Simulation;
 using System.IO;
 using UnityEditor;
 
-namespace IdleDefense.Editor.Simulation
+namespace Assets.Editor.Simulator
 {
     static class CsvExporter
     {
@@ -12,7 +14,8 @@ namespace IdleDefense.Editor.Simulation
 
         public static void Append(SimStats s, SpendingMode mode, int simIndex)
         {
-            if (!Directory.Exists(Folder)) Directory.CreateDirectory(Folder);
+            if (!Directory.Exists(Folder))
+                Directory.CreateDirectory(Folder);
             string path = Path.Combine(Folder, FileName);
             bool writeHeader = !File.Exists(path);
 

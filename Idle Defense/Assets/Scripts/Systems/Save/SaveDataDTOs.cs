@@ -43,7 +43,7 @@ namespace Assets.Scripts.Systems.Save
 
         public static TurretBaseInfoDTO? CreateTurretBaseInfoDTO(TurretStatsInstance? turret)
         {
-            if (turret == null)
+            if (turret == null || turret.Stats.Count == 0)
                 return null;
 
             return new TurretBaseInfoDTO
@@ -61,7 +61,7 @@ namespace Assets.Scripts.Systems.Save
 
         public static TurretInfoDTO? CreateTurretInfoDTO(TurretStatsInstance? turret)
         {
-            if (turret == null)
+            if (turret == null || turret.Stats.Count == 0)
                 return null;
 
             return new TurretInfoDTO
@@ -300,6 +300,14 @@ namespace Assets.Scripts.Systems.Save
                         BaseCost = turret.SlowEffectUpgradeBaseCost,
                         Level = turret.SlowEffectLevel,
                         ExponentialCostMultiplier = baseInfo.SlowEffectCostExponentialMultiplier
+                    },
+                    [TurretStatType.KnockbackStrength] = new TurretStat
+                    {
+                        Value = turret.KnockbackStrength,
+                        UpgradeAmount = turret.KnockbackStrengthUpgradeAmount,
+                        BaseCost = turret.KnockbackStrengthUpgradeBaseCost,
+                        Level = turret.KnockbackStrengthLevel,
+                        ExponentialCostMultiplier = baseInfo.KnockbackStrengthCostExponentialMultiplier
                     }
                 },
                 RotationSpeed = turret.RotationSpeed,
@@ -423,6 +431,11 @@ public class TurretInfoDTO
     public int SlowEffectLevel;
     public float SlowEffectUpgradeAmount;
     public float SlowEffectUpgradeBaseCost;
+
+    public float KnockbackStrength;
+    public int KnockbackStrengthLevel;
+    public float KnockbackStrengthUpgradeAmount;
+    public float KnockbackStrengthUpgradeBaseCost;
 
     public float RotationSpeed;
     public float AngleThreshold;

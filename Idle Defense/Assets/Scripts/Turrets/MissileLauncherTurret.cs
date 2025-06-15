@@ -1,4 +1,5 @@
 using Assets.Scripts.Enemies;
+using Assets.Scripts.Enums;
 using Assets.Scripts.Systems;
 using Assets.Scripts.Systems.Audio;
 using System.Collections.Generic;
@@ -66,8 +67,8 @@ namespace Assets.Scripts.Turrets
             foreach (Enemy enemy in enemiesInAdjecentGrids
                          .Where(enemy => Vector3.Distance(enemy.transform.position, target) <= impactArea))
             {
-                enemy.TakeDamage(_stats.Damage);
-                StatsManager.Instance.AddTurretDamage(_turretInfo.TurretType, _stats.Damage);
+                enemy.TakeDamage(_stats.Stats[TurretStatType.Damage].Value);
+                StatsManager.Instance.AddTurretDamage(_turretInfo.TurretType, _stats.Stats[TurretStatType.Damage].Value);
             }
 
             foreach (Enemy enemy in enemiesInAdjecentGrids

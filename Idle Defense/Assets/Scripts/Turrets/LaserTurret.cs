@@ -1,4 +1,5 @@
 using Assets.Scripts.Enemies;
+using Assets.Scripts.Enums;
 using Assets.Scripts.Systems;
 using Assets.Scripts.Systems.Audio;
 using System;
@@ -46,7 +47,7 @@ namespace Assets.Scripts.Turrets
             base.Shoot();
 
             Enemy enemy = _targetEnemy.GetComponent<Enemy>();
-            float damage = _stats.Damage + _rampedDamageBonus;
+            float damage = _stats.Stats[TurretStatType.Damage].Value + _rampedDamageBonus;
 
             enemy.TakeDamage(damage);
             StatsManager.Instance.AddTurretDamage(_turretInfo.TurretType, damage);
@@ -83,7 +84,7 @@ namespace Assets.Scripts.Turrets
                 return;
 
             _timeOnSameTarget += Time.deltaTime;
-            _rampedDamageBonus = _stats.Damage * _bonusDmgPerSec * _timeOnSameTarget;
+            _rampedDamageBonus = _stats.Stats[TurretStatType.Damage].Value * _bonusDmgPerSec * _timeOnSameTarget;
         }
 
         protected override void Enemy_OnDeath(object sender, EventArgs _)

@@ -1,4 +1,5 @@
 using Assets.Scripts.Enemies;
+using Assets.Scripts.Enums;
 using Assets.Scripts.Systems;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace Assets.Scripts.Turrets
             _recoil.AddRecoil();
 
             float pierceDamageMultiplier = _stats.PierceDamageFalloff / 100f;
-            float currentDamage = _stats.Damage;
+            float currentDamage = _stats.Stats[TurretStatType.Damage].Value;
             bool firstHit = true;
 
             Vector2 startPos = _muzzleFlashPosition.position;
@@ -111,7 +112,7 @@ namespace Assets.Scripts.Turrets
 
         public override float GetDPS()
         {
-            float baseDamage = _stats.Damage;
+            float baseDamage = _stats.Stats[TurretStatType.Damage].Value;
             float fireRate = _stats.FireRate;
             float critChance = Mathf.Clamp01(_stats.CriticalChance / 100f);
             float critMultiplier = _stats.CriticalDamageMultiplier / 100f;

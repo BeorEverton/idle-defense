@@ -1,3 +1,4 @@
+using Assets.Scripts.Enums;
 using Assets.Scripts.Systems;
 using Assets.Scripts.Turrets;
 using Assets.Scripts.UpgradeSystem.TurretUpgrades;
@@ -32,7 +33,7 @@ namespace Assets.Scripts.UI
 
         private static int TotalLevel(TurretStatsInstance s) =>
             Mathf.FloorToInt(
-                  s.DamageLevel + s.FireRateLevel + s.CriticalChanceLevel
+                  s.Stats[TurretStatType.Damage].Level + s.FireRateLevel + s.CriticalChanceLevel
                 + s.CriticalDamageMultiplierLevel + s.ExplosionRadiusLevel
                 + s.SplashDamageLevel + s.PierceChanceLevel
                 + s.PierceDamageFalloffLevel + s.PelletCountLevel

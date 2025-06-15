@@ -1,4 +1,5 @@
 using Assets.Scripts.Enemies;
+using Assets.Scripts.Enums;
 using Assets.Scripts.Systems;
 using System.Collections.Generic;
 using System.Linq;
@@ -125,7 +126,7 @@ namespace Assets.Scripts.Turrets
             {
                 Enemy enemy = enemyBuffer[sortedIndices[index]];
                 float distToEnemy = enemyDistances[sortedIndices[index]];
-                float damage = _stats.Damage - GetDamageFalloff(distToEnemy);
+                float damage = _stats.Stats[TurretStatType.Damage].Value - GetDamageFalloff(distToEnemy);
 
                 enemy.TakeDamage(damage);
                 StatsManager.Instance.AddTurretDamage(_turretInfo.TurretType, damage);
@@ -207,13 +208,13 @@ namespace Assets.Scripts.Turrets
         private float GetDamageFalloff(float distance)
         {
             float minFalloffDistance = 3f;
-            float maxDamageFalloff = _stats.Damage * 0.9f; // cap at 90% reduction
+            float maxDamageFalloff = _stats.Stats[TurretStatType.Damage].Value * 0.9f; // cap at 90% reduction
 
             if (distance <= minFalloffDistance)
                 return 0f;
 
             float effectiveDistance = distance - minFalloffDistance;
-            float damageFalloff = _stats.Damage * effectiveDistance * _stats.DamageFalloffOverDistance / 100f;
+            float damageFalloff = _stats.Stats[TurretStatType.Damage].Value * effectiveDistance * _stats.DamageFalloffOverDistance / 100f;
 
             return Mathf.Min(damageFalloff, maxDamageFalloff);
         }
@@ -265,7 +266,7 @@ namespace Assets.Scripts.Turrets
 
         public override float GetDPS()
         {
-            float baseDamage = _stats.Damage;
+            float baseDamage = _stats.Stats[TurretStatType.Damage].Value;
             float fireRate = _stats.FireRate;
             float critChance = Mathf.Clamp01(_stats.CriticalChance / 100f);
             float critMultiplier = _stats.CriticalDamageMultiplier / 100f;

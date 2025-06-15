@@ -1,4 +1,5 @@
 using Assets.Scripts.Enemies;
+using Assets.Scripts.Enums;
 using Assets.Scripts.SO;
 using Assets.Scripts.Systems;
 using Assets.Scripts.Systems.Audio;
@@ -303,7 +304,7 @@ namespace Assets.Scripts.Turrets
         private int GetTotalUpgradeLevel()
         {
             return Mathf.FloorToInt(
-                _stats.DamageLevel +
+                _stats.Stats[TurretStatType.Damage].Level +
                 _stats.FireRateLevel +
                 _stats.CriticalChanceLevel +
                 _stats.CriticalDamageMultiplierLevel +
@@ -321,7 +322,7 @@ namespace Assets.Scripts.Turrets
 
         public virtual float GetDPS()
         {
-            float baseDamage = _stats.Damage;
+            float baseDamage = _stats.Stats[TurretStatType.Damage].Value;
             float fireRate = _stats.FireRate;
             float critChance = Mathf.Clamp01(_stats.CriticalChance / 100f);
             float critMultiplier = _stats.CriticalDamageMultiplier / 100f;

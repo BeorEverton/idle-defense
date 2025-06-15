@@ -1,3 +1,4 @@
+using Assets.Scripts.Enums;
 using Assets.Scripts.UI;
 using Assets.Scripts.UpgradeSystem.TurretUpgrades;
 using TMPro;
@@ -82,7 +83,7 @@ public class EquipItemButton : MonoBehaviour
         double critBonus = (s.CriticalChance / 100.0) *
                            (s.CriticalDamageMultiplier / 100.0 - 1.0);
 
-        double dmgPerProj = s.Damage * (1.0 + critBonus);
+        double dmgPerProj = s.Stats[TurretStatType.Damage].Value * (1.0 + critBonus);
 
         int pellets = Mathf.Max(1, s.PelletCount);
 
@@ -95,7 +96,7 @@ public class EquipItemButton : MonoBehaviour
     private static int TotalLevel(TurretStatsInstance s)
     {
         return Mathf.FloorToInt(
-              s.DamageLevel
+              s.Stats[TurretStatType.Damage].Level
             + s.FireRateLevel
             + s.CriticalChanceLevel
             + s.CriticalDamageMultiplierLevel

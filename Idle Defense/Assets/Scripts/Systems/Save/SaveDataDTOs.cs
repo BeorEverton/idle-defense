@@ -51,7 +51,7 @@ namespace Assets.Scripts.Systems.Save
                 BaseFireRate = turret.BaseFireRate,
                 BaseCritChance = turret.BaseCritChance,
                 BaseCritDamage = turret.BaseCritDamage,
-                DamageCostExponentialMultiplier = turret.DamageCostExponentialMultiplier,
+                DamageCostExponentialMultiplier = turret.Stats[TurretStatType.Damage].ExponentialCostMultiplier,
                 FireRateCostExponentialMultiplier = turret.FireRateCostExponentialMultiplier,
                 CriticalChanceCostExponentialMultiplier = turret.CriticalChanceCostExponentialMultiplier,
                 CriticalDamageCostExponentialMultiplier = turret.CriticalDamageCostExponentialMultiplier,
@@ -66,10 +66,10 @@ namespace Assets.Scripts.Systems.Save
             return new TurretInfoDTO
             {
                 IsUnlocked = turret.IsUnlocked,
-                Damage = turret.Damage,
-                DamageLevel = turret.DamageLevel,
-                DamageUpgradeAmount = turret.DamageUpgradeAmount,
-                DamageUpgradeBaseCost = turret.DamageUpgradeBaseCost,
+                Damage = turret.Stats[TurretStatType.Damage].Value,
+                DamageLevel = turret.Stats[TurretStatType.Damage].Level,
+                DamageUpgradeAmount = turret.Stats[TurretStatType.Damage].UpgradeAmount,
+                DamageUpgradeBaseCost = turret.Stats[TurretStatType.Damage].BaseCost,
                 FireRate = turret.FireRate,
                 FireRateLevel = turret.FireRateLevel,
                 FireRateUpgradeAmount = turret.FireRateUpgradeAmount,
@@ -174,7 +174,6 @@ namespace Assets.Scripts.Systems.Save
                         Level = playerInfo.RegenIntervalLevel
                     }
                 }
-
             };
 
             return playerStats;
@@ -189,15 +188,22 @@ namespace Assets.Scripts.Systems.Save
                 BaseFireRate = baseInfo.BaseFireRate,
                 BaseCritChance = baseInfo.BaseCritChance,
                 BaseCritDamage = baseInfo.BaseCritDamage,
-                DamageCostExponentialMultiplier = baseInfo.DamageCostExponentialMultiplier,
                 FireRateCostExponentialMultiplier = baseInfo.FireRateCostExponentialMultiplier,
                 CriticalChanceCostExponentialMultiplier = baseInfo.CriticalChanceCostExponentialMultiplier,
                 CriticalDamageCostExponentialMultiplier = baseInfo.CriticalDamageCostExponentialMultiplier,
 
-                DamageLevel = turret.DamageLevel,
-                Damage = turret.Damage,
-                DamageUpgradeAmount = turret.DamageUpgradeAmount,
-                DamageUpgradeBaseCost = turret.DamageUpgradeBaseCost,
+                Stats =
+                {
+                    [TurretStatType.Damage] = new TurretStat
+                    {
+                        Value = turret.Damage,
+                        UpgradeAmount = turret.DamageUpgradeAmount,
+                        BaseCost = turret.DamageUpgradeBaseCost,
+                        Level = turret.DamageLevel,
+                        ExponentialCostMultiplier = baseInfo.DamageCostExponentialMultiplier
+                    }
+                },
+
                 FireRate = turret.FireRate,
                 FireRateLevel = turret.FireRateLevel,
                 FireRateUpgradeAmount = turret.FireRateUpgradeAmount,

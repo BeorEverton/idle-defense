@@ -1,4 +1,5 @@
 using Assets.Scripts.Enemies;
+using Assets.Scripts.Enums;
 using Assets.Scripts.Systems;
 using UnityEngine;
 
@@ -26,7 +27,7 @@ namespace Assets.Scripts.Turrets
 
             _recoil.AddRecoil();
 
-            float finalDamage = _stats.Damage;
+            float finalDamage = _stats.Stats[TurretStatType.Damage].Value;
             bool isCritical = IsCriticalHit();
 
             if (isCritical)

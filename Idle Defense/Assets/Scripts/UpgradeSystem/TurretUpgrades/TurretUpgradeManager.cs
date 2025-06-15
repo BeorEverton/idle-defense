@@ -1,3 +1,5 @@
+using Assets.Scripts.Enums;
+using Assets.Scripts.Structs;
 using Assets.Scripts.Systems;
 using Assets.Scripts.Systems.Audio;
 using Assets.Scripts.Systems.Currency;
@@ -31,30 +33,32 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
             {
                 [TurretUpgradeType.Damage] = new()
                 {
-                    GetCurrentValue = t => t.Damage,
+                    GetCurrentValue = t => t.Stats[TurretStatType.Damage].Value,
                     UpgradeTurret = (t, a) =>
                     {
-                        t.DamageLevel += a;
-                        float exponent = Mathf.Pow(t.DamageUpgradeAmount, t.DamageLevel);
+                        float exponent = Mathf.Pow(t.Stats[TurretStatType.Damage].UpgradeAmount, t.Stats[TurretStatType.Damage].Level);
 
-                        t.Damage = t.BaseDamage * exponent + t.DamageLevel;
+                        TurretStat stat = t.Stats[TurretStatType.Damage];
+                        stat.Level += a;
+                        stat.Value = t.BaseDamage * exponent + t.Stats[TurretStatType.Damage].Level;
+                        t.Stats[TurretStatType.Damage] = stat; // Update the stat in the dictionary
                     },
-                    GetLevel = t => t.DamageLevel,
+                    GetLevel = t => t.Stats[TurretStatType.Damage].Level,
                     GetBaseStat = t => t.BaseDamage,
-                    GetBaseCost = t => t.DamageUpgradeBaseCost,
-                    GetUpgradeAmount = t => t.DamageUpgradeAmount,
-                    GetCostMultiplier = t => t.DamageCostExponentialMultiplier,
+                    GetBaseCost = t => t.Stats[TurretStatType.Damage].BaseCost,
+                    GetUpgradeAmount = t => t.Stats[TurretStatType.Damage].UpgradeAmount,
+                    GetCostMultiplier = t => t.Stats[TurretStatType.Damage].ExponentialCostMultiplier,
                     GetMaxValue = t => float.MaxValue,
                     GetMinValue = t => 0f,
                     GetCost = (t, a) => GetExponentialCost(t, TurretUpgradeType.Damage, a),
                     //GetAmount = t => GetMaxAmount(t.DamageUpgradeBaseCost, t.DamageCostExponentialMultiplier, t.DamageLevel),
                     GetDisplayStrings = (t, a) =>
                         {
-                            float currentDamage = t.Damage;
-                            float currentLevel = t.DamageLevel;
+                            float currentDamage = t.Stats[TurretStatType.Damage].Value;
+                            float currentLevel = t.Stats[TurretStatType.Damage].Level;
                             float newLevel = currentLevel + a;
 
-                            float projectedExponent = Mathf.Pow(t.DamageUpgradeAmount, newLevel);
+                            float projectedExponent = Mathf.Pow(t.Stats[TurretStatType.Damage].UpgradeAmount, newLevel);
                             float projectedDamage = t.BaseDamage * projectedExponent + newLevel;
 
                             float bonus = projectedDamage - currentDamage;

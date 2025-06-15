@@ -1,4 +1,5 @@
 using Assets.Scripts.Systems;
+using Assets.Scripts.Systems.Currency;
 using Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades;
 using System;
 using TMPro;
@@ -37,7 +38,7 @@ namespace Assets.Scripts.UI
         private void OnEnable()
         {
             if (GameManager.Instance)
-                GameManager.Instance.OnMoneyChanged += HandleMoneyChanged;
+                SessionCurrencyManager.Instance.OnSessionCurrencyChanged += HandleMoneyChanged;
 
             UpdateInteractableState(); // Run immediately on enable
         }
@@ -45,7 +46,7 @@ namespace Assets.Scripts.UI
         private void OnDisable()
         {
             if (GameManager.Instance)
-                GameManager.Instance.OnMoneyChanged -= HandleMoneyChanged;
+                SessionCurrencyManager.Instance.OnSessionCurrencyChanged -= HandleMoneyChanged;
         }
 
         private void Start()
@@ -53,7 +54,7 @@ namespace Assets.Scripts.UI
             _playerBaseManager = PlayerBaseManager.Instance;
             _upgradeManager = FindFirstObjectByType<PlayerBaseUpgradeManager>();
             _statName.SetText(GetDisplayNameForUpgrade(_upgradeType));
-            GameManager.Instance.OnMoneyChanged += HandleMoneyChanged;
+            SessionCurrencyManager.Instance.OnSessionCurrencyChanged += HandleMoneyChanged;
             MultipleBuyOption.Instance.OnBuyAmountChanged += OnBuyAmountChanged;
             _playerBaseManager.OnStatsLoaded += OnStatsLoaded;
         }
@@ -126,7 +127,7 @@ namespace Assets.Scripts.UI
             float cost = _upgradeManager.GetPlayerBaseUpgradeCost(_playerBaseManager.Stats, _upgradeType, amount);
             //int availableAmount = _upgradeManager.GetPlayerBaseAvailableUpgradeAmount(_playerBaseManager.Stats, _upgradeType);
 
-            _button.interactable = GameManager.Instance.Money >= cost;
+            _button.interactable = SessionCurrencyManager.Instance.CanSpend((ulong)cost);
         }
     }
 }

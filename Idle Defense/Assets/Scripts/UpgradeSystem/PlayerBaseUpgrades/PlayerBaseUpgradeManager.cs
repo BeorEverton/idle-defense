@@ -1,6 +1,7 @@
 using Assets.Scripts.PlayerBase;
 using Assets.Scripts.Systems;
 using Assets.Scripts.Systems.Audio;
+using Assets.Scripts.Systems.Currency;
 using Assets.Scripts.UI;
 using System.Collections.Generic;
 using UnityEngine;
@@ -180,10 +181,14 @@ namespace Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades
                 return;
             }
 
-            if (TrySpend(cost))
+            if (CanSpend((ulong)cost))
             {
+                SessionCurrencyManager.Instance.Spend((ulong)cost);
+
                 upgrade.Upgrade(stats, amount);
+
                 AudioManager.Instance.Play("Upgrade");
+
                 UpdateUpgradeDisplay(stats, type, button);
                 PlayerBaseManager.Instance.UpdatePlayerBaseAppearance();
 
@@ -272,7 +277,7 @@ namespace Assets.Scripts.UpgradeSystem.PlayerBaseUpgrades
             button.UpdateStats(value, bonus, cost, count);
         }
 
-        private bool TrySpend(float cost) => GameManager.Instance.TrySpend(cost);
+        private bool CanSpend(ulong cost) => SessionCurrencyManager.Instance.CanSpend(cost);
     }
 
     public enum PlayerUpgradeType

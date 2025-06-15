@@ -1,4 +1,5 @@
 using Assets.Scripts.Systems.Audio;
+using Assets.Scripts.Systems.Currency;
 using Assets.Scripts.Systems.Save;
 using Assets.Scripts.Turrets;
 using Assets.Scripts.UI;   // if needed for BaseTurret refs
@@ -55,9 +56,11 @@ namespace Assets.Scripts.Systems
 
             if (!info.purchased)
             {
-                if (GameManager.Instance.Money < info.cost)
+                if (!SessionCurrencyManager.Instance.CanSpend(info.cost))
                     return false;
-                GameManager.Instance.SpendMoney(info.cost);
+
+                SessionCurrencyManager.Instance.Spend(info.cost);
+
                 slotInfo[slot].purchased = true;
             }
             OnSlotUnlocked?.Invoke();

@@ -1,4 +1,5 @@
 using Assets.Scripts.Systems;
+using Assets.Scripts.Systems.Currency;
 using Assets.Scripts.Turrets;
 using Assets.Scripts.UpgradeSystem;
 using Assets.Scripts.UpgradeSystem.TurretUpgrades;
@@ -58,17 +59,16 @@ namespace Assets.Scripts.UI
 
         private void OnEnable()
         {
-            GameManager.Instance.OnMoneyChanged += HandleMoneyChanged;
+            SessionCurrencyManager.Instance.OnSessionCurrencyChanged += HandleMoneyChanged;
             MultipleBuyOption.Instance.OnBuyAmountChanged += OnBuyAmountChanged;
 
-            UpdateUpgradeAmount();
             UpdateInteractableState();
         }
 
         private void OnDisable()
         {
             if (GameManager.Instance != null)
-                GameManager.Instance.OnMoneyChanged -= HandleMoneyChanged;
+                SessionCurrencyManager.Instance.OnSessionCurrencyChanged -= HandleMoneyChanged;
 
             MultipleBuyOption.Instance.OnBuyAmountChanged -= OnBuyAmountChanged;
         }
@@ -76,14 +76,12 @@ namespace Assets.Scripts.UI
         private void OnBuyAmountChanged(object sender, EventArgs e)
         {
             UpdateDisplayFromType();
-            UpdateUpgradeAmount();
             UpdateInteractableState();
         }
 
         private void HandleMoneyChanged(ulong _)
         {
             UpdateDisplayFromType();
-            UpdateUpgradeAmount();
             UpdateInteractableState();
         }
 
@@ -97,7 +95,9 @@ namespace Assets.Scripts.UI
             if (_upgradeManager == null)
                 _upgradeManager = FindFirstObjectByType<TurretUpgradeManager>();
 
-            _upgradeManager.UpgradeTurretStat(_turret, _upgradeType, this, _upgradeAmount);
+            int amount = MultipleBuyOption.Instance.GetBuyAmount();
+
+            _upgradeManager.UpgradeTurretStat(_turret, _upgradeType, this, amount);
         }
 
         public void EnableTooltip()
@@ -144,15 +144,7 @@ namespace Assets.Scripts.UI
             int amount = MultipleBuyOption.Instance.GetBuyAmount();
             float cost = _upgradeManager.GetTurretUpgradeCost(_turret, _upgradeType, amount);
 
-            if (GameManager.Instance.Money >= cost && _upgradeAmount > 0)
-                _button.interactable = true;
-            else
-                _button.interactable = false;
-        }
-
-        private void UpdateUpgradeAmount()
-        {
-            _upgradeAmount = MultipleBuyOption.Instance.GetBuyAmount();
+            _button.interactable = SessionCurrencyManager.Instance.CanSpend((ulong)cost);
         }
     }
 }

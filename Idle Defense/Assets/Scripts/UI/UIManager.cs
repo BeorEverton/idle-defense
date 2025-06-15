@@ -1,4 +1,5 @@
 using Assets.Scripts.Systems;
+using Assets.Scripts.Systems.Currency;
 using Assets.Scripts.WaveSystem;
 using System;
 using System.Collections;
@@ -48,7 +49,15 @@ namespace Assets.Scripts.UI
             EnemySpawner.Instance.OnWaveCreated += OnWaveCreated;
             EnemySpawner.Instance.OnEnemyDeath += OnEnemyDeath;
             WaveManager.Instance.OnWaveStarted += OnWaveStarted;
-            GameManager.Instance.OnMoneyChanged += UpdateMoney;
+            SessionCurrencyManager.Instance.OnSessionCurrencyChanged += UpdateMoney;
+        }
+
+        private void OnDestroy()
+        {
+            EnemySpawner.Instance.OnWaveCreated -= OnWaveCreated;
+            EnemySpawner.Instance.OnEnemyDeath -= OnEnemyDeath;
+            WaveManager.Instance.OnWaveStarted -= OnWaveStarted;
+            SessionCurrencyManager.Instance.OnSessionCurrencyChanged -= UpdateMoney;
         }
 
         private void OnEnemyDeath(object sender, EventArgs _)

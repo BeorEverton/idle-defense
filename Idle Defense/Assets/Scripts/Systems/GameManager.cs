@@ -28,10 +28,6 @@ namespace Assets.Scripts.Systems
 
         public static event Action<float> OnSpdBonusChanged; // Used for the tutorial
 
-        private ulong money;
-        public ulong Money => money;
-        public event Action<ulong> OnMoneyChanged;
-
         [SerializeField] GraphicRaycaster uiRaycaster;
         PointerEventData _ped;
         List<RaycastResult> _results = new();
@@ -45,11 +41,6 @@ namespace Assets.Scripts.Systems
 
             _ped = new PointerEventData(EventSystem.current);
 
-        }
-
-        private void Start()
-        {
-            EnemySpawner.Instance.OnEnemyDeath += OnEnemyDeath;
         }
 
         private void OnEnable()
@@ -124,56 +115,12 @@ namespace Assets.Scripts.Systems
             spdBonus = Mathf.Clamp(spdBonus, 0f, maxSpdBonus);
 
             UIManager.Instance.UpdateSpdBonus(spdBonus);
-
-        }
-        private void OnEnemyDeath(object sender, EnemySpawner.OnEnemyDeathEventArgs e)
-        {
-            AddMoney(e.CoinDropAmount);
-        }
-
-        public void AddMoney(ulong amount)
-        {
-            money += amount;
-            OnMoneyChanged?.Invoke(money);
-        }
-
-        public bool TrySpend(float cost)
-        {
-            if (money >= cost)
-            {
-                SpendMoney((ulong)cost);
-                StatsManager.Instance.UpgradeAmount++;
-                return true;
-            }
-
-            AudioManager.Instance.Play("No Money");
-            return false;
-        }
-
-        public void SpendMoney(ulong amount)
-        {
-            money -= amount;
-            StatsManager.Instance.MoneySpent += amount;
-            OnMoneyChanged?.Invoke(money);
-        }
-
-        public void LoadMoney(ulong amount)
-        {
-            money = amount;
-            UIManager.Instance.UpdateMoney(money);
         }
 
         public void ResetGame()
         {
-            money = 0;
             spdBonus = 0;
-            UIManager.Instance.UpdateMoney(money);
             UIManager.Instance.UpdateSpdBonus(spdBonus);
-        }
-
-        public void DebugAddMoneyInt(int moneyToAdd)
-        {
-            AddMoney((ulong)moneyToAdd);
         }
     }
 }

@@ -1,5 +1,6 @@
 using Assets.Scripts.SO;
 using Assets.Scripts.Systems;
+using Assets.Scripts.Systems.Currency;
 using Assets.Scripts.WaveSystem;
 using System.Linq;
 using TMPro;
@@ -23,7 +24,7 @@ namespace Assets.Scripts.UI
         private void Start()
         {
             buyButton.onClick.AddListener(TryBuy);
-            GameManager.Instance.OnMoneyChanged += _ => Refresh();
+            SessionCurrencyManager.Instance.OnSessionCurrencyChanged += _ => Refresh();
             TurretInventoryManager.Instance.OnInventoryChanged += Refresh;
             WaveManager.Instance.OnWaveStarted += (_, __) => Refresh();
             Refresh();
@@ -33,7 +34,7 @@ namespace Assets.Scripts.UI
         {
             buyButton.onClick.RemoveListener(TryBuy);
             if (GameManager.Instance != null)
-                GameManager.Instance.OnMoneyChanged -= _ => Refresh();
+                SessionCurrencyManager.Instance.OnSessionCurrencyChanged -= _ => Refresh();
 
             if (TurretInventoryManager.Instance != null)
                 TurretInventoryManager.Instance.OnInventoryChanged -= Refresh;
@@ -83,7 +84,7 @@ namespace Assets.Scripts.UI
             countText.text = $"x{owned}";
             costText.text = $"${UIManager.AbbreviateNumber(cost)}";
 
-            bool afford = GameManager.Instance.Money >= cost;
+            bool afford = SessionCurrencyManager.Instance.CanSpend(cost);
             buyButton.interactable = afford;
             costText.color = afford ? Color.black : Color.red;
 

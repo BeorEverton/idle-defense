@@ -1,5 +1,6 @@
 using Assets.Scripts.Enemies;
 using Assets.Scripts.SO;
+using Assets.Scripts.Systems.Currency;
 using Assets.Scripts.Turrets;
 using Assets.Scripts.WaveSystem;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace Assets.Scripts.Systems.Save
         public void SaveGame()
         {
             int waveNumber = WaveManager.Instance.GetCurrentWaveIndex();
-            ulong money = GameManager.Instance.Money;
+            ulong money = SessionCurrencyManager.Instance.SessionCurrency;
             GameDataDTO gameDataDTO = SaveDataDTOs.CreateGameDataDTO(waveNumber, money);
 
             PlayerInfoDTO playerInfoDTO = SaveDataDTOs.CreatePlayerInfoDTO(PlayerBaseManager.Instance.Stats);
@@ -101,7 +102,7 @@ namespace Assets.Scripts.Systems.Save
 
             PlayerBaseManager.Instance.SavedStats = LoadDataDTOs.CreatePlayerBaseSO(gameData.PlayerInfoDTO);
 
-            GameManager.Instance.LoadMoney(gameData.GameDataDTO.Money);
+            SessionCurrencyManager.Instance.LoadMoney(gameData.GameDataDTO.Money);
             WaveManager.Instance.LoadWave(gameData.GameDataDTO.WaveNumber);
             GameTutorialManager.Instance.LoadGame(gameData.GameDataDTO.TutorialStep);
 

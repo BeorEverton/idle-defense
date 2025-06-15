@@ -1,4 +1,5 @@
 using Assets.Scripts.Systems;
+using Assets.Scripts.Systems.Currency;
 using Assets.Scripts.Turrets;
 using Assets.Scripts.WaveSystem;
 using TMPro;
@@ -68,19 +69,15 @@ namespace Assets.Scripts.UI
 
         private void UnlockTurret()
         {
-            if (GameManager.Instance.Money >= _unlockCost)
-            {
-                GameManager.Instance.SpendMoney(_unlockCost);
-                _isUnlocked = true;
-                RefreshState(WaveManager.Instance.GetCurrentWaveIndex());
+            if (!SessionCurrencyManager.Instance.CanSpend(_unlockCost))
+                return;
 
-                _turretToUnlock.SetActive(true);
-                _turretToUnlock.GetComponent<BaseTurret>().UnlockTurret();
-            }
-            else
-            {
-                // Sound to represent no money
-            }
+            SessionCurrencyManager.Instance.Spend(_unlockCost);
+            _isUnlocked = true;
+            RefreshState(WaveManager.Instance.GetCurrentWaveIndex());
+
+            _turretToUnlock.SetActive(true);
+            _turretToUnlock.GetComponent<BaseTurret>().UnlockTurret();
         }
     }
 }

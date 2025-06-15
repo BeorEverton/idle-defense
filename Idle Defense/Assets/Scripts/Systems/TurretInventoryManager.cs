@@ -1,4 +1,5 @@
 using Assets.Scripts.SO;
+using Assets.Scripts.Systems.Currency;
 using Assets.Scripts.Systems.Save;
 using Assets.Scripts.Turrets;
 using Assets.Scripts.WaveSystem;
@@ -105,9 +106,8 @@ namespace Assets.Scripts.Systems
 
             ulong cost = GetCost(type, countOwned);
 
-            if (GameManager.Instance.Money < cost)
-                return false;
-            GameManager.Instance.SpendMoney(cost);
+            if (SessionCurrencyManager.Instance.CanSpend(cost))
+                SessionCurrencyManager.Instance.Spend(cost);
 
             // create runtime copy from the original SO
             TurretInfoSO baseSO = turretLibrary.GetInfo(type);

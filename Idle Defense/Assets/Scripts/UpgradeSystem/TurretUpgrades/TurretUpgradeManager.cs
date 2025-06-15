@@ -1,5 +1,6 @@
 using Assets.Scripts.Systems;
 using Assets.Scripts.Systems.Audio;
+using Assets.Scripts.Systems.Currency;
 using Assets.Scripts.Turrets;
 using Assets.Scripts.UI;
 using System;
@@ -476,18 +477,23 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 return;
             }
 
-            if (TrySpend(cost))
+            if (CanSpend((ulong)cost))
             {
+                SessionCurrencyManager.Instance.Spend((ulong)cost);
+
                 upgrade.UpgradeTurret(turret, amount);
+
                 AudioManager.Instance.Play("Upgrade");
+
                 button._baseTurret.UpdateTurretAppearance();
                 UpdateUpgradeDisplay(turret, type, button);
                 button.UpdateInteractableState();
+
                 OnAnyTurretUpgraded?.Invoke();
             }
         }
 
-        private bool TrySpend(float cost) => GameManager.Instance.TrySpend(cost);
+        private bool CanSpend(ulong cost) => SessionCurrencyManager.Instance.CanSpend((ulong)cost);
 
         public float GetTurretUpgradeCost(TurretStatsInstance turret, TurretUpgradeType type, int amount) =>
             !_turretUpgrades.TryGetValue(type, out TurretUpgrade upgrade) ? 0f : upgrade.GetCost(turret, amount);
@@ -499,8 +505,8 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
         private int GetMaxAmount(float baseCost, float multiplier, int currentLevel)
         {
             int amount = 0;
-            float totalCost = 0f;
-            float money = GameManager.Instance.Money;
+            //float totalCost = 0f;
+            //float money = SessionCurrencyManager.Instance.SessionCurrency;
 
             //while (true)
             //{

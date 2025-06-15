@@ -1,3 +1,4 @@
+using Assets.Scripts.Systems.Currency;
 using Assets.Scripts.Systems.Save;
 using Assets.Scripts.Turrets;
 using Assets.Scripts.UpgradeSystem.TurretUpgrades;
@@ -65,7 +66,7 @@ namespace Assets.Scripts.Systems
             GameManager.OnSpdBonusChanged += OnGameEventTriggered;
             PlayerBaseManager.Instance.OnHealthChanged += OnHealthChanged;
             WaveManager.Instance.OnWaveStarted += OnWaveStarted;
-            GameManager.Instance.OnMoneyChanged += OnMoneyChanged;
+            SessionCurrencyManager.Instance.OnSessionCurrencyChanged += OnMoneyChanged;
             PlayerBaseManager.Instance.OnMaxHealthChanged += OnMaxHealthChanged;
             TurretSlotManager.Instance.OnEquippedChanged += OnAnyTurretEquipped;
             TurretSlotManager.Instance.OnSlotUnlocked += TryAdvanceTutorial;
@@ -77,11 +78,16 @@ namespace Assets.Scripts.Systems
             GameManager.OnSpdBonusChanged -= OnGameEventTriggered;
             PlayerBaseManager.Instance.OnHealthChanged -= OnHealthChanged;
             WaveManager.Instance.OnWaveStarted -= OnWaveStarted;
-            GameManager.Instance.OnMoneyChanged -= OnMoneyChanged;
+            SessionCurrencyManager.Instance.OnSessionCurrencyChanged -= OnMoneyChanged;
             PlayerBaseManager.Instance.OnMaxHealthChanged -= OnHealthChanged;
             TurretSlotManager.Instance.OnEquippedChanged -= OnAnyTurretEquipped;
             TurretSlotManager.Instance.OnSlotUnlocked -= TryAdvanceTutorial;
             TurretUpgradeManager.OnAnyTurretUpgraded -= OnAnyTurretUpgraded;
+        }
+
+        private void OnDestroy()
+        {
+            UnsubscribeFromEvents();
         }
 
         private void OnGameEventTriggered(float _)
@@ -186,10 +192,10 @@ namespace Assets.Scripts.Systems
                 TutorialConditionType.MaxHealthAbove => PlayerBaseManager.Instance.MaxHealth > threshold,
                 TutorialConditionType.WaveReached => WaveManager.Instance.GetCurrentWaveIndex() >= (int)threshold,
                 TutorialConditionType.MoneyChanged => true,
-                TutorialConditionType.MoneyAbove => GameManager.Instance.Money > threshold,
-                TutorialConditionType.MoneyBelow => GameManager.Instance.Money < threshold,
-                TutorialConditionType.MoneyIncreased => GameManager.Instance.Money > _lastKnownMoney,
-                TutorialConditionType.MoneyDecreased => GameManager.Instance.Money < _lastKnownMoney,
+                TutorialConditionType.MoneyAbove => SessionCurrencyManager.Instance.SessionCurrency > threshold,
+                TutorialConditionType.MoneyBelow => SessionCurrencyManager.Instance.SessionCurrency < threshold,
+                TutorialConditionType.MoneyIncreased => SessionCurrencyManager.Instance.SessionCurrency > _lastKnownMoney,
+                TutorialConditionType.MoneyDecreased => SessionCurrencyManager.Instance.SessionCurrency < _lastKnownMoney,
                 TutorialConditionType.TurretEquipped => TurretSlotManager.Instance.IsAnyTurretEquipped(),
                 TutorialConditionType.SlotUnlocked => TurretSlotManager.Instance.UnlockedSlotCount() >= (int)threshold,
                 TutorialConditionType.TurretUpgraded => _turretWasUpgraded,

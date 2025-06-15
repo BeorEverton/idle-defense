@@ -1,3 +1,6 @@
+using Assets.Scripts.Systems.Audio;
+using Assets.Scripts.UI;
+using Assets.Scripts.WaveSystem;
 using System;
 using UnityEngine;
 
@@ -7,8 +10,8 @@ namespace Assets.Scripts.Systems.Currency
     {
         public static SessionCurrencyManager Instance { get; private set; }
 
-        public event EventHandler OnSessionCurrencyChanged;
-        public int SessionCurrency { get; private set; }
+        public Action<ulong> OnSessionCurrencyChanged;
+        public ulong SessionCurrency { get; private set; }
 
         private void Awake()
         {
@@ -21,6 +24,8 @@ namespace Assets.Scripts.Systems.Currency
         private void Start()
         {
             //TODO: Subscribe to events that updates the session currency and call AddSessionCurrency(amount)
+            EnemySpawner.Instance.OnEnemyDeath += OnEnemyDeath;
+
 
             //TODO: Subscribe to event that resets the game and call ResetAll()
 
@@ -28,28 +33,42 @@ namespace Assets.Scripts.Systems.Currency
 
         }
 
-        public bool CanSpend(int amount) => SessionCurrency >= amount;
+        public bool CanSpend(ulong amount) => SessionCurrency >= amount;
 
-        public void SpendSessionCurrency(int amount)
+        public void Spend(ulong amount)
         {
             if (!CanSpend(amount))
+            {
+                AudioManager.Instance.Play("No Money");
                 return;
+            }
 
             SessionCurrency -= amount;
 
-            OnSessionCurrencyChanged?.Invoke(this, EventArgs.Empty);
+            OnSessionCurrencyChanged?.Invoke(SessionCurrency);
+
+            StatsManager.Instance.MoneySpent += amount;
+            StatsManager.Instance.UpgradeAmount++;
         }
 
-        private void AddSessionCurrency(int amount)
+        private void OnEnemyDeath(object sender, EnemySpawner.OnEnemyDeathEventArgs e) => AddSessionCurrency(e.CoinDropAmount);
+
+        private void AddSessionCurrency(ulong amount)
         {
             SessionCurrency += amount;
 
-            OnSessionCurrencyChanged?.Invoke(this, EventArgs.Empty);
+            OnSessionCurrencyChanged?.Invoke(SessionCurrency);
         }
 
         private void PlayerBaseManager_OnWaveFailed(object sender, EventArgs e)
         {
             ResetSessionCurrency();
+        }
+
+        public void LoadMoney(ulong amount)
+        {
+            SessionCurrency = amount;
+            UIManager.Instance.UpdateMoney(SessionCurrency);
         }
 
         private void ResetSessionCurrency()
@@ -60,6 +79,7 @@ namespace Assets.Scripts.Systems.Currency
         private void ResetAll()
         {
             SessionCurrency = 0;
+            OnSessionCurrencyChanged?.Invoke(SessionCurrency);
         }
     }
 }

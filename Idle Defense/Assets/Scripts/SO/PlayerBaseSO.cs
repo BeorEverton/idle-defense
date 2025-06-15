@@ -1,4 +1,4 @@
-using Assets.Scripts.PlayerBase;
+using Assets.Scripts.Structs;
 using UnityEngine;
 
 namespace Assets.Scripts.SO

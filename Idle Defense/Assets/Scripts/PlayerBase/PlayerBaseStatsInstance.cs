@@ -1,4 +1,5 @@
 using Assets.Scripts.SO;
+using Assets.Scripts.Structs;
 using System;
 
 namespace Assets.Scripts.PlayerBase
@@ -41,12 +42,5 @@ namespace Assets.Scripts.PlayerBase
         }
 
         public PlayerBaseStatsInstance() { } //Used to load from DTO
-    }
-
-    public struct PlayerBaseStat
-    {
-        public float Amount;
-        public ulong BaseCost;
-        public int Level;
     }
 }

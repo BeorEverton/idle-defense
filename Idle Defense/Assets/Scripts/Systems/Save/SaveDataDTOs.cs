@@ -1,10 +1,10 @@
 #nullable enable
 using Assets.Scripts.PlayerBase;
 using Assets.Scripts.SO;
+using Assets.Scripts.Structs;
 using Assets.Scripts.Turrets;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Assets.Scripts.Systems.Save
 {

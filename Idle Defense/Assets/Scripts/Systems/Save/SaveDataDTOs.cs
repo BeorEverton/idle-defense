@@ -66,54 +66,67 @@ namespace Assets.Scripts.Systems.Save
             return new TurretInfoDTO
             {
                 IsUnlocked = turret.IsUnlocked,
+
                 Damage = turret.Stats[TurretStatType.Damage].Value,
                 DamageLevel = turret.Stats[TurretStatType.Damage].Level,
                 DamageUpgradeAmount = turret.Stats[TurretStatType.Damage].UpgradeAmount,
                 DamageUpgradeBaseCost = turret.Stats[TurretStatType.Damage].BaseCost,
+
                 FireRate = turret.Stats[TurretStatType.FireRate].Value,
                 FireRateLevel = turret.Stats[TurretStatType.FireRate].Level,
                 FireRateUpgradeAmount = turret.Stats[TurretStatType.FireRate].UpgradeAmount,
                 FireRateUpgradeBaseCost = turret.Stats[TurretStatType.FireRate].BaseCost,
+
                 CriticalChance = turret.Stats[TurretStatType.CriticalChance].Value,
                 CriticalChanceLevel = turret.Stats[TurretStatType.CriticalChance].Level,
                 CriticalChanceUpgradeAmount = turret.Stats[TurretStatType.CriticalChance].UpgradeAmount,
                 CriticalChanceUpgradeBaseCost = turret.Stats[TurretStatType.CriticalChance].BaseCost,
+
                 CriticalDamageMultiplier = turret.Stats[TurretStatType.CriticalDamage].Value,
                 CriticalDamageMultiplierLevel = turret.Stats[TurretStatType.CriticalDamage].Level,
                 CriticalDamageMultiplierUpgradeAmount = turret.Stats[TurretStatType.CriticalDamage].UpgradeAmount,
                 CriticalDamageMultiplierUpgradeBaseCost = turret.Stats[TurretStatType.CriticalDamage].BaseCost,
-                ExplosionRadius = turret.ExplosionRadius,
+
+                ExplosionRadius = turret.Stats[TurretStatType.ExplosionRadius].Value,
                 ExplosionRadiusLevel = turret.Stats[TurretStatType.ExplosionRadius].Level,
                 ExplosionRadiusUpgradeAmount = turret.Stats[TurretStatType.ExplosionRadius].UpgradeAmount,
                 ExplosionRadiusUpgradeBaseCost = turret.Stats[TurretStatType.ExplosionRadius].BaseCost,
-                SplashDamage = turret.SplashDamage,
+
+                SplashDamage = turret.Stats[TurretStatType.SplashDamage].Value,
                 SplashDamageLevel = turret.Stats[TurretStatType.SplashDamage].Level,
                 SplashDamageUpgradeAmount = turret.Stats[TurretStatType.SplashDamage].UpgradeAmount,
                 SplashDamageUpgradeBaseCost = turret.Stats[TurretStatType.SplashDamage].BaseCost,
-                PierceChance = turret.PierceChance,
+
+                PierceChance = turret.Stats[TurretStatType.PierceChance].Value,
                 PierceChanceLevel = turret.Stats[TurretStatType.PierceChance].Level,
                 PierceChanceUpgradeAmount = turret.Stats[TurretStatType.PierceChance].UpgradeAmount,
                 PierceChanceUpgradeBaseCost = turret.Stats[TurretStatType.PierceChance].BaseCost,
-                PierceDamageFalloff = turret.PierceDamageFalloff,
+
+                PierceDamageFalloff = turret.Stats[TurretStatType.PierceDamageFalloff].Value,
                 PierceDamageFalloffLevel = turret.Stats[TurretStatType.PierceDamageFalloff].Level,
                 PierceDamageFalloffUpgradeAmount = turret.Stats[TurretStatType.PierceDamageFalloff].UpgradeAmount,
                 PierceDamageFalloffUpgradeBaseCost = turret.Stats[TurretStatType.PierceDamageFalloff].BaseCost,
-                PelletCount = turret.PelletCount,
+
+                PelletCount = (int)turret.Stats[TurretStatType.PelletCount].Value,
                 PelletCountLevel = turret.Stats[TurretStatType.PelletCount].Level,
                 PelletCountUpgradeAmount = (int)turret.Stats[TurretStatType.PelletCount].UpgradeAmount,
                 PelletCountUpgradeBaseCost = turret.Stats[TurretStatType.PelletCount].BaseCost,
-                DamageFalloffOverDistance = turret.DamageFalloffOverDistance,
+
+                DamageFalloffOverDistance = turret.Stats[TurretStatType.DamageFalloffOverDistance].Value,
                 DamageFalloffOverDistanceLevel = turret.Stats[TurretStatType.DamageFalloffOverDistance].Level,
                 DamageFalloffOverDistanceUpgradeAmount = turret.Stats[TurretStatType.DamageFalloffOverDistance].UpgradeAmount,
                 DamageFalloffOverDistanceUpgradeBaseCost = turret.Stats[TurretStatType.DamageFalloffOverDistance].BaseCost,
-                PercentBonusDamagePerSec = turret.PercentBonusDamagePerSec,
+
+                PercentBonusDamagePerSec = turret.Stats[TurretStatType.PercentBonusDamagePerSec].Value,
                 PercentBonusDamagePerSecLevel = turret.Stats[TurretStatType.PercentBonusDamagePerSec].Level,
                 PercentBonusDamagePerSecUpgradeAmount = turret.Stats[TurretStatType.PercentBonusDamagePerSec].UpgradeAmount,
                 PercentBonusDamagePerSecUpgradeBaseCost = turret.Stats[TurretStatType.PercentBonusDamagePerSec].BaseCost,
-                SlowEffect = turret.SlowEffect,
+
+                SlowEffect = turret.Stats[TurretStatType.SlowEffect].Value,
                 SlowEffectLevel = turret.Stats[TurretStatType.SlowEffect].Level,
                 SlowEffectUpgradeAmount = turret.Stats[TurretStatType.SlowEffect].UpgradeAmount,
                 SlowEffectUpgradeBaseCost = turret.Stats[TurretStatType.SlowEffect].BaseCost,
+
                 RotationSpeed = turret.RotationSpeed,
                 AngleThreshold = turret.AngleThreshold
             };
@@ -222,13 +235,17 @@ namespace Assets.Scripts.Systems.Save
                         BaseCost = turret.CriticalDamageMultiplierUpgradeBaseCost,
                         Level = turret.CriticalDamageMultiplierLevel,
                         ExponentialCostMultiplier = baseInfo.CriticalDamageCostExponentialMultiplier
-                    }
+                    },
+                    [TurretStatType.ExplosionRadius] = new TurretStat
+                    {
+                        Value = turret.ExplosionRadius,
+                        UpgradeAmount = turret.ExplosionRadiusUpgradeAmount,
+                        BaseCost = turret.ExplosionRadiusUpgradeBaseCost,
+                        Level = turret.ExplosionRadiusLevel,
+                        ExponentialCostMultiplier = baseInfo.ExplosionRadiusCostExponentialMultiplier
+                    },
                 },
 
-                ExplosionRadius = turret.ExplosionRadius,
-                ExplosionRadiusLevel = turret.ExplosionRadiusLevel,
-                ExplosionRadiusUpgradeAmount = turret.ExplosionRadiusUpgradeAmount,
-                ExplosionRadiusUpgradeBaseCost = turret.ExplosionRadiusUpgradeBaseCost,
                 SplashDamage = turret.SplashDamage,
                 SplashDamageLevel = turret.SplashDamageLevel,
                 SplashDamageUpgradeAmount = turret.SplashDamageUpgradeAmount,
@@ -303,6 +320,15 @@ public class TurretBaseInfoDTO
     public float FireRateCostExponentialMultiplier;
     public float CriticalChanceCostExponentialMultiplier;
     public float CriticalDamageCostExponentialMultiplier;
+    public float ExplosionRadiusCostExponentialMultiplier;
+    public float SplashDamageCostExponentialMultiplier;
+    public float PierceChanceCostExponentialMultiplier;
+    public float PierceDamageFalloffCostExponentialMultiplier;
+    public float PelletCountCostExponentialMultiplier;
+    public float DamageFalloffOverDistanceCostExponentialMultiplier;
+    public float PercentBonusDamagePerSecCostExponentialMultiplier;
+    public float SlowEffectCostExponentialMultiplier;
+    public float KnockbackStrengthCostExponentialMultiplier;
 }
 
 [Serializable]

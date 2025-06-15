@@ -60,8 +60,8 @@ namespace Assets.Scripts.Turrets
 
         private void CreateExplosion(Vector3 target)
         {
-            List<Enemy> enemiesInAdjecentGrids = GridManager.Instance.GetEnemiesInRange(target, Mathf.CeilToInt(_stats.ExplosionRadius));
-            float impactArea = _stats.ExplosionRadius / 3;
+            List<Enemy> enemiesInAdjecentGrids = GridManager.Instance.GetEnemiesInRange(target, Mathf.CeilToInt(_stats.Stats[TurretStatType.ExplosionRadius].Value));
+            float impactArea = _stats.Stats[TurretStatType.ExplosionRadius].Value / 3;
             AudioManager.Instance.PlayWithVariation(_explosionSound, 0.5f, 1f);
 
             foreach (Enemy enemy in enemiesInAdjecentGrids
@@ -73,7 +73,7 @@ namespace Assets.Scripts.Turrets
 
             foreach (Enemy enemy in enemiesInAdjecentGrids
                          .Where(enemy => Vector3.Distance(enemy.transform.position, target) > impactArea &&
-                             Vector3.Distance(enemy.transform.position, target) <= _stats.ExplosionRadius))
+                             Vector3.Distance(enemy.transform.position, target) <= _stats.Stats[TurretStatType.ExplosionRadius].Value))
             {
                 enemy.TakeDamage(_stats.SplashDamage);
                 StatsManager.Instance.AddTurretDamage(_turretInfo.TurretType, _stats.SplashDamage);
@@ -87,9 +87,9 @@ namespace Assets.Scripts.Turrets
                 return;
 
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(_targetEnemy.transform.position, _stats.ExplosionRadius);
+            Gizmos.DrawWireSphere(_targetEnemy.transform.position, _stats.Stats[TurretStatType.ExplosionRadius].Value);
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(_targetEnemy.transform.position, _stats.ExplosionRadius / 3);
+            Gizmos.DrawWireSphere(_targetEnemy.transform.position, _stats.Stats[TurretStatType.ExplosionRadius].Value / 3);
         }
     }
 }

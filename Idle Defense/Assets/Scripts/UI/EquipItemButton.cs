@@ -100,7 +100,7 @@ public class EquipItemButton : MonoBehaviour
             + s.Stats[TurretStatType.FireRate].Level
             + s.Stats[TurretStatType.CriticalChance].Level
             + s.Stats[TurretStatType.CriticalDamage].Level
-            + s.ExplosionRadiusLevel
+            + s.Stats[TurretStatType.ExplosionRadius].Level
             + s.SplashDamageLevel
             + s.PierceChanceLevel
             + s.PierceDamageFalloffLevel

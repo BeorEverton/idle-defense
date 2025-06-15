@@ -23,11 +23,6 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
         public float BaseCritChance;
         public float BaseCritDamage;
 
-        public float ExplosionRadius;
-        public int ExplosionRadiusLevel;
-        public float ExplosionRadiusUpgradeAmount;
-        public float ExplosionRadiusUpgradeBaseCost;
-
         public float SplashDamage;
         public int SplashDamageLevel;
         public float SplashDamageUpgradeAmount;

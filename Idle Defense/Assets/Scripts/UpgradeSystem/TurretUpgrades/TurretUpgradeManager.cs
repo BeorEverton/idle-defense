@@ -157,16 +157,12 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 },
                 [TurretUpgradeType.ExplosionRadius] = new()
                 {
-                    GetCurrentValue = t => t.ExplosionRadius,
-                    UpgradeTurret = (t, a) =>
-                    {
-                        t.ExplosionRadiusLevel += a;
-                        t.ExplosionRadius += (t.ExplosionRadiusUpgradeAmount * a);
-                    },
-                    GetLevel = t => t.ExplosionRadiusLevel,
-                    GetBaseStat = t => t.ExplosionRadius,
-                    GetBaseCost = t => t.ExplosionRadiusUpgradeBaseCost,
-                    GetUpgradeAmount = t => t.ExplosionRadiusUpgradeAmount,
+                    GetCurrentValue = t => t.Stats[TurretStatType.ExplosionRadius].Value,
+                    UpgradeTurret = (t, a) => UpgradeTurret(a, t.Stats[TurretStatType.ExplosionRadius].UpgradeAmount, TurretUpgradeType.ExplosionRadius, t),
+                    GetLevel = t => t.Stats[TurretStatType.ExplosionRadius].Level,
+                    GetBaseStat = t => t.Stats[TurretStatType.ExplosionRadius].Value,
+                    GetBaseCost = t => t.Stats[TurretStatType.ExplosionRadius].BaseCost,
+                    GetUpgradeAmount = t => t.Stats[TurretStatType.ExplosionRadius].UpgradeAmount,
                     GetCostMultiplier = t => 0f,
                     GetMaxValue = t => float.MaxValue,
                     GetMinValue = t => 0f,
@@ -174,11 +170,11 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                     //GetAmount = t => GetMaxAmount(t.ExplosionRadiusUpgradeBaseCost, 1.1f, t.ExplosionRadiusLevel),
                     GetDisplayStrings = (t, a) =>
                     {
-                        float current = t.ExplosionRadius;
+                        float current = t.Stats[TurretStatType.ExplosionRadius].Value;
                         float bonus = GetBonusAmount(t, TurretUpgradeType.ExplosionRadius);
                         GetHybridCost(t, TurretUpgradeType.ExplosionRadius, a, out float cost, out int amount);
 
-                        if (t.ExplosionRadius >= 5f)
+                        if (t.Stats[TurretStatType.ExplosionRadius].Value >= 5f)
                             return ($"{current:F1}", "Max", "", "0X");
 
                         return (

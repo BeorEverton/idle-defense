@@ -133,7 +133,7 @@ namespace Assets.Scripts.Turrets
                 pelletsRemaining--;
 
                 Vector2 knockDir = (enemy.transform.position - transform.position).normalized;
-                float knockback = _stats.KnockbackStrength;
+                float knockback = _stats.Stats[TurretStatType.KnockbackStrength].Value;
                 enemy.KnockbackVelocity = new Vector2(0f, knockback * 1f);
 
                 enemy.KnockbackTime = 0.2f;

@@ -161,7 +161,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                     GetBaseStat = t => t.Stats[TurretStatType.ExplosionRadius].Value,
                     GetBaseCost = t => t.Stats[TurretStatType.ExplosionRadius].BaseCost,
                     GetUpgradeAmount = t => t.Stats[TurretStatType.ExplosionRadius].UpgradeAmount,
-                    GetCostMultiplier = t => 0f,
+                    GetCostMultiplier = t => t.Stats[TurretStatType.ExplosionRadius].ExponentialCostMultiplier,
                     GetMaxValue = t => float.MaxValue,
                     GetMinValue = t => 0f,
                     GetCost = (t, a) => GetHybridCost(t, TurretStatType.ExplosionRadius, a),
@@ -191,7 +191,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                     GetBaseStat = t => t.Stats[TurretStatType.SplashDamage].Value,
                     GetBaseCost = t => t.Stats[TurretStatType.SplashDamage].BaseCost,
                     GetUpgradeAmount = t => t.Stats[TurretStatType.SplashDamage].UpgradeAmount,
-                    GetCostMultiplier = t => 0f,
+                    GetCostMultiplier = t => t.Stats[TurretStatType.SplashDamage].ExponentialCostMultiplier,
                     GetMaxValue = t => float.MaxValue,
                     GetMinValue = t => 0f,
                     GetCost = (t, a) => GetHybridCost(t, TurretStatType.SplashDamage, a),
@@ -219,7 +219,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                     GetBaseStat = t => t.Stats[TurretStatType.PierceChance].Value,
                     GetBaseCost = t => t.Stats[TurretStatType.PierceChance].BaseCost,
                     GetUpgradeAmount = t => t.Stats[TurretStatType.PierceChance].UpgradeAmount,
-                    GetCostMultiplier = t => 0f,
+                    GetCostMultiplier = t => t.Stats[TurretStatType.PierceChance].ExponentialCostMultiplier,
                     GetMaxValue = t => 100f,
                     GetMinValue = t => 0f,
                     GetCost = (t, a) => GetHybridCost(t, TurretStatType.PierceChance, a),
@@ -249,7 +249,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                     GetBaseStat = t => t.Stats[TurretStatType.PierceDamageFalloff].Value,
                     GetBaseCost = t => t.Stats[TurretStatType.PierceDamageFalloff].BaseCost,
                     GetUpgradeAmount = t => t.Stats[TurretStatType.PierceDamageFalloff].UpgradeAmount,
-                    GetCostMultiplier = t => 0f,
+                    GetCostMultiplier = t => t.Stats[TurretStatType.PierceDamageFalloff].ExponentialCostMultiplier,
                     GetMaxValue = t => float.MaxValue,
                     GetMinValue = t => 0f,
                     GetCost = (t, a) => GetHybridCost(t, TurretStatType.PierceDamageFalloff, a),
@@ -276,7 +276,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                     GetBaseStat = t => t.Stats[TurretStatType.PelletCount].Value,
                     GetBaseCost = t => t.Stats[TurretStatType.PelletCount].BaseCost,
                     GetUpgradeAmount = t => t.Stats[TurretStatType.PelletCount].UpgradeAmount,
-                    GetCostMultiplier = t => 0f,
+                    GetCostMultiplier = t => t.Stats[TurretStatType.PelletCount].ExponentialCostMultiplier,
                     GetMaxValue = t => float.MaxValue,
                     GetMinValue = t => 0f,
                     GetCost = (t, a) => GetHybridCost(t, TurretStatType.PelletCount, a),
@@ -303,7 +303,7 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                     GetBaseStat = t => t.Stats[TurretStatType.DamageFalloffOverDistance].Value,
                     GetBaseCost = t => t.Stats[TurretStatType.DamageFalloffOverDistance].BaseCost,
                     GetUpgradeAmount = t => t.Stats[TurretStatType.DamageFalloffOverDistance].UpgradeAmount,
-                    GetCostMultiplier = t => 0f,
+                    GetCostMultiplier = t => t.Stats[TurretStatType.DamageFalloffOverDistance].ExponentialCostMultiplier,
                     GetMaxValue = t => float.MaxValue,
                     GetMinValue = t => 0f,
                     GetCost = (t, a) => GetHybridCost(t, TurretStatType.DamageFalloffOverDistance, a),
@@ -327,24 +327,20 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
                 },
                 [TurretStatType.KnockbackStrength] = new()
                 {
-                    GetCurrentValue = t => t.KnockbackStrength,
-                    UpgradeTurret = (t, a) =>
-                    {
-                        t.KnockbackStrengthLevel += a;
-                        t.KnockbackStrength += (t.KnockbackStrengthUpgradeAmount * a);
-                    },
-                    GetLevel = t => t.KnockbackStrengthLevel,
-                    GetBaseStat = t => t.KnockbackStrength,
-                    GetBaseCost = t => t.KnockbackStrengthUpgradeBaseCost,
-                    GetUpgradeAmount = t => t.KnockbackStrengthUpgradeAmount,
-                    GetCostMultiplier = t => t.KnockbackStrengthCostExponentialMultiplier,
+                    GetCurrentValue = t => t.Stats[TurretStatType.KnockbackStrength].Value,
+                    UpgradeTurret = (t, a) => UpgradeTurret(a, TurretStatType.KnockbackStrength, t),
+                    GetLevel = t => t.Stats[TurretStatType.KnockbackStrength].Level,
+                    GetBaseStat = t => t.Stats[TurretStatType.KnockbackStrength].Value,
+                    GetBaseCost = t => t.Stats[TurretStatType.KnockbackStrength].BaseCost,
+                    GetUpgradeAmount = t => t.Stats[TurretStatType.KnockbackStrength].UpgradeAmount,
+                    GetCostMultiplier = t => t.Stats[TurretStatType.KnockbackStrength].ExponentialCostMultiplier,
                     GetMaxValue = t => float.MaxValue,
                     GetMinValue = t => 0f,
                     GetCost = (t, a) => GetHybridCost(t, TurretStatType.KnockbackStrength, a),
                     //GetAmount = t => GetMaxAmount(t.KnockbackStrengthUpgradeBaseCost, t.KnockbackStrengthCostExponentialMultiplier, t.KnockbackStrengthLevel),
                     GetDisplayStrings = (t, a) =>
                     {
-                        float current = t.KnockbackStrength;
+                        float current = t.Stats[TurretStatType.KnockbackStrength].Value;
                         float bonus = GetBonusAmount(t, TurretStatType.KnockbackStrength);
                         GetHybridCost(t, TurretStatType.KnockbackStrength, a, out float cost, out int amount);
 

@@ -23,12 +23,6 @@ namespace Assets.Scripts.UpgradeSystem.TurretUpgrades
         public float BaseCritChance;
         public float BaseCritDamage;
 
-        public float KnockbackStrength;
-        public int KnockbackStrengthLevel;
-        public float KnockbackStrengthUpgradeAmount;
-        public float KnockbackStrengthUpgradeBaseCost;
-        public float KnockbackStrengthCostExponentialMultiplier;
-
         public float PercentBonusDamagePerSec;
         public int PercentBonusDamagePerSecLevel;
         public float PercentBonusDamagePerSecUpgradeAmount;

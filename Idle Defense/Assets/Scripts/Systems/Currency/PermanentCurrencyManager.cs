@@ -1,13 +1,13 @@
-using Assets.Scripts.Systems;
 using System;
 using UnityEngine;
 
-namespace Assets.Scripts.UpgradeSystem.PermanentUpgrades
+namespace Assets.Scripts.Systems.Currency
 {
     public class PermanentCurrencyManager : MonoBehaviour
     {
         public static PermanentCurrencyManager Instance { get; private set; }
         public event EventHandler OnPermanentCurrencyChanged;
+        public event EventHandler OnCurrencyOnHoldChanged;
         public int PermanentCurrency { get; private set; }
 
         public int CurrencyOnHold { get; private set; } //Currency that is being held till player dies
@@ -49,20 +49,25 @@ namespace Assets.Scripts.UpgradeSystem.PermanentUpgrades
         private void AddPermanentCurrencyOnHold(int amount)
         {
             CurrencyOnHold += amount;
+            OnCurrencyOnHoldChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void AddHeldCurrencyToPermanentCurrency()
         {
             PermanentCurrency += CurrencyOnHold;
-            OnPermanentCurrencyChanged?.Invoke(this, EventArgs.Empty);
-
             CurrencyOnHold = 0;
+
+            OnPermanentCurrencyChanged?.Invoke(this, EventArgs.Empty);
+            OnCurrencyOnHoldChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void ResetAll()
         {
             PermanentCurrency = 0;
             CurrencyOnHold = 0;
+
+            OnPermanentCurrencyChanged?.Invoke(this, EventArgs.Empty);
+            OnCurrencyOnHoldChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

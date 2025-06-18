@@ -25,31 +25,31 @@ namespace Assets.Scripts.Systems.Save
 
         public GameData(GameDataDTO gameData,
             PlayerInfoDTO playerInfo,
-            TurretInfoDTO machineGunTurretInfoDTO,
-            TurretBaseInfoDTO machineGunTurretBaseInfoDTO,
-            TurretInfoDTO? shotgunTurretInfoDTO,
-            TurretBaseInfoDTO? shotgunTurretBaseInfoDTO,
-            TurretInfoDTO? sniperTurretInfoDTO,
-            TurretBaseInfoDTO? sniperTurretBaseInfoDTO,
-            TurretInfoDTO? missileLauncherTurretInfoDTO,
-            TurretBaseInfoDTO? missileLauncherTurretBaseInfoDTO,
-            TurretInfoDTO? laserTurretInfoDTO,
-            TurretBaseInfoDTO? laserTurretBaseInfoDTO,
+            //TurretInfoDTO machineGunTurretInfoDTO,
+            //TurretBaseInfoDTO machineGunTurretBaseInfoDTO,
+            //TurretInfoDTO? shotgunTurretInfoDTO,
+            //TurretBaseInfoDTO? shotgunTurretBaseInfoDTO,
+            //TurretInfoDTO? sniperTurretInfoDTO,
+            //TurretBaseInfoDTO? sniperTurretBaseInfoDTO,
+            //TurretInfoDTO? missileLauncherTurretInfoDTO,
+            //TurretBaseInfoDTO? missileLauncherTurretBaseInfoDTO,
+            //TurretInfoDTO? laserTurretInfoDTO,
+            //TurretBaseInfoDTO? laserTurretBaseInfoDTO,
             StatsDTO statsDTO,
             TurretInventoryDTO turretInventory)
         {
             GameDataDTO = gameData;
             PlayerInfoDTO = playerInfo;
-            MachineGunTurretInfoDTO = machineGunTurretInfoDTO;
-            MachineGunTurretBaseInfoDTO = machineGunTurretBaseInfoDTO;
-            ShotgunTurretInfoDTO = shotgunTurretInfoDTO;
-            ShotgunTurretBaseInfoDTO = shotgunTurretBaseInfoDTO;
-            SniperTurretInfoDTO = sniperTurretInfoDTO;
-            SniperTurretBaseInfoDTO = sniperTurretBaseInfoDTO;
-            MissileLauncherTurretInfoDTO = missileLauncherTurretInfoDTO;
-            MissileLauncherTurretBaseInfoDTO = missileLauncherTurretBaseInfoDTO;
-            LaserTurretInfoDTO = laserTurretInfoDTO;
-            LaserTurretBaseInfoDTO = laserTurretBaseInfoDTO;
+            //MachineGunTurretInfoDTO = machineGunTurretInfoDTO;
+            //MachineGunTurretBaseInfoDTO = machineGunTurretBaseInfoDTO;
+            //ShotgunTurretInfoDTO = shotgunTurretInfoDTO;
+            //ShotgunTurretBaseInfoDTO = shotgunTurretBaseInfoDTO;
+            //SniperTurretInfoDTO = sniperTurretInfoDTO;
+            //SniperTurretBaseInfoDTO = sniperTurretBaseInfoDTO;
+            //MissileLauncherTurretInfoDTO = missileLauncherTurretInfoDTO;
+            //MissileLauncherTurretBaseInfoDTO = missileLauncherTurretBaseInfoDTO;
+            //LaserTurretInfoDTO = laserTurretInfoDTO;
+            //LaserTurretBaseInfoDTO = laserTurretBaseInfoDTO;
             StatsDTO = statsDTO;
             TurretInventory = turretInventory;
         }

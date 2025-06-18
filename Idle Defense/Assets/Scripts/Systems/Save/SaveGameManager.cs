@@ -45,16 +45,16 @@ namespace Assets.Scripts.Systems.Save
 
             PlayerInfoDTO playerInfoDTO = SaveDataDTOs.CreatePlayerInfoDTO(PlayerBaseManager.Instance.Stats);
 
-            TurretInfoDTO machineGunTurretDTO = SaveDataDTOs.CreateTurretInfoDTO(_machineGunTurret.GetStats());
-            TurretBaseInfoDTO machineGunTurretBaseDTO = SaveDataDTOs.CreateTurretBaseInfoDTO(_machineGunTurret.GetStats());
-            TurretInfoDTO shotgunTurretDTO = SaveDataDTOs.CreateTurretInfoDTO(_shotgunTurret.GetStats());
-            TurretBaseInfoDTO shotgunTurretBaseDTO = SaveDataDTOs.CreateTurretBaseInfoDTO(_machineGunTurret.GetStats());
-            TurretInfoDTO sniperTurretDTO = SaveDataDTOs.CreateTurretInfoDTO(_sniperTurret.GetStats());
-            TurretBaseInfoDTO sniperTurretBaseDTO = SaveDataDTOs.CreateTurretBaseInfoDTO(_machineGunTurret.GetStats());
-            TurretInfoDTO missileLauncherTurretDTO = SaveDataDTOs.CreateTurretInfoDTO(_missileLauncherTurret.GetStats());
-            TurretBaseInfoDTO missileLauncherTurretBaseDTO = SaveDataDTOs.CreateTurretBaseInfoDTO(_machineGunTurret.GetStats());
-            TurretInfoDTO laserTurretDTO = SaveDataDTOs.CreateTurretInfoDTO(_laserTurret.GetStats());
-            TurretBaseInfoDTO laserTurretBaseDTO = SaveDataDTOs.CreateTurretBaseInfoDTO(_machineGunTurret.GetStats());
+            //TurretInfoDTO machineGunTurretDTO = SaveDataDTOs.CreateTurretInfoDTO(_machineGunTurret.GetStats());
+            //TurretBaseInfoDTO machineGunTurretBaseDTO = SaveDataDTOs.CreateTurretBaseInfoDTO(_machineGunTurret.GetStats());
+            //TurretInfoDTO shotgunTurretDTO = SaveDataDTOs.CreateTurretInfoDTO(_shotgunTurret.GetStats());
+            //TurretBaseInfoDTO shotgunTurretBaseDTO = SaveDataDTOs.CreateTurretBaseInfoDTO(_machineGunTurret.GetStats());
+            //TurretInfoDTO sniperTurretDTO = SaveDataDTOs.CreateTurretInfoDTO(_sniperTurret.GetStats());
+            //TurretBaseInfoDTO sniperTurretBaseDTO = SaveDataDTOs.CreateTurretBaseInfoDTO(_machineGunTurret.GetStats());
+            //TurretInfoDTO missileLauncherTurretDTO = SaveDataDTOs.CreateTurretInfoDTO(_missileLauncherTurret.GetStats());
+            //TurretBaseInfoDTO missileLauncherTurretBaseDTO = SaveDataDTOs.CreateTurretBaseInfoDTO(_machineGunTurret.GetStats());
+            //TurretInfoDTO laserTurretDTO = SaveDataDTOs.CreateTurretInfoDTO(_laserTurret.GetStats());
+            //TurretBaseInfoDTO laserTurretBaseDTO = SaveDataDTOs.CreateTurretBaseInfoDTO(_machineGunTurret.GetStats());
             StatsDTO statsDTO = SaveDataDTOs.CreateStatsDTO();
 
             TurretInventoryDTO turretInventory = TurretInventoryManager.Instance.ExportToDTO();
@@ -67,16 +67,16 @@ namespace Assets.Scripts.Systems.Save
             GameData gameData = new(
                 gameDataDTO,
                 playerInfoDTO,
-                machineGunTurretDTO,
-                machineGunTurretBaseDTO,
-                shotgunTurretDTO,
-                shotgunTurretBaseDTO,
-                sniperTurretDTO,
-                sniperTurretBaseDTO,
-                missileLauncherTurretDTO,
-                missileLauncherTurretBaseDTO,
-                laserTurretDTO,
-                laserTurretBaseDTO,
+                //machineGunTurretDTO,
+                //machineGunTurretBaseDTO,
+                //shotgunTurretDTO,
+                //shotgunTurretBaseDTO,
+                //sniperTurretDTO,
+                //sniperTurretBaseDTO,
+                //missileLauncherTurretDTO,
+                //missileLauncherTurretBaseDTO,
+                //laserTurretDTO,
+                //laserTurretBaseDTO,
                 statsDTO,
                 turretInventory);
             gameData.DiscoveredEnemyNames = discoveredEnemies;
